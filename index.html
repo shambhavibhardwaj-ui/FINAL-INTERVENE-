@@ -823,10 +823,10 @@ function toggleAccountMenu(){ const m=document.getElementById('accountMenu'); if
 function hideAccountMenu(){ const m=document.getElementById('accountMenu'); if(m) m.classList.add('hidden'); }
 /* fill the dashboard greeting + avatar with the signed-in user's name */
 function applyDashIdentity(){
-  const nm = window.CURRENT_NAME || 'there';
-  const nameEl = document.getElementById('dashName'); if(nameEl) nameEl.textContent = nm;
-  const av = document.getElementById('dashAvatar');
-  if(av) av.textContent = (window.CURRENT_NAME ? nm.trim()[0] : '?').toUpperCase();
+  const full = window.CURRENT_NAME;
+  const first = full ? full.trim().split(/\s+/)[0] : 'friend';
+  const nameEl = document.getElementById('dashName'); if(nameEl) nameEl.textContent = first;
+  const av = document.getElementById('dashAvatar'); if(av) av.textContent = (full ? first[0] : '?').toUpperCase();
 }
 async function signOut(){ try{ if(sb) await sb.auth.signOut(); }catch(e){} toast('Signed out'); showView('site'); refreshAuthUI(); }
 async function routeAfterLogin(session){
@@ -1161,7 +1161,9 @@ function drawMoodChart(){
   const lg=ctx.createLinearGradient(0,0,w,0); lg.addColorStop(0,'#8B5CF6'); lg.addColorStop(.5,'#2563EB'); lg.addColorStop(1,'#14B8A6');
   ctx.strokeStyle=lg; ctx.lineWidth=3; ctx.lineJoin='round'; ctx.stroke();
   // dots
-  for(let i=0;i<n;i++){ ctx.beginPath(); ctx.arc(x(i),y(h[i].v),3.5,0,7); ctx.fillStyle=moods[h[i].v-1].c; ctx.fill(); ctx.strokeStyle=dark?'#1E1B2E':'#fff'; ctx.lineWidth=2; ctx.stroke(); }
+  const dr = n===1 ? 6 : 3.5;
+  for(let i=0;i<n;i++){ ctx.beginPath(); ctx.arc(x(i),y(h[i].v),dr,0,7); ctx.fillStyle=moods[h[i].v-1].c; ctx.fill(); ctx.strokeStyle=dark?'#1E1B2E':'#fff'; ctx.lineWidth=2; ctx.stroke(); }
+  if(n===1){ ctx.fillStyle=dark?'rgba(255,255,255,.5)':'rgba(0,0,0,.45)'; ctx.font='12px Figtree,sans-serif'; ctx.textAlign='center'; ctx.fillText('Keep logging daily to grow your trend', w/2, ht-pad+2); }
 }
 window.moodChartDraw=()=>{ if(document.getElementById('view-dashboard').classList.contains('active')) drawMoodChart(); };
 window.addEventListener('resize',()=>window.moodChartDraw());
