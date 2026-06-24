@@ -805,7 +805,7 @@ async function refreshAuthUI(){
     const u = session.user;
     const m = u.user_metadata || {};
     const name = m.name || m.full_name || (u.email ? u.email.split('@')[0] : 'Account');
-    window.CURRENT_NAME = name;
+    window.CURRENT_NAME = name; window.IS_SIGNED_IN = true;
     if(btn){ btn.textContent = 'Hi, ' + name; btn.title = 'Account'; btn.onclick = toggleAccountMenu; }
     if(document.getElementById('view-dashboard').classList.contains('active')) applyDashIdentity();
     // admin status comes from the database role (server-enforced allowlist)
@@ -815,7 +815,7 @@ async function refreshAuthUI(){
     setAdminNav(window.IS_ADMIN);
     return session;
   }
-  window.IS_ADMIN = false; ADMIN_IS = false; setAdminNav(false); window.CURRENT_NAME = null; hideAccountMenu();
+  window.IS_ADMIN = false; ADMIN_IS = false; setAdminNav(false); window.CURRENT_NAME = null; window.IS_SIGNED_IN = false; window.MOODS = null; hideAccountMenu();
   if(btn){ btn.textContent = 'Sign in'; btn.title = ''; btn.onclick = () => openAuth('login'); }
   return null;
 }
@@ -830,6 +830,7 @@ function applyDashIdentity(){
 }
 async function signOut(){ try{ if(sb) await sb.auth.signOut(); }catch(e){} toast('Signed out'); showView('site'); refreshAuthUI(); }
 async function routeAfterLogin(session){
+  window.IS_SIGNED_IN = true;
   let dest = 'dashboard';
   try{ const { data:p } = await sb.from('profiles').select('role').eq('id', session.user.id).single(); if(p && p.role==='admin'){ window.IS_ADMIN=true; ADMIN_IS=true; setAdminNav(true); dest='admin'; } }catch(e){}
   toast('Signed in with Google 🎉');
@@ -865,6 +866,7 @@ function toggleMobileNav(){ document.getElementById('mobileNav').classList.toggl
 /* ===================== VIEWS ===================== */
 function showView(v){
   if(v==='admin' && sb && !window.IS_ADMIN){ toast('Admin access only'); v='dashboard'; }
+  if(v==='dashboard' && sb && !window.IS_SIGNED_IN){ openAuth('login'); toast('Please sign in to open your dashboard'); return; }
   document.querySelectorAll('.view').forEach(e=>e.classList.remove('active'));
   document.getElementById('view-'+v).classList.add('active');
   window.scrollTo({top:0,behavior:'instant'});
@@ -918,9 +920,16 @@ async function doAuth(e){
         if(error) throw error; toast('Signed in successfully');
       }
       closeModal('authModal');
-      let dest='dashboard';
-      try{ const {data:{user}}=await sb.auth.getUser(); if(user){ const {data:p}=await sb.from('profiles').select('role').eq('id',user.id).single(); if(p&&p.role==='admin'){ window.IS_ADMIN=true; ADMIN_IS=true; setAdminNav(true); dest='admin'; } } }catch(e){}
-      setTimeout(()=>showView(dest),600); return;
+      try{
+        const {data:{user}}=await sb.auth.getUser();
+        if(user){ window.IS_SIGNED_IN=true; let dest='dashboard';
+          const {data:p}=await sb.from('profiles').select('role').eq('id',user.id).single();
+          if(p&&p.role==='admin'){ window.IS_ADMIN=true; ADMIN_IS=true; setAdminNav(true); dest='admin'; }
+          setTimeout(()=>showView(dest),600);
+        }
+        /* else: email signup pending confirmation — they'll sign in after confirming */
+      }catch(e){}
+      return;
     }catch(err){ toast(err.message||'Auth error'); return; }
   }
   /* demo mode */
@@ -1082,7 +1091,21 @@ const moods=[
   {e:'😄',l:'Great',v:5,c:'#14B8A6'},
 ];
 let pickedMood=4;
-function getMoodHistory(){ return JSON.parse(localStorage.getItem('iv-moods')||'[]'); }
+/* when signed in, mood history comes from the database (synced across devices); window.MOODS caches it */
+function getMoodHistory(){ if(Array.isArray(window.MOODS)) return window.MOODS; return JSON.parse(localStorage.getItem('iv-moods')||'[]'); }
+async function loadMoodsFromDB(){
+  if(!sb){ window.MOODS = JSON.parse(localStorage.getItem('iv-moods')||'[]'); return; }
+  try{
+    const { data:{ user } } = await sb.auth.getUser();
+    if(!user){ window.MOODS = []; return; }
+    const { data, error } = await sb.from('moods').select('id,mood,note,created_at').eq('user_id',user.id).order('created_at',{ascending:true});
+    if(error) throw error;
+    // collapse to one entry per calendar day (latest wins) so the trend stays clean
+    const byDay={};
+    (data||[]).forEach(r=>{ byDay[new Date(r.created_at).toDateString()] = { id:r.id, v:r.mood, d:new Date(r.created_at).getTime(), note:r.note }; });
+    window.MOODS = Object.values(byDay).sort((a,b)=>a.d-b.d);
+  }catch(e){ if(!Array.isArray(window.MOODS)) window.MOODS = []; }
+}
 /* wellness score is derived only from what the user has actually logged — new user = 0 */
 function computeWellness(){ const h=getMoodHistory(); if(!h.length) return 0; const avg=h.reduce((a,b)=>a+b.v,0)/h.length; return Math.round(avg/5*100); }
 /* user-managed wellness goals (persisted locally) */
@@ -1111,9 +1134,8 @@ function addGoal(e){ e.preventDefault(); const inp=document.getElementById('newG
 function removeGoal(i){ const g=getGoals(); g.splice(i,1); saveGoals(g); renderGoals(); }
 function liveGoal(i,val){ const p=document.getElementById('goalPct'+i), b=document.getElementById('goalBar'+i); if(p)p.textContent=val+'%'; if(b)b.style.width=val+'%'; }
 function commitGoal(i,val){ const g=getGoals(); if(g[i]){ g[i].p=+val; saveGoals(g); } }
-function buildDashboard(){
+async function buildDashboard(){
   applyDashIdentity();
-  document.getElementById('wellnessScore').textContent=computeWellness();
   document.getElementById('moodPicker').innerHTML=moods.map(m=>`
     <button onclick="pickMood(${m.v},this)" class="mood-btn flex flex-col items-center gap-1 p-3 rounded-2xl border-2 ${m.v===pickedMood?'border-brand-500 bg-brand-50 dark:bg-white/10':'border-transparent bg-slate-100 dark:bg-white/5'} hover:border-brand-300 transition cursor-pointer">
       <span class="text-3xl">${m.e}</span><span class="text-xs font-medium">${m.l}</span>
@@ -1121,19 +1143,34 @@ function buildDashboard(){
   renderGoals();
   document.getElementById('recoList').innerHTML=['Understanding Anxiety: A Student Guide','5 Breathing Techniques for Stress','Building Real Self-Confidence'].map(r=>`<li class="flex items-start gap-2"><span class="mt-1 w-2 h-2 rounded-full bg-brand-500 shrink-0"></span><a href="#" onclick="event.preventDefault();navTo('resources')" class="hover:text-brand-600 transition-colors cursor-pointer">${r}</a></li>`).join('');
   document.getElementById('dashEvents').innerHTML=events.slice(0,3).map(e=>`<li class="flex items-center gap-3"><span class="grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br ${e.g} text-white text-xs font-bold shrink-0">${e.d}</span><span>${e.t}</span></li>`).join('');
+  drawMoodChart();                       // draw immediately with whatever we have
+  await loadMoodsFromDB();               // then sync this account's history from the database
+  document.getElementById('wellnessScore').textContent=computeWellness();
   drawMoodChart();
 }
 function pickMood(v,btn){ pickedMood=v; document.querySelectorAll('.mood-btn').forEach(b=>{b.classList.remove('border-brand-500','bg-brand-50','dark:bg-white/10');b.classList.add('border-transparent');}); btn.classList.add('border-brand-500','bg-brand-50'); btn.classList.remove('border-transparent'); }
 async function logMood(){
   const note=document.getElementById('moodNote').value;
-  const h=getMoodHistory(); const today=new Date().toDateString();
-  // one entry per day: update today's if it exists, else append — history grows forward and is kept
-  if(h.length && new Date(h[h.length-1].d).toDateString()===today){ h[h.length-1].v=pickedMood; h[h.length-1].note=note; } else { h.push({v:pickedMood,d:Date.now(),note}); }
-  localStorage.setItem('iv-moods',JSON.stringify(h));
+  const today=new Date().toDateString();
   document.getElementById('moodNote').value='';
+  if(sb){
+    try{
+      const {data:{user}}=await sb.auth.getUser();
+      if(user){
+        const existing=(window.MOODS||[]).find(m=>new Date(m.d).toDateString()===today);
+        if(existing && existing.id){ await sb.from('moods').update({mood:pickedMood,note}).eq('id',existing.id); }
+        else { await sb.from('moods').insert({user_id:user.id,mood:pickedMood,note}); }
+        await loadMoodsFromDB();   // re-pull so the chart matches the database exactly
+      }
+    }catch(e){}
+  } else {
+    // demo (no backend): keep it in localStorage
+    const h=getMoodHistory();
+    if(h.length && new Date(h[h.length-1].d).toDateString()===today){ h[h.length-1].v=pickedMood; h[h.length-1].note=note; } else { h.push({v:pickedMood,d:Date.now(),note}); }
+    localStorage.setItem('iv-moods',JSON.stringify(h)); window.MOODS=h;
+  }
   document.getElementById('wellnessScore').textContent=computeWellness();
   drawMoodChart(); toast('Mood logged — thanks for checking in 💜');
-  if(sb){ try{ const {data:{user}}=await sb.auth.getUser(); if(user) await sb.from('moods').insert({user_id:user.id,mood:pickedMood,note}); }catch(e){} }
 }
 function drawMoodChart(){
   const cv=document.getElementById('moodChart'); if(!cv)return;
