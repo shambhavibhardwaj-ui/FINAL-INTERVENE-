@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<script>document.documentElement.className += ' js';</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Intervene — Mental Wellbeing • Anti-Bullying • Awareness, Empathy & Action</title>
+<meta name="description" content="Intervene empowers students to stand against bullying, support mental wellbeing, and build stronger communities. A student-led initiative." />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          brand:   { 50:'#FAF5FF',100:'#F3E8FF',200:'#E9D5FF',300:'#D8B4FE',400:'#C084FC',500:'#A855F7',600:'#8B5CF6',700:'#7C3AED',800:'#6B21A8',900:'#4C1D95' },
+          sky:     { 400:'#38BDF8',500:'#0EA5E9',600:'#2563EB' },
+          teal:    { 400:'#2DD4BF',500:'#14B8A6',600:'#0D9488' },
+          coral:   { 400:'#FB7185',500:'#F43F5E',600:'#E11D48' },
+          mint:    { 500:'#10B981' },
+          ink:     '#1E1B2E',
+        },
+        fontFamily: { sans:['Figtree','Noto Sans','system-ui','sans-serif'], body:['Noto Sans','Figtree','sans-serif'] },
+        keyframes: {
+          floaty:{ '0%,100%':{transform:'translateY(0)'},'50%':{transform:'translateY(-14px)'} },
+          floaty2:{ '0%,100%':{transform:'translateY(0)'},'50%':{transform:'translateY(10px)'} },
+          shimmer:{ '0%':{backgroundPosition:'-200% 0'},'100%':{backgroundPosition:'200% 0'} },
+          pop:{ '0%':{transform:'scale(.9)',opacity:0},'100%':{transform:'scale(1)',opacity:1} },
+          pulse2:{ '0%,100%':{opacity:1},'50%':{opacity:.55} },
+        },
+        animation: {
+          floaty:'floaty 6s ease-in-out infinite',
+          floaty2:'floaty2 7s ease-in-out infinite',
+          shimmer:'shimmer 8s linear infinite',
+          pop:'pop .5s cubic-bezier(.34,1.56,.64,1) both',
+          pulse2:'pulse2 2.4s ease-in-out infinite',
+        }
+      }
+    }
+  }
+</script>
+<style>
+  html{font-family:'Figtree','Noto Sans',sans-serif}
+  body{-webkit-font-smoothing:antialiased}
+  ::selection{background:#C084FC;color:#fff}
+  .glass{background:rgba(255,255,255,.65);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.55)}
+  .dark .glass{background:rgba(30,27,46,.55);border:1px solid rgba(255,255,255,.08)}
+  .glass-strong{background:rgba(255,255,255,.85);backdrop-filter:blur(20px)}
+  .dark .glass-strong{background:rgba(30,27,46,.78)}
+  .grad-text{background:linear-gradient(100deg,#8B5CF6,#2563EB,#14B8A6);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .grad-text-warm{background:linear-gradient(100deg,#F43F5E,#A855F7);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .mesh{background:
+     radial-gradient(60% 50% at 12% 8%, rgba(168,85,247,.20), transparent 60%),
+     radial-gradient(55% 45% at 88% 12%, rgba(37,99,235,.18), transparent 60%),
+     radial-gradient(50% 45% at 70% 85%, rgba(20,184,166,.16), transparent 60%),
+     radial-gradient(45% 40% at 20% 90%, rgba(244,63,94,.12), transparent 60%);}
+  .dark .mesh{background:
+     radial-gradient(60% 50% at 12% 8%, rgba(168,85,247,.25), transparent 60%),
+     radial-gradient(55% 45% at 88% 12%, rgba(37,99,235,.22), transparent 60%),
+     radial-gradient(50% 45% at 70% 85%, rgba(20,184,166,.18), transparent 60%),
+     radial-gradient(45% 40% at 20% 90%, rgba(244,63,94,.14), transparent 60%);}
+  /* content is visible by default; only hidden for the reveal animation when JS is confirmed working */
+  html.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+  .reveal.in{opacity:1!important;transform:none!important}
+  .card-hover{transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s ease,border-color .3s ease}
+  .card-hover:hover{transform:translateY(-6px)}
+  .no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+  .view{display:none}.view.active{display:block;animation:pop .4s ease both}
+  input,textarea,select{font-family:'Noto Sans',sans-serif}
+</style>
+</head>
+<body class="bg-brand-50 dark:bg-ink text-slate-800 dark:text-slate-100 font-body antialiased transition-colors duration-300">
+
+<!-- ======================= TOP ANNOUNCEMENT ======================= -->
+<div class="w-full bg-gradient-to-r from-brand-600 via-sky-600 to-teal-600 text-white text-center text-xs sm:text-sm py-2 px-4 font-medium">
+  In crisis? You're not alone — <button onclick="openEmergency()" class="underline underline-offset-2 font-semibold cursor-pointer hover:text-brand-100">Get immediate help &rarr;</button>
+</div>
+
+<!-- ======================= NAVBAR ======================= -->
+<header class="sticky top-0 z-50 px-3 sm:px-4 pt-3">
+  <nav class="glass max-w-7xl mx-auto rounded-2xl shadow-lg shadow-brand-900/5 px-4 sm:px-6 py-3 flex items-center justify-between">
+    <a href="#home" onclick="showView('site')" class="flex items-center gap-2.5 cursor-pointer shrink-0">
+      <span class="relative grid place-items-center w-11 h-11 rounded-full overflow-hidden bg-white shadow-lg shadow-brand-600/20 ring-1 ring-brand-100 dark:ring-white/10">
+        <img src="logo.png" alt="Intervene logo" class="w-full h-full object-contain" onerror="this.onerror=null;this.style.display='none';this.parentElement.classList.add('bg-gradient-to-br','from-brand-600','to-sky-600');this.nextElementSibling.style.display='block'">
+        <svg style="display:none" class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </span>
+      <span class="font-extrabold text-xl tracking-tight">Inter<span class="grad-text">vene</span></span>
+    </a>
+    <div class="hidden lg:flex items-center gap-1 text-sm font-medium">
+      <a href="#about" class="px-3 py-2 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5 transition-colors cursor-pointer">About</a>
+      <a href="#features" class="px-3 py-2 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5 transition-colors cursor-pointer">Features</a>
+      <a href="#therapists" class="px-3 py-2 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5 transition-colors cursor-pointer">Experts</a>
+      <a href="#resources" class="px-3 py-2 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5 transition-colors cursor-pointer">Resources</a>
+      <a href="#events" class="px-3 py-2 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5 transition-colors cursor-pointer">Events</a>
+      <a href="#connect" class="px-3 py-2 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5 transition-colors cursor-pointer">Connect</a>
+      <button onclick="showView('dashboard')" class="px-3 py-2 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5 transition-colors cursor-pointer">Dashboard</button>
+      <button id="navAdminBtn" onclick="showView('admin')" class="hidden px-3 py-2 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5 transition-colors cursor-pointer">Admin</button>
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="toggleTheme()" aria-label="Toggle dark mode" class="grid place-items-center w-10 h-10 rounded-xl glass hover:bg-brand-100 dark:hover:bg-white/10 transition-colors cursor-pointer">
+        <svg id="iconSun" class="w-5 h-5 hidden dark:block text-amber-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg id="iconMoon" class="w-5 h-5 block dark:hidden text-brand-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <div class="relative hidden sm:block">
+        <button id="navAuthBtn" onclick="openAuth('login')" class="inline-flex px-4 py-2.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-brand-600 to-sky-600 text-white shadow-lg shadow-brand-600/30 hover:shadow-brand-600/50 transition-all cursor-pointer">Sign in</button>
+        <div id="accountMenu" class="hidden absolute right-0 mt-2 w-48 glass-strong rounded-2xl border border-white/60 dark:border-white/10 shadow-xl p-1.5 z-[60]">
+          <button onclick="showView('dashboard');hideAccountMenu()" class="w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-brand-100 dark:hover:bg-white/5 cursor-pointer flex items-center gap-2"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 13h8V3H3zM13 21h8V8h-8zM13 3v3h8V3zM3 21h8v-6H3z"/></svg> My Dashboard</button>
+          <button onclick="hideAccountMenu();signOut()" class="w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium text-coral-600 dark:text-coral-400 hover:bg-coral-50 dark:hover:bg-white/5 cursor-pointer flex items-center gap-2"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg> Log out</button>
+        </div>
+      </div>
+      <button onclick="toggleMobileNav()" aria-label="Open menu" class="lg:hidden grid place-items-center w-10 h-10 rounded-xl glass cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </nav>
+  <div id="mobileNav" class="lg:hidden hidden max-w-7xl mx-auto mt-2 glass rounded-2xl p-3 text-sm font-medium grid gap-1">
+    <a href="#about" onclick="toggleMobileNav()" class="px-3 py-2.5 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5">About</a>
+    <a href="#features" onclick="toggleMobileNav()" class="px-3 py-2.5 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5">Features</a>
+    <a href="#therapists" onclick="toggleMobileNav()" class="px-3 py-2.5 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5">Experts</a>
+    <a href="#resources" onclick="toggleMobileNav()" class="px-3 py-2.5 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5">Resources</a>
+    <a href="#events" onclick="toggleMobileNav()" class="px-3 py-2.5 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5">Events</a>
+    <a href="#connect" onclick="toggleMobileNav()" class="px-3 py-2.5 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5">Connect</a>
+    <button onclick="showView('dashboard');toggleMobileNav()" class="text-left px-3 py-2.5 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5">Dashboard</button>
+    <button id="navAdminBtnM" onclick="showView('admin');toggleMobileNav()" class="hidden text-left px-3 py-2.5 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5">Admin</button>
+    <button onclick="openAuth('login')" class="mt-1 px-3 py-2.5 rounded-lg bg-gradient-to-r from-brand-600 to-sky-600 text-white font-semibold">Sign in</button>
+  </div>
+</header>
+
+<!-- ============================================================= -->
+<!-- ====================== SITE VIEW ============================ -->
+<!-- ============================================================= -->
+<main id="view-site" class="view active">
+
+<!-- ======================= HERO ======================= -->
+<section id="home" class="relative mesh overflow-hidden">
+  <div class="absolute -top-10 left-[8%] w-44 h-44 rounded-full bg-brand-400/30 blur-2xl animate-floaty"></div>
+  <div class="absolute top-24 right-[10%] w-56 h-56 rounded-full bg-sky-400/20 blur-3xl animate-floaty2"></div>
+  <div class="absolute bottom-0 left-1/3 w-48 h-48 rounded-full bg-teal-400/20 blur-3xl animate-floaty"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-20 lg:pt-24 lg:pb-28 grid lg:grid-cols-2 gap-12 items-center relative">
+    <div class="reveal">
+      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass text-xs sm:text-sm font-semibold text-brand-700 dark:text-brand-200 mb-6">
+        <span class="w-2 h-2 rounded-full bg-teal-500 animate-pulse2"></span>
+        Student-Led Initiative • Prometheus School, Noida
+      </span>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.05] tracking-tight">
+        Creating <span class="grad-text">Safer Spaces</span> Through Awareness, Empathy &amp; Action.
+      </h1>
+      <p class="mt-6 text-lg text-slate-600 dark:text-slate-300 max-w-xl leading-relaxed">
+        Intervene empowers students to stand against bullying, support mental wellbeing, and build stronger communities.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <button onclick="openAuth('signup')" class="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-brand-600 to-sky-600 shadow-xl shadow-brand-600/30 hover:shadow-brand-600/50 transition-all cursor-pointer">
+          Join Community
+          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button onclick="openEmergency()" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold glass-strong text-coral-600 dark:text-coral-400 hover:bg-coral-50 dark:hover:bg-white/10 transition-colors cursor-pointer">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Get Support
+        </button>
+        <a href="#team" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold border-2 border-brand-300 dark:border-white/15 text-brand-700 dark:text-brand-200 hover:bg-brand-100 dark:hover:bg-white/5 transition-colors cursor-pointer">
+          Meet the Team
+        </a>
+      </div>
+      <div class="mt-9 flex items-center gap-4">
+        <div class="flex -space-x-3">
+          <span class="w-10 h-10 rounded-full ring-2 ring-white dark:ring-ink bg-gradient-to-br from-brand-400 to-brand-600"></span>
+          <span class="w-10 h-10 rounded-full ring-2 ring-white dark:ring-ink bg-gradient-to-br from-sky-400 to-sky-600"></span>
+          <span class="w-10 h-10 rounded-full ring-2 ring-white dark:ring-ink bg-gradient-to-br from-teal-400 to-teal-600"></span>
+          <span class="w-10 h-10 rounded-full ring-2 ring-white dark:ring-ink bg-gradient-to-br from-coral-400 to-coral-600"></span>
+        </div>
+        <p class="text-sm text-slate-600 dark:text-slate-400"><span class="font-bold text-slate-800 dark:text-white">3,200+</span> students building kinder communities</p>
+      </div>
+    </div>
+
+    <!-- Hero logo medallion -->
+    <div class="reveal relative">
+      <div class="relative grid place-items-center py-6">
+        <div class="absolute w-72 h-72 sm:w-80 sm:h-80 rounded-full bg-gradient-to-br from-brand-400/30 via-sky-400/20 to-teal-400/30 blur-2xl"></div>
+        <div class="relative grid place-items-center w-60 h-60 sm:w-72 sm:h-72 rounded-full bg-white shadow-2xl shadow-brand-900/20 ring-8 ring-white/60 dark:ring-white/10 animate-floaty overflow-hidden">
+          <img src="logo.png" alt="Intervene — Talk. Understand. Support. Change." class="w-full h-full object-contain p-2" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='block'">
+          <svg style="display:none" viewBox="0 0 200 200" class="w-40 h-40" aria-label="Intervene logo">
+            <circle cx="100" cy="100" r="96" fill="none" stroke="#4C1D95" stroke-width="3"/>
+            <path d="M100 150c-22-18-46-32-46-58 0-20 28-26 46-6 18-20 46-14 46 6 0 26-24 40-46 58z" fill="#7C3AED"/>
+            <circle cx="74" cy="78" r="14" fill="#4C1D95"/><circle cx="126" cy="78" r="14" fill="#A855F7"/>
+          </svg>
+        </div>
+        <div class="absolute bottom-2 -left-2 sm:-left-6 glass rounded-2xl px-4 py-3 shadow-xl animate-floaty2">
+          <p class="text-xs text-slate-500 dark:text-slate-400">Today's mood</p>
+          <p class="font-bold text-teal-600 dark:text-teal-400 flex items-center gap-1.5">Feeling hopeful <span class="text-lg">›</span></p>
+        </div>
+        <div class="absolute top-2 -right-2 sm:-right-6 glass rounded-2xl px-4 py-3 shadow-xl animate-floaty">
+          <p class="text-xs text-slate-500 dark:text-slate-400">Reports resolved</p>
+          <p class="font-bold text-brand-600 dark:text-brand-300">98% &nbsp;safely</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- wave divider -->
+  <svg class="w-full text-white dark:text-ink" viewBox="0 0 1440 80" preserveAspectRatio="none" fill="currentColor"><path d="M0 40c240 40 480 40 720 20s480-40 720-20v40H0z"/></svg>
+</section>
+
+<!-- ======================= TRUST STRIP ======================= -->
+<section class="bg-white dark:bg-ink -mt-px">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+    <p class="text-center text-xs uppercase tracking-widest text-slate-400 font-semibold mb-5">Trusted by schools, counselors &amp; youth NGOs</p>
+    <div class="flex flex-wrap justify-center items-center gap-x-10 gap-y-4 opacity-70 text-slate-500 dark:text-slate-400 font-bold text-sm">
+      <span>Prometheus School</span><span>•</span><span>YouthLine</span><span>•</span><span>MindCare NGO</span><span>•</span><span>SafeSpace Counsel</span><span>•</span><span>EmpathyEd</span>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ABOUT ======================= -->
+<section id="about" class="bg-white dark:bg-ink py-20 lg:py-28">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center max-w-3xl mx-auto reveal">
+      <span class="text-sm font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">About Intervene</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">Empathy, made into <span class="grad-text">action</span>.</h2>
+      <p class="mt-5 text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+        Intervene is a student-led movement founded by <strong>Seher Chauhan</strong> &amp; <strong>Riddhita Sharma</strong> at Prometheus School, Noida — built on the belief that young people protecting young people is the most powerful intervention of all.
+      </p>
+    </div>
+
+    <div class="mt-14 grid md:grid-cols-3 gap-6">
+      <div class="reveal card-hover glass-strong rounded-3xl p-7 border border-brand-100 dark:border-white/10 hover:shadow-2xl hover:shadow-brand-600/10">
+        <span class="grid place-items-center w-12 h-12 rounded-2xl bg-brand-100 dark:bg-brand-900/40 text-brand-600 dark:text-brand-300 mb-4">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg>
+        </span>
+        <h3 class="font-bold text-xl mb-2">Our Mission</h3>
+        <p class="text-slate-600 dark:text-slate-300 leading-relaxed">To equip every student with the tools, courage, and community to recognise bullying, protect mental wellbeing, and step in — safely and early.</p>
+      </div>
+      <div class="reveal card-hover glass-strong rounded-3xl p-7 border border-sky-100 dark:border-white/10 hover:shadow-2xl hover:shadow-sky-600/10">
+        <span class="grid place-items-center w-12 h-12 rounded-2xl bg-sky-100 dark:bg-sky-900/40 text-sky-600 dark:text-sky-300 mb-4">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+        </span>
+        <h3 class="font-bold text-xl mb-2">Our Vision</h3>
+        <p class="text-slate-600 dark:text-slate-300 leading-relaxed">A generation of schools where no student suffers in silence — where empathy is a skill, support is a click away, and kindness is the culture.</p>
+      </div>
+      <div class="reveal card-hover glass-strong rounded-3xl p-7 border border-teal-100 dark:border-white/10 hover:shadow-2xl hover:shadow-teal-600/10">
+        <span class="grid place-items-center w-12 h-12 rounded-2xl bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 mb-4">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </span>
+        <h3 class="font-bold text-xl mb-2">Student-Led Impact</h3>
+        <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Designed by students, for students. Peer ambassadors run campaigns, moderate safe spaces, and turn awareness into everyday action.</p>
+      </div>
+    </div>
+
+    <!-- Why it matters -->
+    <div class="mt-8 grid md:grid-cols-2 gap-6">
+      <div class="reveal rounded-3xl p-7 bg-gradient-to-br from-brand-600 to-brand-800 text-white overflow-hidden relative">
+        <div class="absolute -right-8 -bottom-8 w-40 h-40 rounded-full bg-white/10 blur-xl"></div>
+        <h3 class="font-bold text-xl mb-2 relative">Why mental health awareness matters</h3>
+        <p class="text-brand-100 leading-relaxed relative">1 in 7 adolescents experiences a mental health condition. Most never speak up. Early awareness, language, and support change — and save — lives.</p>
+      </div>
+      <div class="reveal rounded-3xl p-7 bg-gradient-to-br from-sky-600 to-teal-600 text-white overflow-hidden relative">
+        <div class="absolute -right-8 -bottom-8 w-40 h-40 rounded-full bg-white/10 blur-xl"></div>
+        <h3 class="font-bold text-xl mb-2 relative">Why anti-bullying initiatives matter</h3>
+        <p class="text-sky-100 leading-relaxed relative">Bullying affects how students learn, sleep, and see themselves. Bystanders who feel empowered to intervene can stop incidents in seconds.</p>
+      </div>
+    </div>
+
+    <!-- Animated stats -->
+    <div class="mt-14 grid grid-cols-2 lg:grid-cols-4 gap-4 reveal">
+      <div class="glass-strong rounded-3xl p-7 text-center border border-brand-100 dark:border-white/10">
+        <p class="text-4xl lg:text-5xl font-extrabold grad-text counter" data-target="3200" data-suffix="+">0</p>
+        <p class="mt-2 text-sm font-medium text-slate-500 dark:text-slate-400">Students supported</p>
+      </div>
+      <div class="glass-strong rounded-3xl p-7 text-center border border-sky-100 dark:border-white/10">
+        <p class="text-4xl lg:text-5xl font-extrabold grad-text counter" data-target="48" data-suffix="">0</p>
+        <p class="mt-2 text-sm font-medium text-slate-500 dark:text-slate-400">Partner schools</p>
+      </div>
+      <div class="glass-strong rounded-3xl p-7 text-center border border-teal-100 dark:border-white/10">
+        <p class="text-4xl lg:text-5xl font-extrabold grad-text counter" data-target="1500" data-suffix="+">0</p>
+        <p class="mt-2 text-sm font-medium text-slate-500 dark:text-slate-400">Reports resolved</p>
+      </div>
+      <div class="glass-strong rounded-3xl p-7 text-center border border-coral-100 dark:border-white/10">
+        <p class="text-4xl lg:text-5xl font-extrabold grad-text-warm counter" data-target="120" data-suffix="">0</p>
+        <p class="mt-2 text-sm font-medium text-slate-500 dark:text-slate-400">Peer ambassadors</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FEATURES ======================= -->
+<section id="features" class="py-20 lg:py-28 bg-brand-50 dark:bg-ink/60 relative overflow-hidden">
+  <div class="absolute top-20 left-0 w-72 h-72 rounded-full bg-brand-300/20 blur-3xl"></div>
+  <div class="absolute bottom-10 right-0 w-72 h-72 rounded-full bg-teal-300/20 blur-3xl"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 relative">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <span class="text-sm font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">The Platform</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">Everything a safer school needs, in one place.</h2>
+      <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">Five connected tools for wellbeing, safety, and support.</p>
+    </div>
+
+    <div class="mt-14 grid lg:grid-cols-12 gap-6">
+      <!-- Mood tracker (big) -->
+      <div class="reveal lg:col-span-7 card-hover glass-strong rounded-3xl p-8 border border-white/60 dark:border-white/10 hover:shadow-2xl hover:shadow-brand-600/10">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <span class="grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-sky-500 text-white mb-4">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+            </span>
+            <h3 class="font-bold text-2xl">Mood Tracker</h3>
+            <p class="mt-2 text-slate-600 dark:text-slate-300 max-w-md">Log daily moods, add reflections, and watch your emotional trends grow into insight — calendar, weekly &amp; monthly analytics.</p>
+          </div>
+          <span class="shrink-0 text-xs font-semibold px-3 py-1 rounded-full bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300">Live demo</span>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <span class="text-xs px-3 py-1.5 rounded-full bg-brand-100 dark:bg-white/5 text-brand-700 dark:text-brand-200 font-medium">Daily entry</span>
+          <span class="text-xs px-3 py-1.5 rounded-full bg-brand-100 dark:bg-white/5 text-brand-700 dark:text-brand-200 font-medium">Mood calendar</span>
+          <span class="text-xs px-3 py-1.5 rounded-full bg-brand-100 dark:bg-white/5 text-brand-700 dark:text-brand-200 font-medium">Weekly analytics</span>
+          <span class="text-xs px-3 py-1.5 rounded-full bg-brand-100 dark:bg-white/5 text-brand-700 dark:text-brand-200 font-medium">Emotional insights</span>
+        </div>
+        <button onclick="showView('dashboard');setTimeout(()=>document.getElementById('moodCard').scrollIntoView({behavior:'smooth'}),200)" class="mt-6 inline-flex items-center gap-2 text-brand-600 dark:text-brand-300 font-semibold cursor-pointer hover:gap-3 transition-all">Try the mood tracker <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+
+      <!-- Safe space -->
+      <div class="reveal lg:col-span-5 card-hover rounded-3xl p-8 bg-gradient-to-br from-sky-600 to-brand-700 text-white hover:shadow-2xl hover:shadow-sky-600/20">
+        <span class="grid place-items-center w-12 h-12 rounded-2xl bg-white/15 mb-4">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </span>
+        <h3 class="font-bold text-2xl">Safe Space Community</h3>
+        <p class="mt-2 text-sky-100">Anonymous, moderated forum to share experiences, ask questions, support others — and report harmful content instantly.</p>
+        <ul class="mt-5 space-y-2 text-sm text-sky-50">
+          <li class="flex gap-2"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg> Always anonymous by default</li>
+          <li class="flex gap-2"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg> Trained student moderators</li>
+          <li class="flex gap-2"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg> One-tap reporting</li>
+        </ul>
+      </div>
+
+      <!-- Therapist connect -->
+      <div class="reveal lg:col-span-4 card-hover glass-strong rounded-3xl p-8 border border-white/60 dark:border-white/10 hover:shadow-2xl hover:shadow-teal-600/10">
+        <span class="grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500 to-sky-500 text-white mb-4">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </span>
+        <h3 class="font-bold text-xl">Therapist &amp; Psychologist Connect</h3>
+        <p class="mt-2 text-slate-600 dark:text-slate-300 text-sm">Browse verified professionals, book guidance sessions, join webinars, and submit anonymous questions.</p>
+        <a href="#therapists" class="mt-5 inline-flex items-center gap-2 text-teal-600 dark:text-teal-300 font-semibold cursor-pointer hover:gap-3 transition-all">Meet the experts <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+
+      <!-- Reporting -->
+      <div class="reveal lg:col-span-4 card-hover rounded-3xl p-8 bg-gradient-to-br from-coral-500 to-brand-600 text-white hover:shadow-2xl hover:shadow-coral-500/20">
+        <span class="grid place-items-center w-12 h-12 rounded-2xl bg-white/15 mb-4">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </span>
+        <h3 class="font-bold text-xl">Anti-Bullying Reporting</h3>
+        <p class="mt-2 text-rose-50 text-sm">Securely report bullying, harassment, cyberbullying &amp; discrimination — anonymously, with evidence upload and status tracking.</p>
+        <button onclick="openReport()" class="mt-5 inline-flex items-center gap-2 font-semibold bg-white/20 hover:bg-white/30 px-4 py-2 rounded-xl transition-colors cursor-pointer">File a report safely</button>
+      </div>
+
+      <!-- Resource hub -->
+      <div class="reveal lg:col-span-4 card-hover glass-strong rounded-3xl p-8 border border-white/60 dark:border-white/10 hover:shadow-2xl hover:shadow-brand-600/10">
+        <span class="grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-coral-500 text-white mb-4">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5z"/></svg>
+        </span>
+        <h3 class="font-bold text-xl">Resource Hub</h3>
+        <p class="mt-2 text-slate-600 dark:text-slate-300 text-sm">Articles, videos &amp; guides on anxiety, stress, bullying prevention, self-confidence and peer support — search &amp; filter.</p>
+        <a href="#resources" class="mt-5 inline-flex items-center gap-2 text-brand-600 dark:text-brand-300 font-semibold cursor-pointer hover:gap-3 transition-all">Explore resources <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= THERAPISTS ======================= -->
+<section id="therapists" class="py-20 lg:py-28 bg-white dark:bg-ink">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center reveal">
+    <span class="text-sm font-bold uppercase tracking-widest text-teal-600 dark:text-teal-400">For Professionals</span>
+    <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight">Are you a therapist or psychologist?</h2>
+    <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">Join Intervene to support students, share your expertise, and help build safer, kinder school communities.</p>
+    <button onclick="openTherapistJoin()" class="mt-8 inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-teal-500 to-sky-600 shadow-lg shadow-teal-500/30 hover:shadow-teal-500/50 transition-all cursor-pointer">
+      Are you a therapist? Join
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ======================= RESOURCES ======================= -->
+<section id="resources" class="py-20 lg:py-28 bg-brand-50 dark:bg-ink/60">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <span class="text-sm font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">Resource Hub</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight">Learn it. Practice it. Pass it on.</h2>
+    </div>
+    <!-- search + filter -->
+    <div class="mt-10 max-w-3xl mx-auto reveal">
+      <div class="glass-strong rounded-2xl p-2 flex flex-col sm:flex-row gap-2 border border-white/60 dark:border-white/10">
+        <div class="flex-1 flex items-center gap-2 px-3">
+          <svg class="w-5 h-5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="resSearch" oninput="renderResources()" type="text" placeholder="Search articles, videos, guides…" class="w-full bg-transparent py-2.5 outline-none text-sm" />
+        </div>
+        <select id="resFilter" onchange="renderResources()" class="bg-transparent px-3 py-2.5 rounded-xl outline-none text-sm font-medium cursor-pointer">
+          <option value="all">All topics</option>
+          <option>Mental health</option>
+          <option>Anxiety</option>
+          <option>Stress</option>
+          <option>Bullying prevention</option>
+          <option>Self-confidence</option>
+          <option>Peer support</option>
+        </select>
+      </div>
+    </div>
+    <div id="resourceGrid" class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </div>
+</section>
+
+<!-- ======================= MEET OUR TEAM ======================= -->
+<section id="team" class="py-20 lg:py-28 bg-white dark:bg-ink">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <span class="text-sm font-bold uppercase tracking-widest text-coral-600 dark:text-coral-400">Meet Our Team</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">The students behind <span class="grad-text">Intervene</span>.</h2>
+      <p class="mt-5 text-lg text-slate-600 dark:text-slate-300">Founded and led by students who believe real change starts with us — at Prometheus School, Noida.</p>
+    </div>
+
+    <!-- team image -->
+    <div class="mt-12 reveal max-w-4xl mx-auto">
+      <div class="glass-strong rounded-3xl p-3 border border-white/60 dark:border-white/10 shadow-2xl shadow-brand-900/10">
+        <img src="team.jpg" alt="The Intervene team" class="w-full rounded-2xl object-cover" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <div style="display:none" class="rounded-2xl bg-gradient-to-br from-brand-100 via-sky-100 to-teal-100 dark:from-brand-900/40 dark:via-sky-900/30 dark:to-teal-900/30 aspect-[16/7] place-items-center">
+          <div class="text-center">
+            <div class="flex -space-x-4 justify-center">
+              <span class="grid place-items-center w-20 h-20 rounded-full ring-4 ring-white dark:ring-ink bg-gradient-to-br from-brand-500 to-sky-500 text-white text-2xl font-bold">SC</span>
+              <span class="grid place-items-center w-20 h-20 rounded-full ring-4 ring-white dark:ring-ink bg-gradient-to-br from-teal-500 to-coral-500 text-white text-2xl font-bold">RS</span>
+            </div>
+            <p class="mt-4 text-sm font-medium text-slate-500 dark:text-slate-400">Save your team photo as <code class="px-1.5 py-0.5 rounded bg-white/60 dark:bg-white/10">intervene/team.png</code></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- founder cards -->
+    <div class="mt-10 grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+      <div class="reveal card-hover glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10 hover:shadow-2xl hover:shadow-brand-600/10 flex items-center gap-4">
+        <span class="grid place-items-center w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-500 to-sky-500 text-white text-xl font-bold shrink-0">SC</span>
+        <div><p class="font-bold text-lg">Seher Chauhan</p><p class="text-sm text-brand-600 dark:text-brand-400 font-medium">Founder</p><p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Student Founder, Intervene</p></div>
+      </div>
+      <div class="reveal card-hover glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10 hover:shadow-2xl hover:shadow-teal-600/10 flex items-center gap-4">
+        <span class="grid place-items-center w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-500 to-coral-500 text-white text-xl font-bold shrink-0">RS</span>
+        <div><p class="font-bold text-lg">Riddhita Sharma</p><p class="text-sm text-teal-600 dark:text-teal-400 font-medium">Founder</p><p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Student Founder, Intervene</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= EVENTS ======================= -->
+<section id="events" class="py-20 lg:py-28 bg-brand-50 dark:bg-ink/60">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <span class="text-sm font-bold uppercase tracking-widest text-sky-600 dark:text-sky-400">Events &amp; Campaigns</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight">What's happening next.</h2>
+      <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">Workshops, webinars, awareness drives &amp; school events.</p>
+    </div>
+    <div id="eventGrid" class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+  </div>
+</section>
+
+<!-- ======================= CONNECT WITH US ======================= -->
+<section id="connect" class="py-20 lg:py-28 bg-white dark:bg-ink relative overflow-hidden">
+  <div class="absolute -top-20 right-0 w-80 h-80 rounded-full bg-brand-300/20 blur-3xl"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 relative">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <span class="text-sm font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">Connect With Us</span>
+      <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight">Join the movement online.</h2>
+      <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">Follow Intervene for campaigns, events, resources &amp; awareness drives.</p>
+    </div>
+    <div id="socialGrid" class="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+
+    <!-- share -->
+    <div class="mt-10 glass-strong rounded-3xl p-6 sm:p-8 border border-white/60 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-5 reveal">
+      <div class="text-center sm:text-left">
+        <h3 class="font-bold text-lg">Spread the word</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-300">Share Intervene and help one more student feel safe.</p>
+      </div>
+      <div class="flex flex-wrap gap-2 justify-center">
+        <button onclick="shareTo('whatsapp')" aria-label="Share on WhatsApp" class="px-4 py-2.5 rounded-xl bg-[#25D366] text-white text-sm font-semibold hover:opacity-90 transition cursor-pointer">WhatsApp</button>
+        <button onclick="shareTo('x')" aria-label="Share on X" class="px-4 py-2.5 rounded-xl bg-black text-white text-sm font-semibold hover:opacity-90 transition cursor-pointer">X</button>
+        <button onclick="shareTo('facebook')" aria-label="Share on Facebook" class="px-4 py-2.5 rounded-xl bg-[#1877F2] text-white text-sm font-semibold hover:opacity-90 transition cursor-pointer">Facebook</button>
+        <button onclick="shareTo('linkedin')" aria-label="Share on LinkedIn" class="px-4 py-2.5 rounded-xl bg-[#0A66C2] text-white text-sm font-semibold hover:opacity-90 transition cursor-pointer">LinkedIn</button>
+        <button onclick="copyLink()" class="px-4 py-2.5 rounded-xl glass border border-slate-200 dark:border-white/10 text-sm font-semibold hover:bg-brand-50 dark:hover:bg-white/5 transition cursor-pointer">Copy link</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= NEWSLETTER + CONTACT ======================= -->
+<section class="py-20 lg:py-24 bg-gradient-to-br from-brand-600 via-brand-700 to-sky-700 text-white relative overflow-hidden">
+  <div class="absolute -top-16 -left-16 w-72 h-72 rounded-full bg-white/10 blur-3xl"></div>
+  <div class="absolute -bottom-16 -right-16 w-80 h-80 rounded-full bg-teal-400/20 blur-3xl"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 relative">
+    <div class="reveal">
+      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Stay in the loop.</h2>
+      <p class="mt-3 text-brand-100 text-lg max-w-md">Get event updates, mental health resources, new campaigns &amp; volunteer opportunities.</p>
+      <form onsubmit="subscribe(event)" class="mt-7 space-y-3 max-w-md">
+        <div class="grid sm:grid-cols-2 gap-3">
+          <input required type="text" placeholder="Name" class="px-4 py-3 rounded-xl bg-white/15 placeholder-white/60 border border-white/20 outline-none focus:ring-2 focus:ring-white/50" />
+          <input required type="email" placeholder="Email" class="px-4 py-3 rounded-xl bg-white/15 placeholder-white/60 border border-white/20 outline-none focus:ring-2 focus:ring-white/50" />
+        </div>
+        <input type="text" placeholder="School / Organization (optional)" class="w-full px-4 py-3 rounded-xl bg-white/15 placeholder-white/60 border border-white/20 outline-none focus:ring-2 focus:ring-white/50" />
+        <button type="submit" class="w-full py-3.5 rounded-xl font-semibold bg-white text-brand-700 hover:bg-brand-50 transition-colors cursor-pointer">Subscribe to the newsletter</button>
+      </form>
+    </div>
+    <div class="reveal lg:pl-10 lg:border-l border-white/15">
+      <h3 class="text-2xl font-bold">Contact us</h3>
+      <div class="mt-6 space-y-4 text-brand-50">
+        <p class="flex items-center gap-3"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/></svg> hello@intervene.org</p>
+        <p class="flex items-center gap-3"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> +91 98xxx xxxxx</p>
+        <p class="flex items-center gap-3"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg> Prometheus School, Noida, India</p>
+      </div>
+      <div class="mt-7 glass rounded-2xl p-5 border border-white/15">
+        <p class="font-semibold">Founders</p>
+        <p class="text-sm text-brand-100 mt-1">Seher Chauhan &amp; Riddhita Sharma — Student Founders, Intervene</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FOOTER ======================= -->
+<footer class="bg-ink text-slate-300 pt-14 pb-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="grid md:grid-cols-4 gap-10">
+      <div class="md:col-span-1">
+        <div class="flex items-center gap-2.5">
+          <span class="relative grid place-items-center w-11 h-11 rounded-full overflow-hidden bg-white"><img src="logo.png" alt="Intervene logo" class="w-full h-full object-contain" onerror="this.onerror=null;this.style.display='none';this.parentElement.classList.add('bg-gradient-to-br','from-brand-600','to-sky-600');this.nextElementSibling.style.display='block'"><svg style="display:none" class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+          <span class="font-extrabold text-xl text-white">Inter<span class="grad-text">vene</span></span>
+        </div>
+        <p class="mt-4 text-sm text-slate-400 leading-relaxed">Mental Wellbeing • Anti-Bullying • Awareness, Empathy &amp; Action.</p>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-3">Platform</p>
+        <ul class="space-y-2 text-sm text-slate-400">
+          <li><a href="#features" class="hover:text-white transition-colors">Mood Tracker</a></li>
+          <li><a href="#features" class="hover:text-white transition-colors">Safe Space</a></li>
+          <li><a href="#therapists" class="hover:text-white transition-colors">Therapist Connect</a></li>
+          <li><button onclick="openReport()" class="hover:text-white transition-colors cursor-pointer">Report an incident</button></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-3">Get involved</p>
+        <ul class="space-y-2 text-sm text-slate-400">
+          <li><a href="#team" class="hover:text-white transition-colors">Meet the Team</a></li>
+          <li><a href="#events" class="hover:text-white transition-colors">Events</a></li>
+          <li><a href="#resources" class="hover:text-white transition-colors">Resources</a></li>
+          <li><a href="#connect" class="hover:text-white transition-colors">Connect with us</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-3">Need help now?</p>
+        <button onclick="openEmergency()" class="px-4 py-2.5 rounded-xl bg-coral-500/20 text-coral-300 font-semibold text-sm hover:bg-coral-500/30 transition-colors cursor-pointer">Emergency support</button>
+        <p class="mt-4 text-xs text-slate-500">Available 24/7 • Confidential</p>
+      </div>
+    </div>
+    <div class="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+      <p>© 2026 Intervene. A student-led initiative at Prometheus School, Noida.</p>
+      <p>Built with empathy 💜 &nbsp;•&nbsp; Privacy-first &amp; anonymous by design</p>
+    </div>
+  </div>
+</footer>
+</main>
+
+<!-- ============================================================= -->
+<!-- ===================== DASHBOARD VIEW ======================== -->
+<!-- ============================================================= -->
+<div id="view-dashboard" class="view">
+<div class="min-h-screen bg-brand-50 dark:bg-ink py-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <!-- back + welcome -->
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+      <div>
+        <button onclick="showView('site')" class="text-sm text-brand-600 dark:text-brand-300 font-semibold mb-2 inline-flex items-center gap-1 cursor-pointer hover:gap-2 transition-all"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> Back to site</button>
+        <h1 class="text-3xl font-extrabold tracking-tight">Welcome back, <span id="dashName" class="grad-text">there</span> 👋</h1>
+        <p class="text-slate-600 dark:text-slate-400 mt-1">Here's how you're doing today.</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="glass-strong rounded-2xl px-5 py-3 border border-white/60 dark:border-white/10 text-center">
+          <p class="text-xs text-slate-500 dark:text-slate-400">Wellness score</p>
+          <p id="wellnessScore" class="text-2xl font-extrabold grad-text">0</p>
+        </div>
+        <span id="dashAvatar" class="grid place-items-center w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-sky-500 text-white font-bold text-lg">?</span>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-6">
+      <!-- Mood entry + chart -->
+      <div id="moodCard" class="lg:col-span-2 glass-strong rounded-3xl p-6 sm:p-7 border border-white/60 dark:border-white/10">
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="font-bold text-xl">How are you feeling today?</h2>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300">Daily check-in</span>
+        </div>
+        <div id="moodPicker" class="grid grid-cols-5 gap-2 sm:gap-3"></div>
+        <textarea id="moodNote" rows="2" placeholder="Add a note or reflection (optional)…" class="mt-4 w-full px-4 py-3 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 outline-none focus:ring-2 focus:ring-brand-500 resize-none text-sm"></textarea>
+        <button onclick="logMood()" class="mt-3 px-5 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-brand-600 to-sky-600 shadow-lg shadow-brand-600/30 hover:shadow-brand-600/50 transition-all cursor-pointer">Log today's mood</button>
+
+        <div class="mt-7 pt-6 border-t border-slate-200 dark:border-white/10">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="font-semibold">Your mood trend</h3>
+            <span class="text-xs text-slate-500 dark:text-slate-400">Higher = better</span>
+          </div>
+          <canvas id="moodChart" height="150" aria-label="Mood trend chart"></canvas>
+        </div>
+      </div>
+
+      <!-- Right widgets -->
+      <div class="space-y-6">
+        <div class="rounded-3xl p-6 bg-gradient-to-br from-brand-600 to-sky-700 text-white">
+          <h3 class="font-bold text-lg">Daily reflection</h3>
+          <p class="mt-2 text-brand-100 text-sm italic">"You don't have to be positive all the time. It's okay to feel — naming it is the first step."</p>
+        </div>
+        <div class="glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10">
+          <h3 class="font-bold mb-4">Wellness goals</h3>
+          <div class="space-y-3" id="goals"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- bottom row -->
+    <div class="mt-6 grid lg:grid-cols-2 gap-6">
+      <div class="glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10">
+        <h3 class="font-bold mb-4 flex items-center gap-2"><svg class="w-5 h-5 text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5z"/></svg> Recommended for you</h3>
+        <ul id="recoList" class="space-y-3 text-sm"></ul>
+      </div>
+      <div class="glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10">
+        <h3 class="font-bold mb-4 flex items-center gap-2"><svg class="w-5 h-5 text-teal-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Upcoming events</h3>
+        <ul id="dashEvents" class="space-y-3 text-sm"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================= -->
+<!-- ===================== ADMIN CONSOLE ========================= -->
+<!-- ============================================================= -->
+<div id="view-admin" class="view">
+<div class="min-h-screen bg-brand-50 dark:bg-ink py-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+      <div>
+        <button onclick="showView('site')" class="text-sm text-brand-600 dark:text-brand-300 font-semibold mb-2 inline-flex items-center gap-1 cursor-pointer hover:gap-2 transition-all"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> Back to site</button>
+        <h1 class="text-3xl font-extrabold tracking-tight">Admin <span class="grad-text">Console</span></h1>
+        <p class="text-slate-600 dark:text-slate-400 mt-1">Manage everything — reports, content, users &amp; social media.</p>
+      </div>
+      <span id="adminStatus" class="text-xs font-semibold px-3 py-2 rounded-xl bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300">Demo mode — sign in as an admin to persist changes</span>
+    </div>
+
+    <div class="grid lg:grid-cols-[210px_1fr] gap-6">
+      <!-- sidebar -->
+      <aside class="glass-strong rounded-3xl p-3 border border-white/60 dark:border-white/10 h-max lg:sticky lg:top-24">
+        <nav id="adminNav" class="flex lg:flex-col gap-1 overflow-x-auto no-scrollbar"></nav>
+      </aside>
+      <!-- panels -->
+      <div id="adminPanel" class="min-w-0"></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================= -->
+<!-- ========================= MODALS =========================== -->
+<!-- ============================================================= -->
+
+<!-- Auth modal -->
+<div id="authModal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4">
+  <div class="absolute inset-0 bg-ink/60 backdrop-blur-sm" onclick="closeModal('authModal')"></div>
+  <div class="relative glass-strong rounded-3xl w-full max-w-md p-7 border border-white/60 dark:border-white/10 shadow-2xl animate-pop">
+    <button onclick="closeModal('authModal')" aria-label="Close" class="absolute top-4 right-4 grid place-items-center w-9 h-9 rounded-xl hover:bg-slate-100 dark:hover:bg-white/10 cursor-pointer"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <h2 id="authTitle" class="text-2xl font-extrabold">Welcome back</h2>
+    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Secured by Supabase Auth</p>
+    <div id="roleRow" class="mt-5 grid grid-cols-2 gap-2 hidden">
+      <button type="button" onclick="pickRole('Student',this)" class="role-btn px-3 py-2.5 rounded-xl text-sm font-semibold border-2 border-brand-500 bg-brand-50 dark:bg-white/5 cursor-pointer">Student</button>
+      <button type="button" onclick="pickRole('Therapist',this)" class="role-btn px-3 py-2.5 rounded-xl text-sm font-semibold border-2 border-transparent bg-slate-100 dark:bg-white/5 cursor-pointer">Therapist</button>
+    </div>
+    <button type="button" onclick="signInWithGoogle()" class="mt-5 w-full flex items-center justify-center gap-3 py-3 rounded-xl font-semibold border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 hover:bg-slate-50 dark:hover:bg-white/10 transition-colors cursor-pointer">
+      <svg class="w-5 h-5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1A11 11 0 0 0 2.18 7.06l3.66 2.84C6.71 7.3 9.14 5.38 12 5.38z"/></svg>
+      Continue with Google
+    </button>
+    <div class="flex items-center gap-3 my-4 text-xs text-slate-400"><span class="flex-1 h-px bg-slate-200 dark:bg-white/10"></span>or continue with email<span class="flex-1 h-px bg-slate-200 dark:bg-white/10"></span></div>
+    <form onsubmit="doAuth(event)" class="space-y-3">
+      <div id="nameField" class="hidden"><label class="block text-sm font-medium mb-1.5">Name</label><input type="text" class="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 outline-none focus:ring-2 focus:ring-brand-500" placeholder="Your name" /></div>
+      <div><label class="block text-sm font-medium mb-1.5">Email</label><input required type="email" class="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 outline-none focus:ring-2 focus:ring-brand-500" placeholder="you@email.com" /></div>
+      <div><label class="block text-sm font-medium mb-1.5">Password</label><input required type="password" class="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 outline-none focus:ring-2 focus:ring-brand-500" placeholder="••••••••" /></div>
+      <button type="submit" class="w-full py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-brand-600 to-sky-600 shadow-lg shadow-brand-600/30 hover:shadow-brand-600/50 transition-all cursor-pointer"><span id="authBtn">Sign in</span></button>
+    </form>
+    <p class="mt-4 text-center text-sm text-slate-500 dark:text-slate-400"><span id="authSwap">New here?</span> <button onclick="swapAuth()" id="authSwapBtn" class="font-semibold text-brand-600 dark:text-brand-300 cursor-pointer hover:underline">Create account</button></p>
+  </div>
+</div>
+
+<!-- Report modal -->
+<div id="reportModal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4">
+  <div class="absolute inset-0 bg-ink/60 backdrop-blur-sm" onclick="closeModal('reportModal')"></div>
+  <div class="relative glass-strong rounded-3xl w-full max-w-lg p-7 border border-white/60 dark:border-white/10 shadow-2xl animate-pop max-h-[90vh] overflow-y-auto no-scrollbar">
+    <button onclick="closeModal('reportModal')" aria-label="Close" class="absolute top-4 right-4 grid place-items-center w-9 h-9 rounded-xl hover:bg-slate-100 dark:hover:bg-white/10 cursor-pointer"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <span class="grid place-items-center w-12 h-12 rounded-2xl bg-coral-100 dark:bg-coral-900/40 text-coral-600 dark:text-coral-300 mb-3"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+    <h2 class="text-2xl font-extrabold">Report safely &amp; securely</h2>
+    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">You're protected. Reports are confidential and reviewed by trained moderators.</p>
+    <form onsubmit="submitReport(event)" class="mt-5 space-y-4">
+      <label class="flex items-center gap-3 p-3 rounded-xl bg-brand-50 dark:bg-white/5 border border-brand-100 dark:border-white/10 cursor-pointer">
+        <input type="checkbox" checked class="w-5 h-5 accent-brand-600" />
+        <span class="text-sm font-medium">Submit anonymously (recommended)</span>
+      </label>
+      <div><label class="block text-sm font-medium mb-1.5">Category</label>
+        <select required class="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer"><option>Bullying</option><option>Harassment</option><option>Cyberbullying</option><option>Discrimination</option></select>
+      </div>
+      <div><label class="block text-sm font-medium mb-1.5">What happened?</label><textarea required rows="4" class="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 outline-none focus:ring-2 focus:ring-brand-500 resize-none" placeholder="Describe the incident in your own words…"></textarea></div>
+      <div><label class="block text-sm font-medium mb-1.5">Evidence (optional)</label>
+        <div class="border-2 border-dashed border-slate-300 dark:border-white/15 rounded-xl p-5 text-center text-sm text-slate-500 dark:text-slate-400 cursor-pointer hover:border-brand-400 transition-colors">
+          <svg class="w-7 h-7 mx-auto mb-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+          Drag a screenshot or click to upload
+          <input type="file" class="hidden" />
+        </div>
+      </div>
+      <button type="submit" class="w-full py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-coral-500 to-brand-600 shadow-lg shadow-coral-500/30 hover:shadow-coral-500/50 transition-all cursor-pointer">Submit report</button>
+      <p class="text-xs text-center text-slate-400">You'll receive a tracking ID to follow the status of your report.</p>
+    </form>
+  </div>
+</div>
+
+<!-- Therapist join modal -->
+<div id="therapistModal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4">
+  <div class="absolute inset-0 bg-ink/60 backdrop-blur-sm" onclick="closeModal('therapistModal')"></div>
+  <div class="relative glass-strong rounded-3xl w-full max-w-lg p-7 border border-white/60 dark:border-white/10 shadow-2xl animate-pop max-h-[90vh] overflow-y-auto no-scrollbar">
+    <button onclick="closeModal('therapistModal')" aria-label="Close" class="absolute top-4 right-4 grid place-items-center w-9 h-9 rounded-xl hover:bg-slate-100 dark:hover:bg-white/10 cursor-pointer"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <span class="grid place-items-center w-12 h-12 rounded-2xl bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-300 mb-3"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+    <h2 class="text-2xl font-extrabold">Join as a Therapist</h2>
+    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Share your credentials and contact details. Our team verifies every professional before they go live.</p>
+    <form onsubmit="submitTherapist(event)" class="mt-5 space-y-4">
+      <div><label class="block text-sm font-medium mb-1.5">Full name</label><input id="thName" required type="text" class="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 outline-none focus:ring-2 focus:ring-teal-500" placeholder="Dr. Your Name" /></div>
+      <div><label class="block text-sm font-medium mb-1.5">Specialization &amp; qualifications</label><input id="thSpec" type="text" class="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 outline-none focus:ring-2 focus:ring-teal-500" placeholder="e.g. Clinical Psychologist, PhD, RCI licensed" /></div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div><label class="block text-sm font-medium mb-1.5">Email</label><input id="thEmail" required type="email" class="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 outline-none focus:ring-2 focus:ring-teal-500" placeholder="you@email.com" /></div>
+        <div><label class="block text-sm font-medium mb-1.5">Phone number</label><input id="thPhone" required type="tel" class="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 outline-none focus:ring-2 focus:ring-teal-500" placeholder="+91 9xxxxxxxxx" /></div>
+      </div>
+      <div><label class="block text-sm font-medium mb-1.5">Instagram ID</label>
+        <div class="flex items-center rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 focus-within:ring-2 focus-within:ring-teal-500">
+          <span class="pl-4 text-slate-400">@</span><input id="thInsta" type="text" class="w-full px-2 py-3 bg-transparent outline-none" placeholder="yourhandle" />
+        </div>
+      </div>
+      <button type="submit" class="w-full py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-teal-500 to-sky-600 shadow-lg shadow-teal-500/30 hover:shadow-teal-500/50 transition-all cursor-pointer">Submit for verification</button>
+      <p class="text-xs text-center text-slate-400">We'll review your details and reach out by email.</p>
+    </form>
+  </div>
+</div>
+
+<!-- Emergency modal -->
+<div id="emergencyModal" class="fixed inset-0 z-[80] hidden items-center justify-center p-4">
+  <div class="absolute inset-0 bg-ink/70 backdrop-blur-sm" onclick="closeModal('emergencyModal')"></div>
+  <div class="relative glass-strong rounded-3xl w-full max-w-md p-7 border border-coral-200 dark:border-white/10 shadow-2xl animate-pop">
+    <button onclick="closeModal('emergencyModal')" aria-label="Close" class="absolute top-4 right-4 grid place-items-center w-9 h-9 rounded-xl hover:bg-slate-100 dark:hover:bg-white/10 cursor-pointer"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <h2 class="text-2xl font-extrabold text-coral-600 dark:text-coral-400">You matter. Help is here.</h2>
+    <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">If you or someone you know is in immediate danger, please reach out now. You are not alone.</p>
+    <div class="mt-5 space-y-3">
+      <a href="tel:112" class="flex items-center justify-between p-4 rounded-2xl bg-coral-50 dark:bg-coral-900/20 border border-coral-200 dark:border-coral-900/40 cursor-pointer hover:bg-coral-100 transition-colors">
+        <span><span class="font-bold block">Emergency Services</span><span class="text-sm text-slate-500 dark:text-slate-400">India — 112</span></span>
+        <svg class="w-5 h-5 text-coral-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </a>
+      <a href="tel:18008914416" class="flex items-center justify-between p-4 rounded-2xl bg-brand-50 dark:bg-white/5 border border-brand-100 dark:border-white/10 cursor-pointer hover:bg-brand-100 transition-colors">
+        <span><span class="font-bold block">Tele-MANAS Helpline</span><span class="text-sm text-slate-500 dark:text-slate-400">Mental health — 14416</span></span>
+        <svg class="w-5 h-5 text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </a>
+      <button onclick="closeModal('emergencyModal');openAI()" class="w-full flex items-center justify-between p-4 rounded-2xl bg-teal-50 dark:bg-white/5 border border-teal-100 dark:border-white/10 cursor-pointer hover:bg-teal-100 transition-colors text-left">
+        <span><span class="font-bold block">Chat with Aria</span><span class="text-sm text-slate-500 dark:text-slate-400">AI wellness companion</span></span>
+        <svg class="w-5 h-5 text-teal-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 z-[90] hidden">
+  <div class="glass-strong rounded-2xl px-5 py-3.5 shadow-2xl border border-white/60 dark:border-white/10 flex items-center gap-3">
+    <span class="grid place-items-center w-8 h-8 rounded-full bg-teal-100 text-teal-600"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+    <span id="toastMsg" class="font-medium text-sm"></span>
+  </div>
+</div>
+
+<!-- AI assistant -->
+<button onclick="openAI()" aria-label="Open AI wellness assistant" class="fixed bottom-6 right-6 z-[60] grid place-items-center w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-600 to-teal-600 text-white shadow-2xl shadow-brand-600/40 hover:scale-105 transition-transform cursor-pointer animate-floaty">
+  <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a7 7 0 0 1 7 7c0 2-1 3.5-2.5 4.5L16 21H8l-.5-7.5C6 12.5 5 11 5 9a7 7 0 0 1 7-7z"/><path d="M9 9h.01M15 9h.01"/></svg>
+</button>
+
+<div id="aiPanel" class="fixed bottom-24 right-6 z-[60] w-[90vw] max-w-sm hidden">
+  <div class="glass-strong rounded-3xl border border-white/60 dark:border-white/10 shadow-2xl overflow-hidden">
+    <div class="bg-gradient-to-r from-brand-600 to-teal-600 text-white p-4 flex items-center gap-3">
+      <span class="grid place-items-center w-10 h-10 rounded-xl bg-white/20"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a7 7 0 0 1 7 7c0 2-1 3.5-2.5 4.5L16 21H8l-.5-7.5C6 12.5 5 11 5 9a7 7 0 0 1 7-7z"/></svg></span>
+      <div><p class="font-bold leading-tight">Aria</p><p class="text-xs text-brand-100">AI Wellness Companion</p></div>
+      <button onclick="closeModal('aiPanel')" aria-label="Close" class="ml-auto grid place-items-center w-8 h-8 rounded-lg hover:bg-white/20 cursor-pointer"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div id="aiMessages" class="p-4 space-y-3 h-72 overflow-y-auto no-scrollbar text-sm"></div>
+    <div class="p-3 border-t border-slate-200 dark:border-white/10 flex gap-2">
+      <input id="aiInput" onkeydown="if(event.key==='Enter')sendAI()" type="text" placeholder="Tell Aria how you feel…" class="flex-1 px-4 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 outline-none focus:ring-2 focus:ring-brand-500 text-sm" />
+      <button onclick="sendAI()" aria-label="Send" class="grid place-items-center w-11 h-11 rounded-xl bg-gradient-to-br from-brand-600 to-teal-600 text-white cursor-pointer hover:opacity-90"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ===================== SUPABASE (database + auth) ===================== */
+/* 1. Create a project at supabase.com  2. run supabase-schema.sql
+   3. paste your Project URL + publishable (anon) key below.
+   Until then the app runs in demo mode (localStorage only). */
+const SUPABASE_URL = 'https://wzhbujbqvlmujxerthez.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_mimNO3dkbRlZWk09R6rYHQ__yP-vpij';
+let sb = null;
+try { if (SUPABASE_URL && SUPABASE_KEY && window.supabase) sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e){}
+
+async function signInWithGoogle(){
+  if(!sb){ closeModal('authModal'); toast('Demo mode — add your Supabase keys in index.html to enable Google sign-in'); return; }
+  localStorage.setItem('iv-oauth-pending','1');   // so we route only after a real Google return
+  const { error } = await sb.auth.signInWithOAuth({ provider:'google', options:{ redirectTo: location.origin + location.pathname } });
+  if(error){ localStorage.removeItem('iv-oauth-pending'); toast('Google sign-in error: ' + error.message); }
+}
+
+/* react to login/logout — updates the nav and routes after Google returns */
+function setAdminNav(show){
+  ['navAdminBtn','navAdminBtnM'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.toggle('hidden',!show); });
+}
+async function refreshAuthUI(){
+  if(!sb) return null;
+  const { data:{ session } } = await sb.auth.getSession();
+  const btn = document.getElementById('navAuthBtn');
+  if(session && session.user){
+    const u = session.user;
+    const m = u.user_metadata || {};
+    const name = m.name || m.full_name || (u.email ? u.email.split('@')[0] : 'Account');
+    window.CURRENT_NAME = name;
+    if(btn){ btn.textContent = 'Hi, ' + name; btn.title = 'Account'; btn.onclick = toggleAccountMenu; }
+    if(document.getElementById('view-dashboard').classList.contains('active')) applyDashIdentity();
+    // admin status comes from the database role (server-enforced allowlist)
+    try{ const { data:p } = await sb.from('profiles').select('role').eq('id', u.id).single(); window.IS_ADMIN = !!(p && p.role==='admin'); }
+    catch(e){ window.IS_ADMIN = false; }
+    ADMIN_IS = window.IS_ADMIN;
+    setAdminNav(window.IS_ADMIN);
+    return session;
+  }
+  window.IS_ADMIN = false; ADMIN_IS = false; setAdminNav(false); window.CURRENT_NAME = null; hideAccountMenu();
+  if(btn){ btn.textContent = 'Sign in'; btn.title = ''; btn.onclick = () => openAuth('login'); }
+  return null;
+}
+function toggleAccountMenu(){ const m=document.getElementById('accountMenu'); if(m) m.classList.toggle('hidden'); }
+function hideAccountMenu(){ const m=document.getElementById('accountMenu'); if(m) m.classList.add('hidden'); }
+/* fill the dashboard greeting + avatar with the signed-in user's name */
+function applyDashIdentity(){
+  const nm = window.CURRENT_NAME || 'there';
+  const nameEl = document.getElementById('dashName'); if(nameEl) nameEl.textContent = nm;
+  const av = document.getElementById('dashAvatar');
+  if(av) av.textContent = (window.CURRENT_NAME ? nm.trim()[0] : '?').toUpperCase();
+}
+async function signOut(){ try{ if(sb) await sb.auth.signOut(); }catch(e){} toast('Signed out'); showView('site'); refreshAuthUI(); }
+async function routeAfterLogin(session){
+  let dest = 'dashboard';
+  try{ const { data:p } = await sb.from('profiles').select('role').eq('id', session.user.id).single(); if(p && p.role==='admin'){ window.IS_ADMIN=true; ADMIN_IS=true; setAdminNav(true); dest='admin'; } }catch(e){}
+  toast('Signed in with Google 🎉');
+  closeModal('authModal');
+  showView(dest);
+}
+if (sb) {
+  sb.auth.onAuthStateChange((event, session) => {
+    refreshAuthUI();
+    if (event === 'SIGNED_IN' && session) {
+      closeModal('authModal');
+      if (localStorage.getItem('iv-oauth-pending')) {   // came back from Google
+        localStorage.removeItem('iv-oauth-pending');
+        routeAfterLogin(session);
+      }
+    }
+  });
+  document.addEventListener('DOMContentLoaded', refreshAuthUI);
+}
+
+/* ===================== THEME ===================== */
+(function(){
+  const t = localStorage.getItem('iv-theme');
+  if(t==='dark' || (!t && window.matchMedia('(prefers-color-scheme:dark)').matches)) document.documentElement.classList.add('dark');
+})();
+function toggleTheme(){
+  document.documentElement.classList.toggle('dark');
+  localStorage.setItem('iv-theme', document.documentElement.classList.contains('dark')?'dark':'light');
+  if(window.moodChartDraw) window.moodChartDraw();
+}
+function toggleMobileNav(){ document.getElementById('mobileNav').classList.toggle('hidden'); }
+
+/* ===================== VIEWS ===================== */
+function showView(v){
+  if(v==='admin' && sb && !window.IS_ADMIN){ toast('Admin access only'); v='dashboard'; }
+  document.querySelectorAll('.view').forEach(e=>e.classList.remove('active'));
+  document.getElementById('view-'+v).classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+  if(v==='dashboard'){ buildDashboard(); }
+  if(v==='admin'){ buildAdmin(); }
+}
+/* scroll to a section, switching back to the homepage first if needed */
+function navTo(id){
+  const go=()=>{ const el=document.getElementById(id); if(el){ el.querySelectorAll('.reveal').forEach(r=>r.classList.add('in')); el.scrollIntoView({behavior:'smooth'}); } };
+  if(!document.getElementById('view-site').classList.contains('active')){ showView('site'); setTimeout(go,90); }
+  else go();
+}
+
+/* ===================== TOAST ===================== */
+let toastT;
+function toast(msg){
+  const el=document.getElementById('toast'); document.getElementById('toastMsg').textContent=msg;
+  el.classList.remove('hidden'); el.classList.add('animate-pop');
+  clearTimeout(toastT); toastT=setTimeout(()=>el.classList.add('hidden'),3200);
+}
+
+/* ===================== MODALS ===================== */
+function openModal(id){ const m=document.getElementById(id); m.classList.remove('hidden'); m.classList.add('flex'); }
+function closeModal(id){ const m=document.getElementById(id); m.classList.add('hidden'); m.classList.remove('flex'); }
+let authMode='login';
+function openAuth(mode){ authMode=mode; renderAuth(); openModal('authModal'); }
+function swapAuth(){ authMode = authMode==='login'?'signup':'login'; renderAuth(); }
+function renderAuth(){
+  const signup = authMode==='signup';
+  document.getElementById('authTitle').textContent = signup?'Create your account':'Welcome back';
+  document.getElementById('authBtn').textContent = signup?'Create account':'Sign in';
+  document.getElementById('authSwap').textContent = signup?'Already a member?':'New here?';
+  document.getElementById('authSwapBtn').textContent = signup?'Sign in':'Create account';
+  document.getElementById('roleRow').classList.toggle('hidden',!signup);
+  document.getElementById('nameField').classList.toggle('hidden',!signup);
+}
+let role='Student';
+function pickRole(r,btn){ role=r; document.querySelectorAll('.role-btn').forEach(b=>{b.classList.remove('border-brand-500','bg-brand-50');b.classList.add('border-transparent','bg-slate-100');}); btn.classList.add('border-brand-500','bg-brand-50'); btn.classList.remove('border-transparent','bg-slate-100'); }
+async function doAuth(e){
+  e.preventDefault();
+  const email = e.target.querySelector('input[type=email]').value;
+  const password = e.target.querySelector('input[type=password]').value;
+  const name = document.querySelector('#nameField input')?.value || '';
+  if(sb){
+    try{
+      if(authMode==='signup'){
+        const {error}=await sb.auth.signUp({email,password,options:{data:{name,role}}});
+        if(error) throw error; toast('Account created — check your email to confirm 💜');
+      } else {
+        const {error}=await sb.auth.signInWithPassword({email,password});
+        if(error) throw error; toast('Signed in successfully');
+      }
+      closeModal('authModal');
+      let dest='dashboard';
+      try{ const {data:{user}}=await sb.auth.getUser(); if(user){ const {data:p}=await sb.from('profiles').select('role').eq('id',user.id).single(); if(p&&p.role==='admin'){ window.IS_ADMIN=true; ADMIN_IS=true; setAdminNav(true); dest='admin'; } } }catch(e){}
+      setTimeout(()=>showView(dest),600); return;
+    }catch(err){ toast(err.message||'Auth error'); return; }
+  }
+  /* demo mode */
+  closeModal('authModal');
+  toast(authMode==='signup'?('Account created — welcome to Intervene! ('+role+')'):'Signed in successfully');
+  setTimeout(()=>showView(role==='Admin'?'admin':'dashboard'),600);
+}
+function openReport(){ openModal('reportModal'); }
+async function submitReport(e){
+  e.preventDefault();
+  const f=e.target;
+  const anon=f.querySelector('input[type=checkbox]').checked;
+  const category=f.querySelector('select').value.toLowerCase();
+  const description=f.querySelector('textarea').value;
+  const code='IV-'+Math.floor(1000+Math.random()*9000);
+  closeModal('reportModal');
+  toast('Report submitted • Tracking ID #'+code);
+  if(sb){ try{ let user_id=null; if(!anon){ const {data:{user}}=await sb.auth.getUser(); user_id=user?.id||null; } await sb.from('reports').insert({user_id,is_anonymous:anon,category,description}); }catch(err){} }
+}
+function openEmergency(){ openModal('emergencyModal'); }
+function openTherapistJoin(){ openModal('therapistModal'); }
+async function submitTherapist(e){
+  e.preventDefault();
+  const name=val('thName'), specialization=val('thSpec'), email=val('thEmail'), phone=val('thPhone');
+  let instagram=val('thInsta'); if(instagram) instagram=instagram.replace(/^@/,'');
+  closeModal('therapistModal'); e.target.reset();
+  toast('Thanks — your details are in for verification 💚');
+  if(sb){ try{ let user_id=null; try{ const {data:{user}}=await sb.auth.getUser(); user_id=user?.id||null; }catch(_){}
+    await sb.from('therapist_profiles').insert({user_id,name,specialization,qualifications:specialization,email,phone,instagram,verified:false}); }catch(err){} }
+}
+function submitVolunteer(e){ e.preventDefault(); e.target.reset(); toast('Application received — we\'ll be in touch! 💜'); }
+function subscribe(e){ e.preventDefault(); e.target.reset(); toast('Subscribed! Check your inbox to confirm.'); }
+
+/* ===================== SHARE ===================== */
+const SHARE_URL='https://intervene.org', SHARE_TXT='Intervene — Creating safer spaces through awareness, empathy & action.';
+function shareTo(p){
+  const u=encodeURIComponent(SHARE_URL), t=encodeURIComponent(SHARE_TXT);
+  const map={ whatsapp:`https://wa.me/?text=${t}%20${u}`, x:`https://twitter.com/intent/tweet?text=${t}&url=${u}`, facebook:`https://www.facebook.com/sharer/sharer.php?u=${u}`, linkedin:`https://www.linkedin.com/sharing/share-offsite/?url=${u}` };
+  window.open(map[p],'_blank','noopener');
+}
+function copyLink(){ navigator.clipboard?.writeText(SHARE_URL); toast('Link copied to clipboard'); }
+
+/* ===================== DATA ===================== */
+const therapists=[
+  {n:'Dr. Meera Kapoor',s:'Adolescent Psychology',q:'PhD, Clinical Psychology',g:'from-brand-500 to-sky-500',tag:'Anxiety • Self-esteem'},
+  {n:'Dr. Arjun Rao',s:'Counselling Psychologist',q:'M.Phil, RCI Licensed',g:'from-teal-500 to-sky-500',tag:'Bullying • Stress'},
+  {n:'Ms. Sara Iyer',s:'School Counsellor',q:'M.A. Counselling',g:'from-coral-500 to-brand-500',tag:'Peer support • Family'},
+  {n:'Dr. Nikhil Sharma',s:'Child Psychiatrist',q:'MD Psychiatry',g:'from-brand-500 to-coral-500',tag:'Depression • Sleep'},
+  {n:'Ms. Tanvi Bose',s:'Art Therapist',q:'M.A. Expressive Arts',g:'from-sky-500 to-teal-500',tag:'Trauma • Confidence'},
+  {n:'Dr. Rehan Khan',s:'Clinical Psychologist',q:'PhD, CBT Certified',g:'from-teal-500 to-brand-500',tag:'OCD • Social anxiety'},
+];
+function renderTherapists(){
+  document.getElementById('therapistGrid').innerHTML = therapists.map(t=>`
+   <div class="card-hover glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10 hover:shadow-2xl hover:shadow-brand-600/10 reveal">
+     <div class="flex items-center gap-4">
+       <span class="grid place-items-center w-14 h-14 rounded-2xl bg-gradient-to-br ${t.g} text-white font-bold text-lg shrink-0">${t.n.split(' ')[1][0]}${t.n.split(' ')[2]?t.n.split(' ')[2][0]:''}</span>
+       <div><p class="font-bold leading-tight">${t.n}</p><p class="text-sm text-slate-500 dark:text-slate-400">${t.s}</p></div>
+       <span class="ml-auto grid place-items-center w-7 h-7 rounded-full bg-teal-100 text-teal-600 dark:bg-teal-900/40 dark:text-teal-300" title="Verified"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+     </div>
+     <p class="mt-3 text-xs font-medium text-slate-500 dark:text-slate-400">${t.q}</p>
+     <div class="mt-3 flex flex-wrap gap-1.5">${t.tag.split(' • ').map(x=>`<span class="text-xs px-2.5 py-1 rounded-full bg-brand-100 dark:bg-white/5 text-brand-700 dark:text-brand-200">${x}</span>`).join('')}</div>
+     <div class="mt-4 flex gap-2">
+       <button onclick="toast('Session request sent to ${t.n.replace(/'/g,'')}')" class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-brand-600 to-sky-600 hover:opacity-90 transition cursor-pointer">Book</button>
+       <button onclick="toast('Anonymous question sent privately')" class="px-3 py-2.5 rounded-xl text-sm font-semibold glass border border-slate-200 dark:border-white/10 hover:bg-brand-50 dark:hover:bg-white/5 transition cursor-pointer">Ask</button>
+     </div>
+   </div>`).join('');
+  observeReveals();
+}
+
+const resources=[
+  {t:'Understanding Anxiety: A Student Guide',c:'Anxiety',type:'Article',m:'6 min read',g:'from-brand-500 to-sky-500'},
+  {t:'5 Breathing Techniques for Stress',c:'Stress',type:'Video',m:'4 min',g:'from-teal-500 to-sky-500'},
+  {t:'How to Be an Upstander, Not a Bystander',c:'Bullying prevention',type:'Guide',m:'8 min read',g:'from-coral-500 to-brand-500'},
+  {t:'Building Real Self-Confidence',c:'Self-confidence',type:'Article',m:'5 min read',g:'from-brand-500 to-coral-500'},
+  {t:'Supporting a Friend Who\'s Struggling',c:'Peer support',type:'Guide',m:'7 min read',g:'from-sky-500 to-teal-500'},
+  {t:'What Mental Health Really Means',c:'Mental health',type:'Video',m:'9 min',g:'from-teal-500 to-brand-500'},
+  {t:'Beating Exam Stress',c:'Stress',type:'Article',m:'5 min read',g:'from-sky-500 to-brand-500'},
+  {t:'Cyberbullying: Spot it & Stop it',c:'Bullying prevention',type:'Guide',m:'6 min read',g:'from-coral-500 to-sky-500'},
+  {t:'Grounding Exercises for Panic',c:'Anxiety',type:'Video',m:'3 min',g:'from-brand-500 to-teal-500'},
+];
+function renderResources(){
+  const q=(document.getElementById('resSearch').value||'').toLowerCase();
+  const f=document.getElementById('resFilter').value;
+  const list=resources.filter(r=>(f==='all'||r.c===f)&&(r.t.toLowerCase().includes(q)||r.c.toLowerCase().includes(q)));
+  const grid=document.getElementById('resourceGrid');
+  grid.innerHTML = list.length? list.map(r=>`
+    <div class="card-hover glass-strong rounded-3xl overflow-hidden border border-white/60 dark:border-white/10 hover:shadow-2xl hover:shadow-brand-600/10 cursor-pointer" onclick="openResource('${encodeURIComponent(r.link||'')}','${encodeURIComponent(r.t)}')">
+      <div class="h-28 bg-gradient-to-br ${r.g} relative">
+        <span class="absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full bg-white/25 text-white backdrop-blur">${r.type}</span>
+        ${r.type==='Video'?`<span class="absolute inset-0 grid place-items-center"><span class="grid place-items-center w-12 h-12 rounded-full bg-white/30 backdrop-blur"><svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span>`:''}
+      </div>
+      <div class="p-5">
+        <span class="text-xs font-semibold text-brand-600 dark:text-brand-400">${r.c}</span>
+        <h3 class="font-bold mt-1 leading-tight">${r.t}</h3>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">${r.m}</p>
+      </div>
+    </div>`).join('') : `<p class="col-span-full text-center text-slate-500 dark:text-slate-400 py-10">No resources match your search.</p>`;
+  observeReveals();
+}
+
+function openResource(encLink,encTitle){
+  const link=decodeURIComponent(encLink||''); const title=decodeURIComponent(encTitle||'this resource');
+  if(link){ window.open(link,'_blank','noopener'); }
+  else { toast('No link set yet for: '+title); }
+}
+
+const events=[
+  {d:'28',mo:'Jun',t:'Mindful Mornings Workshop',ty:'Workshop',g:'from-brand-500 to-sky-500'},
+  {d:'05',mo:'Jul',t:'Anti-Bullying Webinar',ty:'Webinar',g:'from-coral-500 to-brand-500'},
+  {d:'12',mo:'Jul',t:'Kindness Awareness Drive',ty:'Campaign',g:'from-teal-500 to-sky-500'},
+  {d:'20',mo:'Jul',t:'Peer Support Training',ty:'School Event',g:'from-sky-500 to-brand-500'},
+];
+function renderEvents(){
+  document.getElementById('eventGrid').innerHTML=events.map(e=>`
+    <div class="card-hover glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10 hover:shadow-2xl hover:shadow-brand-600/10 reveal">
+      <div class="flex items-center gap-4">
+        <div class="grid place-items-center w-16 h-16 rounded-2xl bg-gradient-to-br ${e.g} text-white shrink-0">
+          <span class="text-2xl font-extrabold leading-none">${e.d}</span><span class="text-xs uppercase tracking-wide">${e.mo}</span>
+        </div>
+        <div><span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand-100 dark:bg-white/5 text-brand-700 dark:text-brand-200">${e.ty}</span>
+        <h3 class="font-bold mt-2 leading-tight">${e.t}</h3></div>
+      </div>
+      <button onclick="toast('You\\'re registered for: ${e.t}')" class="mt-4 w-full py-2.5 rounded-xl text-sm font-semibold border-2 border-brand-300 dark:border-white/15 text-brand-700 dark:text-brand-200 hover:bg-brand-50 dark:hover:bg-white/5 transition cursor-pointer">Register</button>
+    </div>`).join('');
+  observeReveals();
+}
+
+const socials=[
+  {n:'Instagram',h:'@intervene',f:'12.4k',g:'from-[#F58529] via-[#DD2A7B] to-[#8134AF]',p:'M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4a3.8 3.8 0 0 1-1.4-.9 3.8 3.8 0 0 1-.9-1.4c-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1.1-1.7.2-2.1.4-.5.2-.9.4-1.3.8-.4.4-.6.8-.8 1.3-.2.4-.3 1-.4 2.1-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c.1 1.1.2 1.7.4 2.1.2.5.4.9.8 1.3.4.4.8.6 1.3.8.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.7-.2 2.1-.4.5-.2.9-.4 1.3-.8.4-.4.6-.8.8-1.3.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-1.1-.2-1.7-.4-2.1a3.5 3.5 0 0 0-.8-1.3 3.5 3.5 0 0 0-1.3-.8c-.4-.2-1-.3-2.1-.4-1.2-.1-1.6-.1-4.7-.1zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm0 8a3.1 3.1 0 1 0 0-6.2 3.1 3.1 0 0 0 0 6.2zm6.3-8.2a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0z'},
+  {n:'LinkedIn',h:'Intervene',f:'4.1k',g:'from-[#0A66C2] to-[#004182]',p:'M20.45 20.45h-3.55v-5.57c0-1.33 0-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.8 0 0 .78 0 1.74v20.52C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.74V1.74C24 .78 23.2 0 22.22 0z'},
+  {n:'YouTube',h:'Intervene',f:'8.7k',g:'from-[#FF0000] to-[#CC0000]',p:'M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z'},
+  {n:'Facebook',h:'Intervene',f:'5.2k',g:'from-[#1877F2] to-[#0C5AC9]',p:'M24 12a12 12 0 1 0-13.9 11.9v-8.4H7v-3.5h3.1V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9v2.2h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z'},
+  {n:'X (Twitter)',h:'@intervene',f:'6.9k',g:'from-black to-gray-800',p:'M18.9 1.2h3.7l-8 9.1L24 22.8h-7.4l-5.8-7.6-6.6 7.6H.5l8.6-9.8L0 1.2h7.6l5.2 6.9 6.1-6.9zm-1.3 19.4h2L6.5 3.3H4.4l13.2 17.3z'},
+  {n:'Threads',h:'@intervene',f:'3.3k',g:'from-gray-900 to-black',p:'M17.3 11.2c-.1 0-.2-.1-.3-.1-.2-3-1.8-4.7-4.5-4.7-1.6 0-3 .7-3.8 2l1.5 1c.6-.9 1.5-1.1 2.3-1.1 1.5 0 2.5.9 2.7 2.4-.7-.1-1.4-.2-2.2-.1-2.6.1-4.3 1.6-4.2 3.7.1 1.9 1.7 3.1 3.7 3 1.5-.1 2.6-.7 3.4-1.7.6-.8.9-1.7 1-2.8.7.4 1.2 1 1.5 1.7.5 1.2.5 3-1 4.5-1.3 1.3-2.9 1.9-5.2 1.9-2.6 0-4.5-.8-5.8-2.4C5.1 17 4.5 14.9 4.5 12s.6-5 1.6-6.3C7.4 4.1 9.3 3.3 11.9 3.3c2.6 0 4.6.8 5.8 2.4.6.8 1 1.7 1.3 2.8l1.8-.5c-.3-1.4-.9-2.6-1.7-3.6C17.5 2.3 15 1.4 11.9 1.4c-3.1 0-5.6 1-7.3 3C3 6.2 2.3 8.8 2.3 12s.7 5.8 2.3 7.6c1.7 2 4.2 3 7.3 3 2.8 0 4.9-.7 6.5-2.4 2.1-2.1 2-4.8 1.4-6.4-.5-1.2-1.4-2.1-2.5-2.6zm-4.6 5.2c-1.1.1-2.2-.4-2.3-1.4 0-.8.6-1.6 2.4-1.7h.6c.6 0 1.2.1 1.7.2-.2 1.9-1.1 2.8-2.4 2.9z'},
+  {n:'WhatsApp Community',h:'Join group',f:'1.5k',g:'from-[#25D366] to-[#128C7E]',p:'M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm0 18.1a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8.1 8.1 0 1 1 12 20.1zm4.5-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8.9-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-1.9-1.2 7 7 0 0 1-1.3-1.6c-.1-.2 0-.4.1-.5l.4-.4.2-.4c.1-.1 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.6.3c-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 3.9 3.5.5.2.9.4 1.2.5.5.2 1 .1 1.3.1.4-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1l-.3-.3z'},
+  {n:'Discord',h:'Server',f:'2.1k',g:'from-[#5865F2] to-[#404EED]',p:'M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.3.5a18.3 18.3 0 0 1 4.3 1.4 16.6 16.6 0 0 0-15-.6c.4-.2.9-.3 1.3-.4L5.5 3a19.8 19.8 0 0 0-4.9 1.4C-.7 9 .2 13.4.6 17.8a19.9 19.9 0 0 0 6 3l.7-1.1c-1-.4-1.9-.8-2.8-1.4l.7-.5a14.2 14.2 0 0 0 12.1 0l.7.5c-.9.6-1.8 1-2.8 1.4l.7 1.1a19.8 19.8 0 0 0 6-3c.5-5.1-.8-9.5-3.6-13.4zM8.3 15c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm7.4 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z'},
+];
+function renderSocials(){
+  document.getElementById('socialGrid').innerHTML=socials.map(s=>`
+    <a href="${s.u||'#'}" target="_blank" rel="noopener" class="card-hover group rounded-3xl p-5 bg-gradient-to-br ${s.g} text-white relative overflow-hidden cursor-pointer hover:shadow-2xl reveal">
+      <div class="absolute -right-6 -bottom-6 w-24 h-24 rounded-full bg-white/10 blur-lg group-hover:scale-125 transition-transform"></div>
+      <svg class="w-8 h-8 relative" viewBox="0 0 24 24" fill="currentColor"><path d="${s.p}"/></svg>
+      <p class="mt-4 font-bold relative">${s.n}</p>
+      <p class="text-xs text-white/80 relative">${s.h}</p>
+      <div class="mt-3 flex items-center justify-between relative">
+        <span class="text-sm font-semibold">${s.f} followers</span>
+        <span class="text-xs font-semibold bg-white/25 px-3 py-1 rounded-full group-hover:bg-white/40 transition-colors">Follow</span>
+      </div>
+    </a>`).join('');
+  observeReveals();
+}
+
+/* ===================== DASHBOARD ===================== */
+const moods=[
+  {e:'😢',l:'Awful',v:1,c:'#F43F5E'},
+  {e:'😔',l:'Low',v:2,c:'#FB7185'},
+  {e:'😐',l:'Okay',v:3,c:'#FBBF24'},
+  {e:'🙂',l:'Good',v:4,c:'#38BDF8'},
+  {e:'😄',l:'Great',v:5,c:'#14B8A6'},
+];
+let pickedMood=4;
+function getMoodHistory(){ return JSON.parse(localStorage.getItem('iv-moods')||'[]'); }
+/* wellness score is derived only from what the user has actually logged — new user = 0 */
+function computeWellness(){ const h=getMoodHistory(); if(!h.length) return 0; const avg=h.reduce((a,b)=>a+b.v,0)/h.length; return Math.round(avg/5*100); }
+/* user-managed wellness goals (persisted locally) */
+function getGoals(){ return JSON.parse(localStorage.getItem('iv-goals')||'[]'); }
+function saveGoals(g){ localStorage.setItem('iv-goals',JSON.stringify(g)); }
+function renderGoals(){
+  const box=document.getElementById('goals'); if(!box) return;
+  const g=getGoals(); const grads=['from-brand-500 to-sky-500','from-teal-500 to-sky-500','from-coral-500 to-brand-500','from-sky-500 to-brand-500'];
+  const items = g.length ? g.map((x,i)=>`
+    <div>
+      <div class="flex justify-between items-center text-sm mb-1">
+        <span class="font-medium">${(x.t||'').replace(/</g,'&lt;')}</span>
+        <span class="flex items-center gap-2"><span id="goalPct${i}" class="text-slate-500">${x.p}%</span>
+          <button onclick="removeGoal(${i})" aria-label="Delete goal" class="text-slate-400 hover:text-coral-500 cursor-pointer"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></span>
+      </div>
+      <div class="h-2.5 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden"><div id="goalBar${i}" class="h-full rounded-full bg-gradient-to-r ${grads[i%grads.length]}" style="width:${x.p}%"></div></div>
+      <input type="range" min="0" max="100" value="${x.p}" oninput="liveGoal(${i},this.value)" onchange="commitGoal(${i},this.value)" class="w-full mt-1.5 accent-brand-600 cursor-pointer" aria-label="Progress" />
+    </div>`).join('') : `<p class="text-sm text-slate-500 dark:text-slate-400">No goals yet — add one below to start tracking.</p>`;
+  box.innerHTML = items + `
+    <form onsubmit="addGoal(event)" class="flex gap-2 pt-1">
+      <input id="newGoal" type="text" maxlength="60" placeholder="Add a wellness goal…" class="flex-1 px-3 py-2 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 outline-none focus:ring-2 focus:ring-brand-500 text-sm" />
+      <button class="px-4 py-2 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-brand-600 to-sky-600 hover:opacity-90 cursor-pointer">Add</button>
+    </form>`;
+}
+function addGoal(e){ e.preventDefault(); const inp=document.getElementById('newGoal'); const v=(inp.value||'').trim(); if(!v) return; const g=getGoals(); g.push({t:v,p:0}); saveGoals(g); renderGoals(); }
+function removeGoal(i){ const g=getGoals(); g.splice(i,1); saveGoals(g); renderGoals(); }
+function liveGoal(i,val){ const p=document.getElementById('goalPct'+i), b=document.getElementById('goalBar'+i); if(p)p.textContent=val+'%'; if(b)b.style.width=val+'%'; }
+function commitGoal(i,val){ const g=getGoals(); if(g[i]){ g[i].p=+val; saveGoals(g); } }
+function buildDashboard(){
+  applyDashIdentity();
+  document.getElementById('wellnessScore').textContent=computeWellness();
+  document.getElementById('moodPicker').innerHTML=moods.map(m=>`
+    <button onclick="pickMood(${m.v},this)" class="mood-btn flex flex-col items-center gap-1 p-3 rounded-2xl border-2 ${m.v===pickedMood?'border-brand-500 bg-brand-50 dark:bg-white/10':'border-transparent bg-slate-100 dark:bg-white/5'} hover:border-brand-300 transition cursor-pointer">
+      <span class="text-3xl">${m.e}</span><span class="text-xs font-medium">${m.l}</span>
+    </button>`).join('');
+  renderGoals();
+  document.getElementById('recoList').innerHTML=['Understanding Anxiety: A Student Guide','5 Breathing Techniques for Stress','Building Real Self-Confidence'].map(r=>`<li class="flex items-start gap-2"><span class="mt-1 w-2 h-2 rounded-full bg-brand-500 shrink-0"></span><a href="#" onclick="event.preventDefault();navTo('resources')" class="hover:text-brand-600 transition-colors cursor-pointer">${r}</a></li>`).join('');
+  document.getElementById('dashEvents').innerHTML=events.slice(0,3).map(e=>`<li class="flex items-center gap-3"><span class="grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br ${e.g} text-white text-xs font-bold shrink-0">${e.d}</span><span>${e.t}</span></li>`).join('');
+  drawMoodChart();
+}
+function pickMood(v,btn){ pickedMood=v; document.querySelectorAll('.mood-btn').forEach(b=>{b.classList.remove('border-brand-500','bg-brand-50','dark:bg-white/10');b.classList.add('border-transparent');}); btn.classList.add('border-brand-500','bg-brand-50'); btn.classList.remove('border-transparent'); }
+async function logMood(){
+  const note=document.getElementById('moodNote').value;
+  const h=getMoodHistory(); const today=new Date().toDateString();
+  // one entry per day: update today's if it exists, else append — history grows forward and is kept
+  if(h.length && new Date(h[h.length-1].d).toDateString()===today){ h[h.length-1].v=pickedMood; h[h.length-1].note=note; } else { h.push({v:pickedMood,d:Date.now(),note}); }
+  localStorage.setItem('iv-moods',JSON.stringify(h));
+  document.getElementById('moodNote').value='';
+  document.getElementById('wellnessScore').textContent=computeWellness();
+  drawMoodChart(); toast('Mood logged — thanks for checking in 💜');
+  if(sb){ try{ const {data:{user}}=await sb.auth.getUser(); if(user) await sb.from('moods').insert({user_id:user.id,mood:pickedMood,note}); }catch(e){} }
+}
+function drawMoodChart(){
+  const cv=document.getElementById('moodChart'); if(!cv)return;
+  if(!cv.clientWidth){ requestAnimationFrame(drawMoodChart); return; }   // wait until laid out
+  const h=getMoodHistory(); const dark=document.documentElement.classList.contains('dark');
+  const dpr=window.devicePixelRatio||1; const w=cv.clientWidth, ht=150;
+  cv.width=w*dpr; cv.height=ht*dpr; const ctx=cv.getContext('2d'); ctx.scale(dpr,dpr);
+  ctx.clearRect(0,0,w,ht);
+  const pad=18, gw=w-pad*2, gh=ht-pad*2, n=h.length;
+  // gridlines
+  ctx.strokeStyle=dark?'rgba(255,255,255,.08)':'rgba(0,0,0,.06)'; ctx.lineWidth=1;
+  for(let i=0;i<=4;i++){ const y=pad+gh*i/4; ctx.beginPath(); ctx.moveTo(pad,y); ctx.lineTo(w-pad,y); ctx.stroke(); }
+  if(n===0){ ctx.fillStyle=dark?'rgba(255,255,255,.45)':'rgba(0,0,0,.4)'; ctx.font='13px Figtree,sans-serif'; ctx.textAlign='center'; ctx.fillText('Log your first mood to start your trend', w/2, ht/2+4); return; }
+  const x=i=> n===1 ? w/2 : pad + gw*i/(n-1);
+  const y=v=> pad + gh*(1-(v-1)/4);
+  // gradient area
+  const grad=ctx.createLinearGradient(0,pad,0,ht); grad.addColorStop(0,'rgba(139,92,246,.35)'); grad.addColorStop(1,'rgba(20,184,166,.02)');
+  ctx.beginPath(); ctx.moveTo(x(0),y(h[0].v));
+  for(let i=1;i<n;i++){ const xc=(x(i-1)+x(i))/2; ctx.quadraticCurveTo(x(i-1),y(h[i-1].v),xc,(y(h[i-1].v)+y(h[i].v))/2); ctx.quadraticCurveTo(x(i),y(h[i].v),x(i),y(h[i].v)); }
+  ctx.lineTo(x(n-1),ht-pad); ctx.lineTo(x(0),ht-pad); ctx.closePath(); ctx.fillStyle=grad; ctx.fill();
+  // line
+  ctx.beginPath(); ctx.moveTo(x(0),y(h[0].v));
+  for(let i=1;i<n;i++){ const xc=(x(i-1)+x(i))/2; ctx.quadraticCurveTo(x(i-1),y(h[i-1].v),xc,(y(h[i-1].v)+y(h[i].v))/2); ctx.quadraticCurveTo(x(i),y(h[i].v),x(i),y(h[i].v)); }
+  const lg=ctx.createLinearGradient(0,0,w,0); lg.addColorStop(0,'#8B5CF6'); lg.addColorStop(.5,'#2563EB'); lg.addColorStop(1,'#14B8A6');
+  ctx.strokeStyle=lg; ctx.lineWidth=3; ctx.lineJoin='round'; ctx.stroke();
+  // dots
+  for(let i=0;i<n;i++){ ctx.beginPath(); ctx.arc(x(i),y(h[i].v),3.5,0,7); ctx.fillStyle=moods[h[i].v-1].c; ctx.fill(); ctx.strokeStyle=dark?'#1E1B2E':'#fff'; ctx.lineWidth=2; ctx.stroke(); }
+}
+window.moodChartDraw=()=>{ if(document.getElementById('view-dashboard').classList.contains('active')) drawMoodChart(); };
+window.addEventListener('resize',()=>window.moodChartDraw());
+
+/* ===================== AI ASSISTANT ===================== */
+function openAI(){ const p=document.getElementById('aiPanel'); p.classList.remove('hidden'); if(!p.dataset.init){ p.dataset.init='1'; aiSay('bot',"Hi, I'm Aria 🌿 your wellness companion. How are you feeling right now? I'm here to listen — no judgement."); } }
+function aiSay(who,txt){
+  const box=document.getElementById('aiMessages');
+  const bubble = who==='bot'
+    ? `<div class="flex gap-2"><span class="grid place-items-center w-7 h-7 rounded-lg bg-gradient-to-br from-brand-600 to-teal-600 text-white shrink-0 text-xs font-bold">A</span><div class="bg-brand-50 dark:bg-white/5 rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[80%]">${txt}</div></div>`
+    : `<div class="flex justify-end"><div class="bg-gradient-to-r from-brand-600 to-sky-600 text-white rounded-2xl rounded-tr-sm px-3.5 py-2.5 max-w-[80%]">${txt}</div></div>`;
+  box.insertAdjacentHTML('beforeend',bubble); box.scrollTop=box.scrollHeight;
+}
+function sendAI(){
+  const inp=document.getElementById('aiInput'); const v=inp.value.trim(); if(!v)return; aiSay('me',v); inp.value='';
+  const t=v.toLowerCase(); let r;
+  if(/sad|down|depress|cry|low|alone|lonely/.test(t)) r="I hear you, and I'm really glad you told me. That sounds heavy 💙 Would it help to try a 2-minute breathing exercise, or talk to one of our verified counsellors?";
+  else if(/anx|worry|panic|stress|nervous|scared/.test(t)) r="Anxiety can feel overwhelming. Try this: breathe in for 4, hold for 4, out for 6. I can also share grounding resources from our hub — want me to?";
+  else if(/bully|harass|threat|hurt|cyber/.test(t)) r="No one deserves to be treated that way, and reporting it is brave. You can file a confidential report anytime — I can open it for you. You're not alone in this.";
+  else if(/happy|good|great|better|fine|okay/.test(t)) r="That's wonderful to hear 🌟 Celebrating the good days matters too. Want to log this in your mood tracker so future-you can look back?";
+  else r="Thank you for sharing that with me. Whatever you're feeling is valid. Would you like a calming resource, a breathing exercise, or to connect with a real person?";
+  setTimeout(()=>aiSay('bot',r),600);
+}
+
+/* ===================== REVEAL + COUNTERS ===================== */
+let io;
+function revealAll(){ document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in')); }
+function observeReveals(){
+  if(typeof IntersectionObserver==='undefined'){ revealAll(); return; }
+  if(!io){ io=new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }); },{threshold:.08,rootMargin:'0px 0px -5% 0px'}); }
+  document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
+}
+function runCounters(){
+  document.querySelectorAll('.counter').forEach(el=>{
+    const target=+el.dataset.target, suf=el.dataset.suffix||''; let cur=0; const step=target/60;
+    const tick=()=>{ cur+=step; if(cur<target){ el.textContent=Math.floor(cur).toLocaleString()+suf; requestAnimationFrame(tick);} else el.textContent=target.toLocaleString()+suf; };
+    tick();
+  });
+}
+const statObserver=new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isIntersecting){ runCounters(); statObserver.disconnect(); } }); },{threshold:.3});
+
+/* ===================== INIT ===================== */
+document.addEventListener('DOMContentLoaded',()=>{
+  renderResources(); renderEvents(); renderSocials();
+  observeReveals();
+  const stat=document.querySelector('.counter'); if(stat) statObserver.observe(stat);
+  loadContentFromDB();   // refresh public content from Supabase when available
+  // make every in-page anchor work across views (e.g. About from the dashboard)
+  document.querySelectorAll('header a[href^="#"], footer a[href^="#"], #home a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{ const href=a.getAttribute('href'); if(href && href.length>1){ e.preventDefault(); navTo(href.slice(1)); } });
+  });
+  // close the account menu when clicking outside it
+  document.addEventListener('click',e=>{ if(!e.target.closest('#navAuthBtn') && !e.target.closest('#accountMenu')) hideAccountMenu(); });
+});
+
+/* ===================== DB-DRIVEN CONTENT ===================== */
+const SOCIAL_META={}; socials.forEach(s=>SOCIAL_META[s.n]={p:s.p,g:s.g});
+const DEFAULT_SVG='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm0 6c2 0 4 1 4 3v1H8v-1c0-2 2-3 4-3z';
+const GRADS=['from-brand-500 to-sky-500','from-teal-500 to-sky-500','from-coral-500 to-brand-500','from-brand-500 to-coral-500','from-sky-500 to-teal-500','from-teal-500 to-brand-500','from-sky-500 to-brand-500','from-coral-500 to-sky-500'];
+const SOC_GRADS=['from-[#F58529] via-[#DD2A7B] to-[#8134AF]','from-[#0A66C2] to-[#004182]','from-[#FF0000] to-[#CC0000]','from-[#1877F2] to-[#0C5AC9]','from-black to-gray-800','from-gray-900 to-black','from-[#25D366] to-[#128C7E]','from-[#5865F2] to-[#404EED]'];
+
+async function loadContentFromDB(){
+  if(!sb) return;
+  try{
+    const r=await sb.from('resources').select('*').order('created_at',{ascending:true});
+    if(!r.error && r.data && r.data.length){ resources.length=0; r.data.forEach((row,i)=>resources.push({id:row.id,t:row.title,c:row.category||'Mental health',type:row.type||'Article',m:row.content||'',link:row.link||'',g:GRADS[i%GRADS.length]})); renderResources(); }
+    const e=await sb.from('events').select('*').order('date',{ascending:true});
+    if(!e.error && e.data && e.data.length){ events.length=0; e.data.forEach((row,i)=>{ const d=new Date(row.date); events.push({id:row.id,d:String(d.getDate()).padStart(2,'0'),mo:d.toLocaleString('en',{month:'short'}),t:row.title,ty:row.type||'Event',desc:row.description||'',date:row.date,g:GRADS[i%GRADS.length]}); }); renderEvents(); if(document.getElementById('view-dashboard').classList.contains('active')) buildDashboard(); }
+    const s=await sb.from('social_links').select('*').order('sort',{ascending:true});
+    if(!s.error && s.data && s.data.length){ socials.length=0; s.data.forEach((row,i)=>{ const meta=SOCIAL_META[row.platform]; socials.push({id:row.id,n:row.platform,h:row.handle||'',f:row.followers||'',u:row.url||'#',g:(meta&&meta.g)||SOC_GRADS[i%SOC_GRADS.length],p:(meta&&meta.p)||DEFAULT_SVG}); }); renderSocials(); }
+  }catch(err){}
+}
+
+/* ===================== ADMIN CONSOLE ===================== */
+let ADMIN_IS=false, adminTabName='overview';
+const adminData={reports:[],users:[]};
+const SEED_REPORTS=[
+  {id:'d1',category:'cyberbullying',description:'Repeated mean comments on a group chat targeting a classmate.',is_anonymous:true,status:'submitted',tracking_code:'IV-4821',created_at:Date.now()-2*864e5},
+  {id:'d2',category:'bullying',description:'Being pushed and mocked near the lockers after school.',is_anonymous:false,status:'under_review',tracking_code:'IV-1190',created_at:Date.now()-5*864e5},
+  {id:'d3',category:'discrimination',description:'Excluded from a project group based on background.',is_anonymous:true,status:'resolved',tracking_code:'IV-7732',created_at:Date.now()-9*864e5},
+];
+const SEED_USERS=[
+  {id:'u1',name:'Aanya Verma',email:'aanya@school.edu',role:'student'},
+  {id:'u2',name:'Dr. Meera Kapoor',email:'meera@clinic.com',role:'therapist'},
+  {id:'u3',name:'Riddhita Sharma',email:'riddhita@intervene.org',role:'admin'},
+  {id:'u4',name:'Kabir Singh',email:'kabir@school.edu',role:'student'},
+];
+const STATUSES=['submitted','under_review','action_taken','resolved','dismissed'];
+const STATUS_STYLE={submitted:'bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300',under_review:'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',action_taken:'bg-brand-100 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300',resolved:'bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300',dismissed:'bg-slate-200 text-slate-600 dark:bg-white/10 dark:text-slate-300'};
+const fmtDate=t=>new Date(t).toLocaleDateString('en',{day:'numeric',month:'short',year:'numeric'});
+const ADMIN_TABS=[['overview','Overview','M3 13h8V3H3zM13 21h8V8h-8zM13 3v3h8V3zM3 21h8v-6H3z'],['reports','Reports','M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'],['resources','Resources','M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5z'],['events','Events','M3 4h18v18H3zM3 10h18M8 2v4M16 2v4'],['social','Social Links','M18 8a3 3 0 1 0-2.8-4H15a3 3 0 0 0 .2 4l-6 3.5M9 12a3 3 0 1 0 0 0zm6 4-6-3.5'],['users','Users','M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0 0z']];
+
+async function buildAdmin(){
+  document.getElementById('adminNav').innerHTML=ADMIN_TABS.map(([k,label,icon])=>`
+    <button onclick="adminTab('${k}')" data-tab="${k}" class="admin-tab flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-colors cursor-pointer ${k===adminTabName?'bg-gradient-to-r from-brand-600 to-sky-600 text-white shadow-lg shadow-brand-600/30':'hover:bg-brand-100 dark:hover:bg-white/5'}">
+      <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${icon}"/></svg>${label}
+    </button>`).join('');
+  await loadAdminData();
+  const st=document.getElementById('adminStatus');
+  if(ADMIN_IS){ st.textContent='Signed in as Admin — changes are live'; st.className='text-xs font-semibold px-3 py-2 rounded-xl bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300'; }
+  else { st.textContent='Demo mode — sign in as an admin to persist changes'; st.className='text-xs font-semibold px-3 py-2 rounded-xl bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300'; }
+  adminTab(adminTabName);
+}
+async function loadAdminData(){
+  if(sb){
+    try{
+      const {data:{user}}=await sb.auth.getUser();
+      if(user){ const {data:p}=await sb.from('profiles').select('role').eq('id',user.id).single(); ADMIN_IS=p && p.role==='admin'; }
+      const rep=await sb.from('reports').select('*').order('created_at',{ascending:false});
+      adminData.reports=(!rep.error&&rep.data&&rep.data.length)?rep.data.map(r=>({...r,created_at:r.created_at})):SEED_REPORTS.slice();
+      const us=await sb.from('profiles').select('*').order('created_at',{ascending:false});
+      adminData.users=(!us.error&&us.data&&us.data.length)?us.data:SEED_USERS.slice();
+      return;
+    }catch(e){}
+  }
+  adminData.reports=SEED_REPORTS.slice(); adminData.users=SEED_USERS.slice();
+}
+function adminTab(name){
+  adminTabName=name;
+  document.querySelectorAll('.admin-tab').forEach(b=>{ const on=b.dataset.tab===name; b.classList.toggle('bg-gradient-to-r',on); b.classList.toggle('from-brand-600',on); b.classList.toggle('to-sky-600',on); b.classList.toggle('text-white',on); b.classList.toggle('shadow-lg',on); });
+  ({overview:adminOverview,reports:adminReports,resources:adminResources,events:adminEvents,social:adminSocial,users:adminUsers}[name])();
+}
+const card=(label,val,grad,icon)=>`<div class="glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10">
+  <span class="grid place-items-center w-11 h-11 rounded-2xl bg-gradient-to-br ${grad} text-white mb-3"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="${icon}"/></svg></span>
+  <p class="text-3xl font-extrabold">${val}</p><p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">${label}</p></div>`;
+
+function adminOverview(){
+  const open=adminData.reports.filter(r=>r.status!=='resolved'&&r.status!=='dismissed').length;
+  document.getElementById('adminPanel').innerHTML=`
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      ${card('Total users',adminData.users.length,'from-brand-500 to-sky-500','M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0 0z')}
+      ${card('Open reports',open,'from-coral-500 to-brand-500','M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z')}
+      ${card('Resources',resources.length,'from-teal-500 to-sky-500','M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5z')}
+      ${card('Events',events.length,'from-sky-500 to-brand-500','M3 4h18v18H3zM3 10h18')}
+    </div>
+    <div class="grid lg:grid-cols-2 gap-6 mt-6">
+      <div class="glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10"><h3 class="font-bold mb-4">Weekly engagement</h3><canvas id="engChart" height="160"></canvas></div>
+      <div class="glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10"><h3 class="font-bold mb-4">Platform mood distribution</h3><canvas id="moodDistChart" height="160"></canvas></div>
+    </div>`;
+  drawBars('engChart',[42,55,48,67,72,60,81],['M','T','W','T','F','S','S'],'#8B5CF6');
+  const h=getMoodHistory(); const dist=[0,0,0,0,0]; h.forEach(x=>dist[x.v-1]++);
+  drawBars('moodDistChart',dist,['Awful','Low','Okay','Good','Great'],['#F43F5E','#FB7185','#FBBF24','#38BDF8','#14B8A6']);
+}
+function adminReports(){
+  const rows=adminData.reports.map(r=>`
+    <tr class="border-b border-slate-100 dark:border-white/5">
+      <td class="py-3 pr-3"><span class="text-xs font-mono text-slate-400">#${r.tracking_code||r.id}</span></td>
+      <td class="py-3 pr-3"><span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand-100 dark:bg-white/5 text-brand-700 dark:text-brand-200 capitalize">${r.category}</span></td>
+      <td class="py-3 pr-3 max-w-xs"><p class="truncate text-slate-600 dark:text-slate-300">${(r.description||'').replace(/</g,'&lt;')}</p></td>
+      <td class="py-3 pr-3 text-xs text-slate-400 whitespace-nowrap">${r.is_anonymous?'Anonymous':'Identified'}</td>
+      <td class="py-3 pr-3 text-xs text-slate-400 whitespace-nowrap">${fmtDate(r.created_at)}</td>
+      <td class="py-3 pr-3"><select onchange="reportSetStatus('${r.id}',this.value)" class="text-xs font-semibold px-2.5 py-1.5 rounded-lg outline-none cursor-pointer ${STATUS_STYLE[r.status]||''}">${STATUSES.map(s=>`<option value="${s}" ${s===r.status?'selected':''}>${s.replace('_',' ')}</option>`).join('')}</select></td>
+      <td class="py-3"><button onclick="toast('Secure message sent to reporter')" class="text-xs font-semibold text-brand-600 dark:text-brand-300 hover:underline cursor-pointer">Contact</button></td>
+    </tr>`).join('');
+  document.getElementById('adminPanel').innerHTML=`
+    <div class="glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10">
+      <div class="flex items-center justify-between mb-4"><h3 class="font-bold text-lg">Bullying &amp; safety reports</h3><span class="text-sm text-slate-500">${adminData.reports.length} total</span></div>
+      <div class="overflow-x-auto no-scrollbar"><table class="w-full text-sm text-left"><thead><tr class="text-xs uppercase tracking-wide text-slate-400 border-b border-slate-200 dark:border-white/10"><th class="py-2 pr-3">ID</th><th class="py-2 pr-3">Category</th><th class="py-2 pr-3">Description</th><th class="py-2 pr-3">Type</th><th class="py-2 pr-3">Date</th><th class="py-2 pr-3">Status</th><th class="py-2">Action</th></tr></thead><tbody>${rows}</tbody></table></div>
+    </div>`;
+}
+async function reportSetStatus(id,status){
+  const r=adminData.reports.find(x=>String(x.id)===String(id)); if(r) r.status=status;
+  if(sb && ADMIN_IS){ try{ await sb.from('reports').update({status}).eq('id',id); toast('Report status updated'); }catch(e){ toast('Update failed: '+e.message); } }
+  else toast('Status updated (demo)');
+  adminReports();
+}
+function adminResources(){
+  const list=resources.map((r,i)=>`
+    <div class="flex items-center gap-3 p-3 rounded-2xl bg-white/60 dark:bg-white/5 border border-slate-100 dark:border-white/10">
+      <span class="grid place-items-center w-10 h-10 rounded-xl bg-gradient-to-br ${r.g} text-white text-xs font-bold shrink-0">${(r.type||'A')[0]}</span>
+      <div class="min-w-0 flex-1"><p class="font-semibold truncate">${r.t}</p><p class="text-xs text-slate-400">${r.c} • ${r.type} • ${r.m||''}</p></div>
+      <button onclick="resDelete(${i})" aria-label="Delete" class="grid place-items-center w-9 h-9 rounded-lg text-coral-500 hover:bg-coral-50 dark:hover:bg-white/10 cursor-pointer"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button>
+    </div>`).join('');
+  document.getElementById('adminPanel').innerHTML=`
+    <div class="grid lg:grid-cols-[1fr_360px] gap-6">
+      <div class="glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10"><h3 class="font-bold text-lg mb-4">Resource hub (${resources.length})</h3><div class="space-y-2 max-h-[28rem] overflow-y-auto no-scrollbar">${list}</div></div>
+      <form onsubmit="resAdd(event)" class="glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10 h-max">
+        <h3 class="font-bold text-lg mb-4">Add resource</h3>
+        ${adminInput('rTitle','Title','text',true)}
+        ${adminSelect('rCat','Category',['Mental health','Anxiety','Stress','Bullying prevention','Self-confidence','Peer support'])}
+        ${adminSelect('rType','Type',['Article','Video','Guide'])}
+        ${adminInput('rMeta','Meta (e.g. 5 min read)','text',false)}
+        ${adminInput('rUrl','Link URL — where it opens (https://…)','url',false)}
+        <button class="mt-4 w-full py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-teal-500 to-sky-600 hover:opacity-90 cursor-pointer">Publish resource</button>
+      </form></div>`;
+}
+async function resAdd(e){
+  e.preventDefault();
+  const title=val('rTitle'),category=val('rCat'),type=val('rType'),content=val('rMeta'),link=val('rUrl');
+  if(sb && ADMIN_IS){ try{ await sb.from('resources').insert({title,category,type,content,link}); toast('Resource published'); await loadContentFromDB(); }catch(err){ toast('Failed: '+err.message); } }
+  else { resources.push({id:'l'+Date.now(),t:title,c:category,type,m:content,link,g:GRADS[resources.length%GRADS.length]}); renderResources(); toast('Resource added (demo)'); }
+  adminResources();
+}
+async function resDelete(i){
+  const r=resources[i]; if(!r) return;
+  if(sb && ADMIN_IS && r.id && String(r.id).length>10){ try{ await sb.from('resources').delete().eq('id',r.id); await loadContentFromDB(); toast('Resource deleted'); }catch(err){ toast('Failed: '+err.message); } }
+  else { resources.splice(i,1); renderResources(); toast('Resource removed (demo)'); }
+  adminResources();
+}
+function adminEvents(){
+  const list=events.map((ev,i)=>`
+    <div class="flex items-center gap-3 p-3 rounded-2xl bg-white/60 dark:bg-white/5 border border-slate-100 dark:border-white/10">
+      <span class="grid place-items-center w-11 h-11 rounded-xl bg-gradient-to-br ${ev.g} text-white shrink-0"><span class="text-sm font-extrabold leading-none">${ev.d}</span><span class="text-[10px] uppercase">${ev.mo}</span></span>
+      <div class="min-w-0 flex-1"><p class="font-semibold truncate">${ev.t}</p><p class="text-xs text-slate-400">${ev.ty}</p></div>
+      <button onclick="evDelete(${i})" aria-label="Delete" class="grid place-items-center w-9 h-9 rounded-lg text-coral-500 hover:bg-coral-50 dark:hover:bg-white/10 cursor-pointer"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button>
+    </div>`).join('');
+  document.getElementById('adminPanel').innerHTML=`
+    <div class="grid lg:grid-cols-[1fr_360px] gap-6">
+      <div class="glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10"><h3 class="font-bold text-lg mb-4">Events &amp; campaigns (${events.length})</h3><div class="space-y-2 max-h-[28rem] overflow-y-auto no-scrollbar">${list}</div></div>
+      <form onsubmit="evAdd(event)" class="glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10 h-max">
+        <h3 class="font-bold text-lg mb-4">Add event</h3>
+        ${adminInput('eTitle','Title','text',true)}
+        ${adminInput('eDesc','Short description','text',false)}
+        ${adminSelect('eType','Type',['Workshop','Webinar','Campaign','School Event'])}
+        ${adminInput('eDate','Date','date',true)}
+        <button class="mt-4 w-full py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-sky-500 to-brand-600 hover:opacity-90 cursor-pointer">Publish event</button>
+      </form></div>`;
+}
+async function evAdd(e){
+  e.preventDefault();
+  const title=val('eTitle'),description=val('eDesc'),type=val('eType'),date=val('eDate')||new Date().toISOString();
+  if(sb && ADMIN_IS){ try{ await sb.from('events').insert({title,description,type,date}); toast('Event published'); await loadContentFromDB(); }catch(err){ toast('Failed: '+err.message); } }
+  else { const d=new Date(date); events.push({id:'l'+Date.now(),d:String(d.getDate()).padStart(2,'0'),mo:d.toLocaleString('en',{month:'short'}),t:title,ty:type,g:GRADS[events.length%GRADS.length]}); renderEvents(); toast('Event added (demo)'); }
+  adminEvents();
+}
+async function evDelete(i){
+  const ev=events[i]; if(!ev) return;
+  if(sb && ADMIN_IS && ev.id && String(ev.id).length>10){ try{ await sb.from('events').delete().eq('id',ev.id); await loadContentFromDB(); toast('Event deleted'); }catch(err){ toast('Failed: '+err.message); } }
+  else { events.splice(i,1); renderEvents(); toast('Event removed (demo)'); }
+  adminEvents();
+}
+function adminSocial(){
+  const list=socials.map((s,i)=>`
+    <div class="flex items-center gap-3 p-3 rounded-2xl bg-white/60 dark:bg-white/5 border border-slate-100 dark:border-white/10">
+      <span class="grid place-items-center w-10 h-10 rounded-xl bg-gradient-to-br ${s.g} text-white shrink-0"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="${s.p}"/></svg></span>
+      <div class="min-w-0 flex-1"><p class="font-semibold truncate">${s.n}</p><p class="text-xs text-slate-400 truncate">${s.h} • ${s.u||''}</p></div>
+      <input value="${s.f||''}" onchange="socUpdate(${i},'f',this.value)" class="w-20 text-xs px-2 py-1.5 rounded-lg bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 outline-none focus:ring-2 focus:ring-brand-500" title="Followers" />
+      <button onclick="socDelete(${i})" aria-label="Delete" class="grid place-items-center w-9 h-9 rounded-lg text-coral-500 hover:bg-coral-50 dark:hover:bg-white/10 cursor-pointer"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button>
+    </div>`).join('');
+  document.getElementById('adminPanel').innerHTML=`
+    <div class="grid lg:grid-cols-[1fr_360px] gap-6">
+      <div class="glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10"><h3 class="font-bold text-lg mb-1">Social media links (${socials.length})</h3><p class="text-xs text-slate-400 mb-4">Edit followers inline; changes show on the public “Connect” page.</p><div class="space-y-2 max-h-[28rem] overflow-y-auto no-scrollbar">${list}</div></div>
+      <form onsubmit="socAdd(event)" class="glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10 h-max">
+        <h3 class="font-bold text-lg mb-4">Add platform</h3>
+        ${adminInput('sName','Platform name','text',true)}
+        ${adminInput('sHandle','Handle / label','text',false)}
+        ${adminInput('sUrl','URL','url',false)}
+        ${adminInput('sFoll','Followers','text',false)}
+        <button class="mt-4 w-full py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-brand-600 to-coral-500 hover:opacity-90 cursor-pointer">Add platform</button>
+        <p class="mt-3 text-xs text-slate-400">New platforms get a generic icon automatically — the layout never breaks.</p>
+      </form></div>`;
+}
+async function socAdd(e){
+  e.preventDefault();
+  const platform=val('sName'),handle=val('sHandle'),url=val('sUrl'),followers=val('sFoll');
+  if(sb && ADMIN_IS){ try{ await sb.from('social_links').insert({platform,handle,url,followers,sort:socials.length+1}); toast('Platform added'); await loadContentFromDB(); }catch(err){ toast('Failed: '+err.message); } }
+  else { const meta=SOCIAL_META[platform]; socials.push({id:'l'+Date.now(),n:platform,h:handle,u:url||'#',f:followers,g:(meta&&meta.g)||SOC_GRADS[socials.length%SOC_GRADS.length],p:(meta&&meta.p)||DEFAULT_SVG}); renderSocials(); toast('Platform added (demo)'); }
+  adminSocial();
+}
+async function socUpdate(i,field,value){
+  const s=socials[i]; if(!s) return; s[field]=value; renderSocials();
+  const col=field==='f'?'followers':field;
+  if(sb && ADMIN_IS && s.id && String(s.id).length>10){ try{ await sb.from('social_links').update({[col]:value}).eq('id',s.id); toast('Saved'); }catch(err){ toast('Failed: '+err.message); } }
+  else toast('Saved (demo)');
+}
+async function socDelete(i){
+  const s=socials[i]; if(!s) return;
+  if(sb && ADMIN_IS && s.id && String(s.id).length>10){ try{ await sb.from('social_links').delete().eq('id',s.id); await loadContentFromDB(); toast('Platform removed'); }catch(err){ toast('Failed: '+err.message); } }
+  else { socials.splice(i,1); renderSocials(); toast('Platform removed (demo)'); }
+  adminSocial();
+}
+function adminUsers(){
+  const rows=adminData.users.map(u=>`
+    <tr class="border-b border-slate-100 dark:border-white/5">
+      <td class="py-3 pr-3"><div class="flex items-center gap-3"><span class="grid place-items-center w-9 h-9 rounded-full bg-gradient-to-br from-brand-500 to-sky-500 text-white text-xs font-bold shrink-0">${(u.name||u.email||'?').slice(0,2).toUpperCase()}</span><span class="font-semibold">${u.name||'—'}</span></div></td>
+      <td class="py-3 pr-3 text-slate-500 dark:text-slate-400">${u.email||''}</td>
+      <td class="py-3"><select onchange="userSetRole('${u.id}',this.value)" class="text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 outline-none cursor-pointer">${['student','therapist','admin'].map(r=>`<option value="${r}" ${r===u.role?'selected':''}>${r}</option>`).join('')}</select></td>
+    </tr>`).join('');
+  document.getElementById('adminPanel').innerHTML=`
+    <div class="glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10">
+      <div class="flex items-center justify-between mb-4"><h3 class="font-bold text-lg">Users &amp; permissions</h3><span class="text-sm text-slate-500">${adminData.users.length} users</span></div>
+      <div class="overflow-x-auto no-scrollbar"><table class="w-full text-sm text-left"><thead><tr class="text-xs uppercase tracking-wide text-slate-400 border-b border-slate-200 dark:border-white/10"><th class="py-2 pr-3">User</th><th class="py-2 pr-3">Email</th><th class="py-2">Role</th></tr></thead><tbody>${rows}</tbody></table></div>
+    </div>`;
+}
+async function userSetRole(id,role){
+  const u=adminData.users.find(x=>String(x.id)===String(id)); if(u) u.role=role;
+  if(sb && ADMIN_IS){ try{ await sb.from('profiles').update({role}).eq('id',id); toast('Role updated'); }catch(e){ toast('Failed: '+e.message); } }
+  else toast('Role updated (demo)');
+}
+/* admin form helpers */
+const val=id=>{ const el=document.getElementById(id); return el?el.value.trim():''; };
+const adminInput=(id,ph,type,req)=>`<input id="${id}" type="${type}" ${req?'required':''} placeholder="${ph}" class="w-full mb-3 px-4 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 outline-none focus:ring-2 focus:ring-brand-500 text-sm" />`;
+const adminSelect=(id,ph,opts)=>`<select id="${id}" class="w-full mb-3 px-4 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 outline-none focus:ring-2 focus:ring-brand-500 text-sm cursor-pointer" aria-label="${ph}">${opts.map(o=>`<option>${o}</option>`).join('')}</select>`;
+
+/* generic bar chart */
+function drawBars(id,vals,labels,color){
+  const cv=document.getElementById(id); if(!cv)return;
+  if(!cv.clientWidth){ requestAnimationFrame(()=>drawBars(id,vals,labels,color)); return; }
+  const dark=document.documentElement.classList.contains('dark');
+  const dpr=window.devicePixelRatio||1, w=cv.clientWidth, h=160;
+  cv.width=w*dpr; cv.height=h*dpr; const ctx=cv.getContext('2d'); ctx.scale(dpr,dpr); ctx.clearRect(0,0,w,h);
+  const pad=24, bw=(w-pad*2)/vals.length, max=Math.max(...vals,1);
+  ctx.strokeStyle=dark?'rgba(255,255,255,.08)':'rgba(0,0,0,.06)'; ctx.lineWidth=1;
+  for(let i=0;i<=3;i++){ const y=pad+(h-pad*2)*i/3; ctx.beginPath(); ctx.moveTo(pad,y); ctx.lineTo(w-pad,y); ctx.stroke(); }
+  vals.forEach((v,i)=>{
+    const bh=(h-pad*2)*(v/max), x=pad+i*bw+bw*0.18, bwid=bw*0.64, y=h-pad-bh;
+    const col=Array.isArray(color)?color[i]:color;
+    if(bh>0.5){
+      ctx.fillStyle=col;
+      const r=Math.max(0,Math.min(6,bwid/2,bh/2)); ctx.beginPath(); ctx.moveTo(x,y+r); ctx.arcTo(x,y,x+r,y,r); ctx.arcTo(x+bwid,y,x+bwid,y+r,r); ctx.lineTo(x+bwid,h-pad); ctx.lineTo(x,h-pad); ctx.closePath(); ctx.fill();
+    } else {
+      // zero value: faint baseline dot so the column still reads, no weird arc
+      ctx.fillStyle=dark?'rgba(255,255,255,.12)':'rgba(0,0,0,.08)';
+      ctx.fillRect(x,h-pad-2,bwid,2);
+    }
+    ctx.fillStyle=dark?'rgba(255,255,255,.55)':'rgba(0,0,0,.5)'; ctx.font='10px Figtree,sans-serif'; ctx.textAlign='center';
+    ctx.fillText(labels[i],x+bwid/2,h-pad+14);
+  });
+}
+</script>
+</body>
+</html>
