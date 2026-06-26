@@ -70,6 +70,16 @@
   .no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
   @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
   .view{display:none}.view.active{display:block;animation:pop .4s ease both}
+  /* sliding-pill navigation */
+  #navLinks{isolation:isolate}
+  .navlink{position:relative;z-index:1;padding:.5rem 1rem;border-radius:9999px;color:#475569;cursor:pointer;background:transparent;border:0;font:inherit;line-height:1;white-space:nowrap;transition:color .25s ease}
+  .dark .navlink{color:#cbd5e1}
+  .navlink:focus-visible{outline:2px solid #8B5CF6;outline-offset:2px}
+  .navlink.on{color:#fff}
+  #navIndicator{position:absolute;top:0;left:0;height:0;width:0;border-radius:9999px;background:linear-gradient(100deg,#8B5CF6,#2563EB);box-shadow:0 10px 24px -8px rgba(139,92,246,.55);opacity:0;z-index:0;transform:translateX(0);pointer-events:none;will-change:transform,width;transition:transform .42s cubic-bezier(.34,1.45,.5,1),width .42s cubic-bezier(.34,1.45,.5,1),height .25s ease,opacity .2s ease}
+  @keyframes navSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+  #mobileNav:not(.hidden){animation:navSlide .26s cubic-bezier(.22,1,.36,1) both}
+  @media (prefers-reduced-motion: reduce){#navIndicator{transition:opacity .2s ease}}
   input,textarea,select{font-family:'Noto Sans',sans-serif}
 </style>
 </head>
@@ -90,15 +100,16 @@
       </span>
       <span class="font-extrabold text-xl tracking-tight">Inter<span class="grad-text">vene</span></span>
     </a>
-    <div class="hidden lg:flex items-center gap-1 text-sm font-medium">
-      <a href="#about" class="px-3 py-2 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5 transition-colors cursor-pointer">About</a>
-      <a href="#features" class="px-3 py-2 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5 transition-colors cursor-pointer">Features</a>
-      <a href="#therapists" class="px-3 py-2 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5 transition-colors cursor-pointer">Experts</a>
-      <a href="#resources" class="px-3 py-2 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5 transition-colors cursor-pointer">Resources</a>
-      <a href="#events" class="px-3 py-2 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5 transition-colors cursor-pointer">Events</a>
-      <a href="#connect" class="px-3 py-2 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5 transition-colors cursor-pointer">Connect</a>
-      <button onclick="showView('dashboard')" class="px-3 py-2 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5 transition-colors cursor-pointer">Dashboard</button>
-      <button id="navAdminBtn" onclick="showView('admin')" class="hidden px-3 py-2 rounded-lg hover:bg-brand-100 dark:hover:bg-white/5 transition-colors cursor-pointer">Admin</button>
+    <div id="navLinks" class="hidden lg:flex relative items-center gap-0.5 text-sm font-medium">
+      <span id="navIndicator" aria-hidden="true"></span>
+      <a href="#about" class="navlink">About</a>
+      <a href="#features" class="navlink">Features</a>
+      <a href="#therapists" class="navlink">Experts</a>
+      <a href="#resources" class="navlink">Resources</a>
+      <a href="#events" class="navlink">Events</a>
+      <a href="#connect" class="navlink">Connect</a>
+      <button onclick="showView('dashboard')" class="navlink">Dashboard</button>
+      <button id="navAdminBtn" onclick="showView('admin')" class="navlink hidden">Admin</button>
     </div>
     <div class="flex items-center gap-2">
       <button onclick="toggleTheme()" aria-label="Toggle dark mode" class="grid place-items-center w-10 h-10 rounded-xl glass hover:bg-brand-100 dark:hover:bg-white/10 transition-colors cursor-pointer">
@@ -863,6 +874,33 @@ function toggleTheme(){
 }
 function toggleMobileNav(){ document.getElementById('mobileNav').classList.toggle('hidden'); }
 
+/* ===================== SLIDING-PILL NAV ===================== */
+function initPillNav(){
+  const wrap=document.getElementById('navLinks'); if(!wrap) return;
+  const ind=document.getElementById('navIndicator');
+  const links=Array.from(wrap.querySelectorAll('.navlink'));
+  let active=null;
+  function place(el){
+    if(!el || el.offsetParent===null){ ind.style.opacity='0'; links.forEach(l=>l.classList.remove('on')); return; }
+    ind.style.opacity='1';
+    ind.style.top=el.offsetTop+'px';
+    ind.style.height=el.offsetHeight+'px';
+    ind.style.width=el.offsetWidth+'px';
+    ind.style.transform='translateX('+el.offsetLeft+'px)';
+    links.forEach(l=>l.classList.toggle('on', l===el));
+  }
+  links.forEach(l=>{
+    l.addEventListener('mouseenter',()=>place(l));
+    l.addEventListener('focus',()=>place(l));
+    l.addEventListener('click',()=>{ active=l; place(l); });
+  });
+  wrap.addEventListener('mouseleave',()=>place(active));   // glide back to the active item (or hide)
+  window.addEventListener('resize',()=>{ if(active) place(active); });
+  // expose so other code can set the active item (e.g. when a section is in view) if desired
+  window.setActiveNav=el=>{ active=el; place(el); };
+  place(null);   // start clean: indicator appears on hover, settles on the last clicked item
+}
+
 /* ===================== VIEWS ===================== */
 function showView(v){
   if(v==='admin' && sb && !window.IS_ADMIN){ toast('Admin access only'); v='dashboard'; }
@@ -1245,6 +1283,7 @@ const statObserver=new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isInter
 /* ===================== INIT ===================== */
 document.addEventListener('DOMContentLoaded',()=>{
   renderResources(); renderEvents(); renderSocials();
+  initPillNav();
   observeReveals();
   const stat=document.querySelector('.counter'); if(stat) statObserver.observe(stat);
   loadContentFromDB();   // refresh public content from Supabase when available
