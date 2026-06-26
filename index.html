@@ -177,15 +177,6 @@
           Meet the Team
         </a>
       </div>
-      <div class="mt-9 flex items-center gap-4">
-        <div class="flex -space-x-3">
-          <span class="w-10 h-10 rounded-full ring-2 ring-white dark:ring-ink bg-gradient-to-br from-brand-400 to-brand-600"></span>
-          <span class="w-10 h-10 rounded-full ring-2 ring-white dark:ring-ink bg-gradient-to-br from-sky-400 to-sky-600"></span>
-          <span class="w-10 h-10 rounded-full ring-2 ring-white dark:ring-ink bg-gradient-to-br from-teal-400 to-teal-600"></span>
-          <span class="w-10 h-10 rounded-full ring-2 ring-white dark:ring-ink bg-gradient-to-br from-coral-400 to-coral-600"></span>
-        </div>
-        <p class="text-sm text-slate-600 dark:text-slate-400"><span class="font-bold text-slate-800 dark:text-white">3,200+</span> students building kinder communities</p>
-      </div>
     </div>
 
     <!-- Hero logo medallion -->
@@ -203,10 +194,6 @@
         <div class="absolute bottom-2 -left-2 sm:-left-6 glass rounded-2xl px-4 py-3 shadow-xl animate-floaty2">
           <p class="text-xs text-slate-500 dark:text-slate-400">Today's mood</p>
           <p class="font-bold text-teal-600 dark:text-teal-400 flex items-center gap-1.5">Feeling hopeful <span class="text-lg">›</span></p>
-        </div>
-        <div class="absolute top-2 -right-2 sm:-right-6 glass rounded-2xl px-4 py-3 shadow-xl animate-floaty">
-          <p class="text-xs text-slate-500 dark:text-slate-400">Reports resolved</p>
-          <p class="font-bold text-brand-600 dark:text-brand-300">98% &nbsp;safely</p>
         </div>
       </div>
     </div>
@@ -1317,17 +1304,6 @@ async function loadContentFromDB(){
 /* ===================== ADMIN CONSOLE ===================== */
 let ADMIN_IS=false, adminTabName='overview';
 const adminData={reports:[],users:[]};
-const SEED_REPORTS=[
-  {id:'d1',category:'cyberbullying',description:'Repeated mean comments on a group chat targeting a classmate.',is_anonymous:true,status:'submitted',tracking_code:'IV-4821',created_at:Date.now()-2*864e5},
-  {id:'d2',category:'bullying',description:'Being pushed and mocked near the lockers after school.',is_anonymous:false,status:'under_review',tracking_code:'IV-1190',created_at:Date.now()-5*864e5},
-  {id:'d3',category:'discrimination',description:'Excluded from a project group based on background.',is_anonymous:true,status:'resolved',tracking_code:'IV-7732',created_at:Date.now()-9*864e5},
-];
-const SEED_USERS=[
-  {id:'u1',name:'Aanya Verma',email:'aanya@school.edu',role:'student'},
-  {id:'u2',name:'Dr. Meera Kapoor',email:'meera@clinic.com',role:'therapist'},
-  {id:'u3',name:'Riddhita Sharma',email:'riddhita@intervene.org',role:'admin'},
-  {id:'u4',name:'Kabir Singh',email:'kabir@school.edu',role:'student'},
-];
 const STATUSES=['submitted','under_review','action_taken','resolved','dismissed'];
 const STATUS_STYLE={submitted:'bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300',under_review:'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',action_taken:'bg-brand-100 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300',resolved:'bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300',dismissed:'bg-slate-200 text-slate-600 dark:bg-white/10 dark:text-slate-300'};
 const fmtDate=t=>new Date(t).toLocaleDateString('en',{day:'numeric',month:'short',year:'numeric'});
@@ -1345,18 +1321,17 @@ async function buildAdmin(){
   adminTab(adminTabName);
 }
 async function loadAdminData(){
-  if(sb){
-    try{
-      const {data:{user}}=await sb.auth.getUser();
-      if(user){ const {data:p}=await sb.from('profiles').select('role').eq('id',user.id).single(); ADMIN_IS=p && p.role==='admin'; }
-      const rep=await sb.from('reports').select('*').order('created_at',{ascending:false});
-      adminData.reports=(!rep.error&&rep.data&&rep.data.length)?rep.data.map(r=>({...r,created_at:r.created_at})):SEED_REPORTS.slice();
-      const us=await sb.from('profiles').select('*').order('created_at',{ascending:false});
-      adminData.users=(!us.error&&us.data&&us.data.length)?us.data:SEED_USERS.slice();
-      return;
-    }catch(e){}
-  }
-  adminData.reports=SEED_REPORTS.slice(); adminData.users=SEED_USERS.slice();
+  // real data only — reflects the live reports & profiles tables
+  adminData.reports=[]; adminData.users=[];
+  if(!sb) return;
+  try{
+    const {data:{user}}=await sb.auth.getUser();
+    if(user){ const {data:p}=await sb.from('profiles').select('role').eq('id',user.id).single(); ADMIN_IS=p && p.role==='admin'; }
+    const rep=await sb.from('reports').select('*').order('created_at',{ascending:false});
+    if(!rep.error && Array.isArray(rep.data)) adminData.reports=rep.data;
+    const us=await sb.from('profiles').select('*').order('created_at',{ascending:false});
+    if(!us.error && Array.isArray(us.data)) adminData.users=us.data;
+  }catch(e){}
 }
 function adminTab(name){
   adminTabName=name;
@@ -1401,7 +1376,8 @@ function adminReports(){
   document.getElementById('adminPanel').innerHTML=`
     <div class="glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10">
       <div class="flex items-center justify-between mb-4"><h3 class="font-bold text-lg">Bullying &amp; safety reports</h3><span class="text-sm text-slate-500">${adminData.reports.length} total</span></div>
-      <div class="overflow-x-auto no-scrollbar"><table class="w-full text-sm text-left"><thead><tr class="text-xs uppercase tracking-wide text-slate-400 border-b border-slate-200 dark:border-white/10"><th class="py-2 pr-3">ID</th><th class="py-2 pr-3">Category</th><th class="py-2 pr-3">Description</th><th class="py-2 pr-3">Type</th><th class="py-2 pr-3">Date</th><th class="py-2 pr-3">Status</th><th class="py-2">Action</th></tr></thead><tbody>${rows}</tbody></table></div>
+      ${adminData.reports.length ? `<div class="overflow-x-auto no-scrollbar"><table class="w-full text-sm text-left"><thead><tr class="text-xs uppercase tracking-wide text-slate-400 border-b border-slate-200 dark:border-white/10"><th class="py-2 pr-3">ID</th><th class="py-2 pr-3">Category</th><th class="py-2 pr-3">Description</th><th class="py-2 pr-3">Type</th><th class="py-2 pr-3">Date</th><th class="py-2 pr-3">Status</th><th class="py-2">Action</th></tr></thead><tbody>${rows}</tbody></table></div>`
+      : `<div class="text-center py-12 text-slate-500 dark:text-slate-400"><svg class="w-10 h-10 mx-auto mb-3 opacity-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><p class="font-medium">No reports yet</p><p class="text-sm mt-1">New bullying &amp; safety reports will appear here as students submit them.</p></div>`}
     </div>`;
 }
 async function reportSetStatus(id,status){
