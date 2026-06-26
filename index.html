@@ -16,13 +16,13 @@
     theme: {
       extend: {
         colors: {
-          /* "Blushing Sands" palette — rose / apricot / gold / blush */
-          brand:   { 50:'#FFF5F6',100:'#FDE6EA',200:'#FBCDD5',300:'#F7ADB8',400:'#F4929F',500:'#F28695',600:'#DB4E66',700:'#BE3A52',800:'#992F43',900:'#711F30' },
-          sky:     { 50:'#FDF8F1',100:'#FAEFDD',200:'#F5DEBC',300:'#F1CCA6',400:'#ECB57E',500:'#E09A55',600:'#C67E3C',700:'#A4642F',800:'#7C4C28',900:'#583620' },
-          teal:    { 50:'#FCFBF3',100:'#F9F4E0',200:'#F4EAC2',300:'#F2E6B8',400:'#E7D38A',500:'#D8BB5E',600:'#BD9C3D',700:'#977B31',800:'#705C29',900:'#50421F' },
-          coral:   { 50:'#FEF4F2',100:'#FBE6E1',200:'#F6D0C7',300:'#F2BFB4',400:'#EDA08C',500:'#E67E63',600:'#D25E42',700:'#AE4730',800:'#853728',900:'#5F2820' },
-          mint:    { 500:'#D8BB5E' },
-          ink:     '#25191C',
+          /* "Blushing Sands" — pink family: rose / magenta / orchid / blush */
+          brand:   { 50:'#FFF5F7',100:'#FDE6EC',200:'#FBCED9',300:'#F7AEC1',400:'#F495A9',500:'#F28695',600:'#E85A78',700:'#CE3D5E',800:'#A52F4A',900:'#7A2236' },
+          sky:     { 50:'#FEF3F8',100:'#FCE3EE',200:'#F9C8DD',300:'#F4A4C5',400:'#EF85AF',500:'#E8689A',600:'#D44C80',700:'#B23A67',800:'#892E50',900:'#62213A' },
+          teal:    { 50:'#FBF4FA',100:'#F6E6F2',200:'#EFCDE6',300:'#E4AAD4',400:'#D788C1',500:'#C96EAD',600:'#B05093',700:'#8E3F76',800:'#6C305A',900:'#4C2240' },
+          coral:   { 50:'#FEF4F3',100:'#FCE6E4',200:'#F8D0CB',300:'#F2BFB4',400:'#ED9FA6',500:'#E87E8E',600:'#D85C70',700:'#B44557',800:'#883642',900:'#61272F' },
+          mint:    { 500:'#E8689A' },
+          ink:     '#261A20',
         },
         fontFamily: { sans:['Figtree','Noto Sans','system-ui','sans-serif'], body:['Noto Sans','Figtree','sans-serif'] },
         keyframes: {
@@ -48,20 +48,20 @@
   body{-webkit-font-smoothing:antialiased}
   ::selection{background:#F7ADB8;color:#711F30}
   .glass{background:rgba(255,255,255,.65);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.55)}
-  .dark .glass{background:rgba(37,25,28,.55);border:1px solid rgba(255,255,255,.08)}
+  .dark .glass{background:rgba(38,26,32,.55);border:1px solid rgba(255,255,255,.08)}
   .glass-strong{background:rgba(255,255,255,.85);backdrop-filter:blur(20px)}
-  .dark .glass-strong{background:rgba(37,25,28,.78)}
-  .grad-text{background:linear-gradient(100deg,#DB4E66,#E09A55,#BD9C3D);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .grad-text-warm{background:linear-gradient(100deg,#D25E42,#DB4E66);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .dark .glass-strong{background:rgba(38,26,32,.78)}
+  .grad-text{background:linear-gradient(100deg,#E85A78,#D44C80,#C96EAD);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .grad-text-warm{background:linear-gradient(100deg,#D85C70,#E85A78);-webkit-background-clip:text;background-clip:text;color:transparent}
   .mesh{background:
-     radial-gradient(60% 50% at 12% 8%, rgba(242,134,149,.28), transparent 60%),
-     radial-gradient(55% 45% at 88% 12%, rgba(241,204,166,.30), transparent 60%),
-     radial-gradient(50% 45% at 70% 85%, rgba(242,230,184,.30), transparent 60%),
+     radial-gradient(60% 50% at 12% 8%, rgba(242,134,149,.30), transparent 60%),
+     radial-gradient(55% 45% at 88% 12%, rgba(232,104,154,.26), transparent 60%),
+     radial-gradient(50% 45% at 70% 85%, rgba(201,110,173,.22), transparent 60%),
      radial-gradient(45% 40% at 20% 90%, rgba(242,191,180,.26), transparent 60%);}
   .dark .mesh{background:
      radial-gradient(60% 50% at 12% 8%, rgba(242,134,149,.20), transparent 60%),
-     radial-gradient(55% 45% at 88% 12%, rgba(224,154,85,.18), transparent 60%),
-     radial-gradient(50% 45% at 70% 85%, rgba(216,187,94,.16), transparent 60%),
+     radial-gradient(55% 45% at 88% 12%, rgba(232,104,154,.18), transparent 60%),
+     radial-gradient(50% 45% at 70% 85%, rgba(201,110,173,.16), transparent 60%),
      radial-gradient(45% 40% at 20% 90%, rgba(242,191,180,.14), transparent 60%);}
   /* content is visible by default; only hidden for the reveal animation when JS is confirmed working */
   html.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
@@ -75,9 +75,9 @@
   #navLinks{isolation:isolate}
   .navlink{position:relative;z-index:1;padding:.5rem 1rem;border-radius:9999px;color:#475569;cursor:pointer;background:transparent;border:0;font:inherit;line-height:1;white-space:nowrap;transition:color .25s ease}
   .dark .navlink{color:#cbd5e1}
-  .navlink:focus-visible{outline:2px solid #DB4E66;outline-offset:2px}
+  .navlink:focus-visible{outline:2px solid #E85A78;outline-offset:2px}
   .navlink.on{color:#fff}
-  #navIndicator{position:absolute;top:0;left:0;height:0;width:0;border-radius:9999px;background:linear-gradient(100deg,#DB4E66,#C67E3C);box-shadow:0 10px 24px -8px rgba(219,78,102,.5);opacity:0;z-index:0;transform:translateX(0);pointer-events:none;will-change:transform,width;transition:transform .42s cubic-bezier(.34,1.45,.5,1),width .42s cubic-bezier(.34,1.45,.5,1),height .25s ease,opacity .2s ease}
+  #navIndicator{position:absolute;top:0;left:0;height:0;width:0;border-radius:9999px;background:linear-gradient(100deg,#E85A78,#D44C80);box-shadow:0 10px 24px -8px rgba(232,90,120,.5);opacity:0;z-index:0;transform:translateX(0);pointer-events:none;will-change:transform,width;transition:transform .42s cubic-bezier(.34,1.45,.5,1),width .42s cubic-bezier(.34,1.45,.5,1),height .25s ease,opacity .2s ease}
   @keyframes navSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
   #mobileNav:not(.hidden){animation:navSlide .26s cubic-bezier(.22,1,.36,1) both}
   @media (prefers-reduced-motion: reduce){#navIndicator{transition:opacity .2s ease}}
@@ -195,9 +195,9 @@
         <div class="relative grid place-items-center w-60 h-60 sm:w-72 sm:h-72 rounded-full bg-white shadow-2xl shadow-brand-900/20 ring-8 ring-white/60 dark:ring-white/10 animate-floaty overflow-hidden">
           <img src="logo.png" alt="Intervene — Talk. Understand. Support. Change." class="w-full h-full object-contain p-2" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='block'">
           <svg style="display:none" viewBox="0 0 200 200" class="w-40 h-40" aria-label="Intervene logo">
-            <circle cx="100" cy="100" r="96" fill="none" stroke="#BE3A52" stroke-width="3"/>
-            <path d="M100 150c-22-18-46-32-46-58 0-20 28-26 46-6 18-20 46-14 46 6 0 26-24 40-46 58z" fill="#DB4E66"/>
-            <circle cx="74" cy="78" r="14" fill="#BE3A52"/><circle cx="126" cy="78" r="14" fill="#E09A55"/>
+            <circle cx="100" cy="100" r="96" fill="none" stroke="#A52F4A" stroke-width="3"/>
+            <path d="M100 150c-22-18-46-32-46-58 0-20 28-26 46-6 18-20 46-14 46 6 0 26-24 40-46 58z" fill="#E85A78"/>
+            <circle cx="74" cy="78" r="14" fill="#A52F4A"/><circle cx="126" cy="78" r="14" fill="#D44C80"/>
           </svg>
         </div>
         <div class="absolute bottom-2 -left-2 sm:-left-6 glass rounded-2xl px-4 py-3 shadow-xl animate-floaty2">
@@ -1123,11 +1123,11 @@ function renderSocials(){
 
 /* ===================== DASHBOARD ===================== */
 const moods=[
-  {e:'😢',l:'Awful',v:1,c:'#BE3A52'},
-  {e:'😔',l:'Low',v:2,c:'#E8836D'},
-  {e:'😐',l:'Okay',v:3,c:'#ECB57E'},
-  {e:'🙂',l:'Good',v:4,c:'#D8BB5E'},
-  {e:'😄',l:'Great',v:5,c:'#BD9C3D'},
+  {e:'😢',l:'Awful',v:1,c:'#A52F4A'},
+  {e:'😔',l:'Low',v:2,c:'#D85C70'},
+  {e:'😐',l:'Okay',v:3,c:'#F0A8BE'},
+  {e:'🙂',l:'Good',v:4,c:'#E8689A'},
+  {e:'😄',l:'Great',v:5,c:'#C96EAD'},
 ];
 let pickedMood=4;
 /* when signed in, mood history comes from the database (synced across devices); window.MOODS caches it */
@@ -1227,14 +1227,14 @@ function drawMoodChart(){
   const x=i=> n===1 ? w/2 : pad + gw*i/(n-1);
   const y=v=> pad + gh*(1-(v-1)/4);
   // gradient area
-  const grad=ctx.createLinearGradient(0,pad,0,ht); grad.addColorStop(0,'rgba(219,78,102,.32)'); grad.addColorStop(1,'rgba(216,187,94,.03)');
+  const grad=ctx.createLinearGradient(0,pad,0,ht); grad.addColorStop(0,'rgba(232,90,120,.32)'); grad.addColorStop(1,'rgba(201,110,173,.04)');
   ctx.beginPath(); ctx.moveTo(x(0),y(h[0].v));
   for(let i=1;i<n;i++){ const xc=(x(i-1)+x(i))/2; ctx.quadraticCurveTo(x(i-1),y(h[i-1].v),xc,(y(h[i-1].v)+y(h[i].v))/2); ctx.quadraticCurveTo(x(i),y(h[i].v),x(i),y(h[i].v)); }
   ctx.lineTo(x(n-1),ht-pad); ctx.lineTo(x(0),ht-pad); ctx.closePath(); ctx.fillStyle=grad; ctx.fill();
   // line
   ctx.beginPath(); ctx.moveTo(x(0),y(h[0].v));
   for(let i=1;i<n;i++){ const xc=(x(i-1)+x(i))/2; ctx.quadraticCurveTo(x(i-1),y(h[i-1].v),xc,(y(h[i-1].v)+y(h[i].v))/2); ctx.quadraticCurveTo(x(i),y(h[i].v),x(i),y(h[i].v)); }
-  const lg=ctx.createLinearGradient(0,0,w,0); lg.addColorStop(0,'#DB4E66'); lg.addColorStop(.5,'#E09A55'); lg.addColorStop(1,'#BD9C3D');
+  const lg=ctx.createLinearGradient(0,0,w,0); lg.addColorStop(0,'#E85A78'); lg.addColorStop(.5,'#D44C80'); lg.addColorStop(1,'#C96EAD');
   ctx.strokeStyle=lg; ctx.lineWidth=3; ctx.lineJoin='round'; ctx.stroke();
   // dots
   const dr = n===1 ? 6 : 3.5;
@@ -1383,9 +1383,9 @@ function adminOverview(){
   // real data, derived from the live reports — updates as reports come in / statuses change
   const cats=['bullying','harassment','cyberbullying','discrimination'];
   const catCounts=cats.map(c=>adminData.reports.filter(r=>r.category===c).length);
-  drawBars('engChart',catCounts,['Bullying','Harass.','Cyber','Discrim.'],['#DB4E66','#E8836D','#E09A55','#BD9C3D']);
+  drawBars('engChart',catCounts,['Bullying','Harass.','Cyber','Discrim.'],['#E85A78','#D85C70','#D44C80','#C96EAD']);
   const statCounts=STATUSES.map(s=>adminData.reports.filter(r=>r.status===s).length);
-  drawBars('moodDistChart',statCounts,['Submitted','Review','Action','Resolved','Dismissed'],['#E09A55','#D8BB5E','#DB4E66','#C67E3C','#A98F84']);
+  drawBars('moodDistChart',statCounts,['Submitted','Review','Action','Resolved','Dismissed'],['#E8689A','#C96EAD','#E85A78','#D85C70','#A98994']);
 }
 function adminReports(){
   const rows=adminData.reports.map(r=>`
