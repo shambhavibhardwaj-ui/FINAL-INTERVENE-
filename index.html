@@ -1566,7 +1566,7 @@ function drawBars(id,vals,labels,color){
   cv.style.cssText='position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:90';
   cv.setAttribute('aria-hidden','true');
   const glow=document.createElement('div');
-  glow.style.cssText='position:fixed;left:0;top:0;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;pointer-events:none;z-index:89;filter:blur(34px);opacity:.5;background:radial-gradient(circle,rgba(247,231,169,.7),rgba(120,162,210,.25) 55%,transparent 70%);transform:translate(-200px,-200px)';
+  glow.style.cssText='position:fixed;left:0;top:0;width:170px;height:170px;margin:-85px 0 0 -85px;border-radius:50%;pointer-events:none;z-index:89;filter:blur(36px);opacity:.8;background:radial-gradient(circle,rgba(254,255,175,.85),rgba(120,162,210,.4) 52%,transparent 72%);transform:translate(-200px,-200px)';
   function attach(){ document.body.appendChild(cv); document.body.appendChild(glow); }
   if(document.body) attach(); else document.addEventListener('DOMContentLoaded',attach);
 
@@ -1574,17 +1574,17 @@ function drawBars(id,vals,labels,color){
   function resize(){ dpr=Math.min(window.devicePixelRatio||1,2); cv.width=innerWidth*dpr; cv.height=innerHeight*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
   resize(); addEventListener('resize',resize);
 
-  const COLORS=['#F7E7A9','#FFF4C2','#FFF8DC','#FFFFFF','#78A2D2','#FEFFAF','#D8CCFF'];
-  const MAX=160; let parts=[]; let count=0;
+  const COLORS=['#FEFFAF','#FEFFAF','#78A2D2','#5C83B6','#F2D06B','#FFF4C2','#FFFFFF'];
+  const MAX=260; let parts=[]; let count=0;
   let mx=-200,my=-200, gx=-200,gy=-200, lx=-200,ly=-200, moved=false;
   addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; moved=true; });
 
   function rand(a,b){ return a+Math.random()*(b-a); }
   function spawn(x,y,bright){
-    const type = bright ? 'spark' : (Math.random()<0.012?'petal':(Math.random()<0.012?'heart':(Math.random()<0.45?'star':(Math.random()<0.5?'sparkle':'dot'))));
-    parts.push({ x:x+rand(-4,4), y:y+rand(-4,4), vx:rand(-.35,.35), vy:rand(-.5,-.05), size:rand(3,8)*(bright?1.4:1),
-      life:0, ttl:rand(700,1200), rot:rand(0,Math.PI*2), vr:rand(-.04,.04),
-      color:bright?'#FFF8DC':COLORS[(Math.random()*COLORS.length)|0], type, glow:bright });
+    const type = bright ? 'spark' : (Math.random()<0.012?'petal':(Math.random()<0.012?'heart':(Math.random()<0.55?'star':(Math.random()<0.55?'sparkle':'dot'))));
+    parts.push({ x:x+rand(-5,5), y:y+rand(-5,5), vx:rand(-.45,.45), vy:rand(-.6,-.05), size:rand(5,12)*(bright?1.7:1),
+      life:0, ttl:rand(900,1500), rot:rand(0,Math.PI*2), vr:rand(-.05,.05),
+      color:bright?'#FFFDE7':COLORS[(Math.random()*COLORS.length)|0], type, glow:bright });
   }
   function drawStar(x,y,r,rot){ ctx.beginPath(); for(let i=0;i<8;i++){ const ang=rot+i*Math.PI/4; const rr=(i%2===0)?r:r*0.38; ctx.lineTo(x+Math.cos(ang)*rr,y+Math.sin(ang)*rr);} ctx.closePath(); ctx.fill(); }
   function drawHeart(x,y,s){ ctx.beginPath(); ctx.moveTo(x,y+s*0.3); ctx.bezierCurveTo(x,y,x-s,y-s*0.2,x-s,y+s*0.25); ctx.bezierCurveTo(x-s,y+s*0.6,x,y+s*0.85,x,y+s); ctx.bezierCurveTo(x,y+s*0.85,x+s,y+s*0.6,x+s,y+s*0.25); ctx.bezierCurveTo(x+s,y-s*0.2,x,y,x,y+s*0.3); ctx.closePath(); ctx.fill(); }
@@ -1597,9 +1597,9 @@ function drawBars(id,vals,labels,color){
     // emit along movement
     if(moved){
       const dx=mx-lx, dy=my-ly, dist=Math.hypot(dx,dy);
-      if(dist>3){
-        const n=Math.min(5,Math.max(2,Math.round(dist/8)));
-        for(let i=0;i<n && parts.length<MAX;i++){ count++; spawn(mx,my, count%12===0); }
+      if(dist>2){
+        const n=Math.min(7,Math.max(3,Math.round(dist/6)));
+        for(let i=0;i<n && parts.length<MAX;i++){ count++; spawn(mx,my, count%7===0); }
         lx=mx; ly=my;
       }
       moved=false;
@@ -1609,9 +1609,9 @@ function drawBars(id,vals,labels,color){
       const p=parts[i]; p.life+=16;
       const t=p.life/p.ttl; if(t>=1){ parts.splice(i,1); continue; }
       p.x+=p.vx; p.y+=p.vy; p.vy+=0.006; p.vx*=0.99; p.rot+=p.vr;
-      const a=(1-t), sc=1-t*0.9, s=p.size*sc;
-      ctx.save(); ctx.globalAlpha=a; ctx.fillStyle=p.color;
-      if(p.glow){ ctx.shadowColor=p.color; ctx.shadowBlur=12; }
+      const a=t<0.65?1:(1-t)/0.35, sc=1-t*0.5, s=p.size*sc;   // hold full, then fade; shrink less
+      ctx.save(); ctx.globalAlpha=Math.max(0,a); ctx.fillStyle=p.color;
+      ctx.shadowColor=p.color; ctx.shadowBlur=p.glow?20:Math.max(6,s*1.4);   // every particle glows
       if(p.type==='star'||p.type==='spark'){ drawStar(p.x,p.y,s,p.rot); }
       else if(p.type==='heart'){ drawHeart(p.x,p.y,s*0.8); }
       else if(p.type==='petal'){ ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.beginPath(); ctx.ellipse(0,0,s*0.5,s,0,0,7); ctx.fill(); }
