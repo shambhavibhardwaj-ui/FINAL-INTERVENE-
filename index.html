@@ -9,22 +9,23 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet" />
 <script>
   tailwind.config = {
     darkMode: 'class',
     theme: {
       extend: {
         colors: {
-          /* "Blushing Sands" — pink family: rose / magenta / orchid / blush */
-          brand:   { 50:'#FFF5F7',100:'#FDE6EC',200:'#FBCED9',300:'#F7AEC1',400:'#F495A9',500:'#F28695',600:'#E85A78',700:'#CE3D5E',800:'#A52F4A',900:'#7A2236' },
-          sky:     { 50:'#FEF3F8',100:'#FCE3EE',200:'#F9C8DD',300:'#F4A4C5',400:'#EF85AF',500:'#E8689A',600:'#D44C80',700:'#B23A67',800:'#892E50',900:'#62213A' },
-          teal:    { 50:'#FBF4FA',100:'#F6E6F2',200:'#EFCDE6',300:'#E4AAD4',400:'#D788C1',500:'#C96EAD',600:'#B05093',700:'#8E3F76',800:'#6C305A',900:'#4C2240' },
-          coral:   { 50:'#FEF4F3',100:'#FCE6E4',200:'#F8D0CB',300:'#F2BFB4',400:'#ED9FA6',500:'#E87E8E',600:'#D85C70',700:'#B44557',800:'#883642',900:'#61272F' },
-          mint:    { 500:'#E8689A' },
-          ink:     '#261A20',
+          /* Editorial palette — Vista Blue primary, cream/lavender/teal accents, rose sparingly */
+          brand:   { 50:'#F3F8FD',100:'#E3EEF8',200:'#C8DCF0',300:'#A6C4E4',400:'#8AAEDA',500:'#78A2D2',600:'#5C83B6',700:'#496A93',800:'#3D5775',900:'#33495F' },
+          sky:     { 50:'#F5F3FF',100:'#ECE7FF',200:'#DBD2FF',300:'#C4B5FD',400:'#B8A8FF',500:'#A78BFA',600:'#8B6CF0',700:'#7553D6',800:'#5E43A8',900:'#4A357F' },
+          teal:    { 50:'#F0FBF8',100:'#DCF4EE',200:'#BBE8DD',300:'#92D6C7',400:'#70C1B3',500:'#4FA89A',600:'#3C8B7F',700:'#326F66',800:'#2B5852',900:'#244844' },
+          coral:   { 50:'#FEF3F7',100:'#FCE4EE',200:'#FACADC',300:'#F6A6C3',400:'#F07AA8',500:'#E85C92',600:'#D43F78',700:'#B12F61',800:'#8B274D',900:'#641B38' },
+          mint:    { 500:'#EBD27A' },
+          cream:   { 100:'#FFFDF0',200:'#FEFFAF',300:'#FFF4C2' },
+          ink:     '#141B26',
         },
-        fontFamily: { sans:['Figtree','Noto Sans','system-ui','sans-serif'], body:['Noto Sans','Figtree','sans-serif'] },
+        fontFamily: { sans:['Inter','system-ui','sans-serif'], body:['Inter','system-ui','sans-serif'], serif:['"Playfair Display"','Georgia','serif'] },
         keyframes: {
           floaty:{ '0%,100%':{transform:'translateY(0)'},'50%':{transform:'translateY(-14px)'} },
           floaty2:{ '0%,100%':{transform:'translateY(0)'},'50%':{transform:'translateY(10px)'} },
@@ -44,25 +45,35 @@
   }
 </script>
 <style>
-  html{font-family:'Figtree','Noto Sans',sans-serif}
+  html{font-family:'Inter',system-ui,sans-serif}
   body{-webkit-font-smoothing:antialiased}
-  ::selection{background:#F7ADB8;color:#711F30}
-  .glass{background:rgba(255,255,255,.65);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.55)}
-  .dark .glass{background:rgba(38,26,32,.55);border:1px solid rgba(255,255,255,.08)}
-  .glass-strong{background:rgba(255,255,255,.85);backdrop-filter:blur(20px)}
-  .dark .glass-strong{background:rgba(38,26,32,.78)}
-  .grad-text{background:linear-gradient(100deg,#E85A78,#D44C80,#C96EAD);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .grad-text-warm{background:linear-gradient(100deg,#D85C70,#E85A78);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .font-serif,.serif{font-family:'Playfair Display',Georgia,serif}
+  h1,h2{font-family:'Playfair Display',Georgia,serif;letter-spacing:-.01em}
+  ::selection{background:#C8DCF0;color:#33495F}
+  .glass{background:rgba(255,255,255,.62);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.6)}
+  .dark .glass{background:rgba(20,27,38,.55);border:1px solid rgba(255,255,255,.08)}
+  .glass-strong{background:rgba(255,255,255,.86);backdrop-filter:blur(22px)}
+  .dark .glass-strong{background:rgba(20,27,38,.8)}
+  .grad-text{background:linear-gradient(100deg,#5C83B6,#78A2D2,#4FA89A);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .grad-text-warm{background:linear-gradient(100deg,#5C83B6,#78A2D2);-webkit-background-clip:text;background-clip:text;color:transparent}
   .mesh{background:
-     radial-gradient(60% 50% at 12% 8%, rgba(242,134,149,.30), transparent 60%),
-     radial-gradient(55% 45% at 88% 12%, rgba(232,104,154,.26), transparent 60%),
-     radial-gradient(50% 45% at 70% 85%, rgba(201,110,173,.22), transparent 60%),
-     radial-gradient(45% 40% at 20% 90%, rgba(242,191,180,.26), transparent 60%);}
+     radial-gradient(60% 50% at 12% 8%, rgba(120,162,210,.24), transparent 62%),
+     radial-gradient(55% 45% at 88% 14%, rgba(254,255,175,.34), transparent 60%),
+     radial-gradient(52% 48% at 72% 88%, rgba(184,168,255,.22), transparent 62%),
+     radial-gradient(45% 42% at 18% 92%, rgba(255,216,194,.26), transparent 60%);}
   .dark .mesh{background:
-     radial-gradient(60% 50% at 12% 8%, rgba(242,134,149,.20), transparent 60%),
-     radial-gradient(55% 45% at 88% 12%, rgba(232,104,154,.18), transparent 60%),
-     radial-gradient(50% 45% at 70% 85%, rgba(201,110,173,.16), transparent 60%),
-     radial-gradient(45% 40% at 20% 90%, rgba(242,191,180,.14), transparent 60%);}
+     radial-gradient(60% 50% at 12% 8%, rgba(120,162,210,.20), transparent 62%),
+     radial-gradient(55% 45% at 88% 14%, rgba(235,210,122,.14), transparent 60%),
+     radial-gradient(52% 48% at 72% 88%, rgba(167,139,250,.18), transparent 62%),
+     radial-gradient(45% 42% at 18% 92%, rgba(255,216,194,.12), transparent 60%);}
+  /* soft frosted gradient that sits behind the floating navbar */
+  .nav-aura{position:absolute;inset:-40px -10% auto -10%;height:200px;z-index:-1;pointer-events:none;filter:blur(34px);opacity:.9;
+     background:
+       radial-gradient(40% 80% at 18% 30%, rgba(120,162,210,.5), transparent 70%),
+       radial-gradient(36% 80% at 50% 10%, rgba(255,255,255,.7), transparent 70%),
+       radial-gradient(40% 80% at 74% 35%, rgba(240,122,168,.28), transparent 70%),
+       radial-gradient(40% 90% at 92% 20%, rgba(184,168,255,.4), transparent 70%);}
+  .dark .nav-aura{opacity:.5}
   /* content is visible by default; only hidden for the reveal animation when JS is confirmed working */
   html.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
   .reveal.in{opacity:1!important;transform:none!important}
@@ -75,42 +86,42 @@
   #navLinks{isolation:isolate}
   .navlink{position:relative;z-index:1;padding:.5rem 1rem;border-radius:9999px;color:#475569;cursor:pointer;background:transparent;border:0;font:inherit;line-height:1;white-space:nowrap;transition:color .25s ease}
   .dark .navlink{color:#cbd5e1}
-  .navlink:focus-visible{outline:2px solid #E85A78;outline-offset:2px}
-  .navlink.on{color:#fff}
-  #navIndicator{position:absolute;top:0;left:0;height:0;width:0;border-radius:9999px;background:linear-gradient(100deg,#E85A78,#D44C80);box-shadow:0 10px 24px -8px rgba(232,90,120,.5);opacity:0;z-index:0;transform:translateX(0);pointer-events:none;will-change:transform,width;transition:transform .42s cubic-bezier(.34,1.45,.5,1),width .42s cubic-bezier(.34,1.45,.5,1),height .25s ease,opacity .2s ease}
+  .navlink:focus-visible{outline:2px solid #78A2D2;outline-offset:2px}
+  #navIndicator{position:absolute;top:0;left:0;height:0;width:0;border-radius:9999px;background:#78A2D2;box-shadow:0 10px 24px -8px rgba(120,162,210,.5);opacity:0;z-index:0;transform:translateX(0);pointer-events:none;will-change:transform,width;transition:transform .42s cubic-bezier(.34,1.4,.5,1),width .42s cubic-bezier(.34,1.4,.5,1),height .25s ease,opacity .2s ease,background-color .35s ease,box-shadow .35s ease}
   @keyframes navSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
   #mobileNav:not(.hidden){animation:navSlide .26s cubic-bezier(.22,1,.36,1) both}
   @media (prefers-reduced-motion: reduce){#navIndicator{transition:opacity .2s ease}}
-  input,textarea,select{font-family:'Noto Sans',sans-serif}
+  input,textarea,select{font-family:'Inter',system-ui,sans-serif}
 </style>
 </head>
 <body class="bg-brand-50 dark:bg-ink text-slate-800 dark:text-slate-100 font-body antialiased transition-colors duration-300">
 
 <!-- ======================= TOP ANNOUNCEMENT ======================= -->
-<div class="w-full bg-gradient-to-r from-brand-600 via-sky-600 to-teal-600 text-white text-center text-xs sm:text-sm py-2 px-4 font-medium">
-  In crisis? You're not alone — <button onclick="openEmergency()" class="underline underline-offset-2 font-semibold cursor-pointer hover:text-brand-100">Get immediate help &rarr;</button>
+<div class="w-full text-white text-center text-xs sm:text-sm py-2.5 px-4 font-medium transition-colors" style="background:#7D1E2F" onmouseover="this.style.background='#8B2332'" onmouseout="this.style.background='#7D1E2F'">
+  In crisis? You're not alone — <button onclick="openEmergency()" class="underline underline-offset-2 font-semibold cursor-pointer hover:text-white/80">Get immediate help &rarr;</button>
 </div>
 
 <!-- ======================= NAVBAR ======================= -->
 <header class="sticky top-0 z-50 px-3 sm:px-4 pt-3">
-  <nav class="glass max-w-7xl mx-auto rounded-2xl shadow-lg shadow-brand-900/5 px-4 sm:px-6 py-3 flex items-center justify-between">
+  <span class="nav-aura"></span>
+  <nav class="glass max-w-7xl mx-auto rounded-3xl shadow-lg shadow-brand-900/5 px-4 sm:px-6 py-3 flex items-center justify-between">
     <a href="#home" onclick="showView('site')" class="flex items-center gap-2.5 cursor-pointer shrink-0">
       <span class="relative grid place-items-center w-11 h-11 rounded-full overflow-hidden bg-white shadow-lg shadow-brand-600/20 ring-1 ring-brand-100 dark:ring-white/10">
-        <img src="logo.png" alt="Intervene logo" class="w-full h-full object-contain" onerror="this.onerror=null;this.style.display='none';this.parentElement.classList.add('bg-gradient-to-br','from-brand-600','to-sky-600');this.nextElementSibling.style.display='block'">
+        <img src="logo.png?v=2" alt="Intervene logo" class="w-full h-full object-contain" onerror="this.onerror=null;this.style.display='none';this.parentElement.classList.add('bg-gradient-to-br','from-brand-600','to-sky-600');this.nextElementSibling.style.display='block'">
         <svg style="display:none" class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </span>
-      <span class="font-extrabold text-xl tracking-tight">Inter<span class="grad-text">vene</span></span>
+      <span class="font-extrabold text-xl tracking-tight text-slate-900 dark:text-white">Intervene</span>
     </a>
     <div id="navLinks" class="hidden lg:flex relative items-center gap-0.5 text-sm font-medium">
       <span id="navIndicator" aria-hidden="true"></span>
-      <a href="#about" class="navlink">About</a>
-      <a href="#features" class="navlink">Features</a>
-      <a href="#therapists" class="navlink">Experts</a>
-      <a href="#resources" class="navlink">Resources</a>
-      <a href="#events" class="navlink">Events</a>
-      <a href="#connect" class="navlink">Connect</a>
-      <button onclick="showView('dashboard')" class="navlink">Dashboard</button>
-      <button id="navAdminBtn" onclick="showView('admin')" class="navlink hidden">Admin</button>
+      <a href="#about" class="navlink" data-accent="#F07AA8" data-on="#fff">About</a>
+      <a href="#features" class="navlink" data-accent="#A78BFA" data-on="#fff">Features</a>
+      <a href="#therapists" class="navlink" data-accent="#70C1B3" data-on="#fff">Experts</a>
+      <a href="#resources" class="navlink" data-accent="#FEFFAF" data-on="#3D3A12">Resources</a>
+      <a href="#events" class="navlink" data-accent="#FDBA74" data-on="#5B3A12">Events</a>
+      <a href="#connect" class="navlink" data-accent="#C4B5FD" data-on="#3A2E66">Connect</a>
+      <button onclick="showView('dashboard')" class="navlink" data-accent="#FB7185" data-on="#fff">Dashboard</button>
+      <button id="navAdminBtn" onclick="showView('admin')" class="navlink hidden" data-accent="#64748B" data-on="#fff">Admin</button>
     </div>
     <div class="flex items-center gap-2">
       <button onclick="toggleTheme()" aria-label="Toggle dark mode" class="grid place-items-center w-10 h-10 rounded-xl glass hover:bg-brand-100 dark:hover:bg-white/10 transition-colors cursor-pointer">
@@ -158,22 +169,22 @@
         <span class="w-2 h-2 rounded-full bg-teal-500 animate-pulse2"></span>
         Student-Led Initiative • Prometheus School, Noida
       </span>
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.05] tracking-tight">
-        Creating <span class="grad-text">Safer Spaces</span> Through Awareness, Empathy &amp; Action.
+      <h1 class="font-serif text-[2.6rem] sm:text-5xl lg:text-[3.75rem] font-bold leading-[1.08] tracking-tight text-slate-900 dark:text-white">
+        Creating Safer Spaces Through Awareness, Empathy &amp; Action.
       </h1>
-      <p class="mt-6 text-lg text-slate-600 dark:text-slate-300 max-w-xl leading-relaxed">
+      <p class="mt-6 text-lg text-slate-500 dark:text-slate-300 max-w-xl leading-relaxed">
         Intervene empowers students to stand against bullying, support mental wellbeing, and build stronger communities.
       </p>
-      <div class="mt-8 flex flex-wrap gap-3">
-        <button onclick="openAuth('signup')" class="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-brand-600 to-sky-600 shadow-xl shadow-brand-600/30 hover:shadow-brand-600/50 transition-all cursor-pointer">
+      <div class="mt-9 flex flex-wrap gap-3">
+        <button onclick="openAuth('signup')" class="group inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-semibold text-white bg-brand-500 hover:bg-brand-600 shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transition-all cursor-pointer">
           Join Community
           <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </button>
-        <button onclick="openEmergency()" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold glass-strong text-coral-600 dark:text-coral-400 hover:bg-coral-50 dark:hover:bg-white/10 transition-colors cursor-pointer">
+        <button onclick="openEmergency()" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-semibold bg-white dark:bg-white/5 border border-brand-200 dark:border-white/15 text-brand-700 dark:text-brand-200 hover:bg-cream-100 dark:hover:bg-white/10 transition-colors cursor-pointer">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           Get Support
         </button>
-        <a href="#team" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold border-2 border-brand-300 dark:border-white/15 text-brand-700 dark:text-brand-200 hover:bg-brand-100 dark:hover:bg-white/5 transition-colors cursor-pointer">
+        <a href="#team" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-semibold bg-white dark:bg-white/5 border border-brand-200 dark:border-white/15 text-brand-700 dark:text-brand-200 hover:bg-cream-100 dark:hover:bg-white/10 transition-colors cursor-pointer">
           Meet the Team
         </a>
       </div>
@@ -182,13 +193,12 @@
     <!-- Hero logo medallion -->
     <div class="reveal relative">
       <div class="relative grid place-items-center py-6">
-        <div class="absolute w-72 h-72 sm:w-80 sm:h-80 rounded-full bg-gradient-to-br from-brand-400/30 via-sky-400/20 to-teal-400/30 blur-2xl"></div>
-        <div class="relative grid place-items-center w-60 h-60 sm:w-72 sm:h-72 rounded-full bg-white shadow-2xl shadow-brand-900/20 ring-8 ring-white/60 dark:ring-white/10 animate-floaty overflow-hidden">
-          <img src="logo.png" alt="Intervene — Talk. Understand. Support. Change." class="w-full h-full object-contain p-2" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='block'">
+        <div class="absolute w-72 h-72 sm:w-80 sm:h-80 rounded-full bg-gradient-to-br from-brand-300/35 via-cream-200/40 to-sky-300/30 blur-3xl"></div>
+        <div class="relative grid place-items-center w-64 h-64 sm:w-72 sm:h-72 rounded-full bg-white shadow-[0_30px_60px_-15px_rgba(120,162,210,.35)] dark:shadow-[0_30px_60px_-15px_rgba(0,0,0,.5)] animate-floaty">
+          <img src="logo.png?v=2" alt="Intervene — Talk. Understand. Support. Change." class="w-[88%] h-[88%] object-contain" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='block'">
           <svg style="display:none" viewBox="0 0 200 200" class="w-40 h-40" aria-label="Intervene logo">
-            <circle cx="100" cy="100" r="96" fill="none" stroke="#A52F4A" stroke-width="3"/>
-            <path d="M100 150c-22-18-46-32-46-58 0-20 28-26 46-6 18-20 46-14 46 6 0 26-24 40-46 58z" fill="#E85A78"/>
-            <circle cx="74" cy="78" r="14" fill="#A52F4A"/><circle cx="126" cy="78" r="14" fill="#D44C80"/>
+            <path d="M100 150c-22-18-46-32-46-58 0-20 28-26 46-6 18-20 46-14 46 6 0 26-24 40-46 58z" fill="#78A2D2"/>
+            <circle cx="74" cy="78" r="14" fill="#33495F"/><circle cx="126" cy="78" r="14" fill="#A78BFA"/>
           </svg>
         </div>
         <div class="absolute bottom-2 -left-2 sm:-left-6 glass rounded-2xl px-4 py-3 shadow-xl animate-floaty2">
@@ -502,7 +512,7 @@
     <div class="grid md:grid-cols-4 gap-10">
       <div class="md:col-span-1">
         <div class="flex items-center gap-2.5">
-          <span class="relative grid place-items-center w-11 h-11 rounded-full overflow-hidden bg-white"><img src="logo.png" alt="Intervene logo" class="w-full h-full object-contain" onerror="this.onerror=null;this.style.display='none';this.parentElement.classList.add('bg-gradient-to-br','from-brand-600','to-sky-600');this.nextElementSibling.style.display='block'"><svg style="display:none" class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+          <span class="relative grid place-items-center w-11 h-11 rounded-full overflow-hidden bg-white"><img src="logo.png?v=2" alt="Intervene logo" class="w-full h-full object-contain" onerror="this.onerror=null;this.style.display='none';this.parentElement.classList.add('bg-gradient-to-br','from-brand-600','to-sky-600');this.nextElementSibling.style.display='block'"><svg style="display:none" class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
           <span class="font-extrabold text-xl text-white">Inter<span class="grad-text">vene</span></span>
         </div>
         <p class="mt-4 text-sm text-slate-400 leading-relaxed">Mental Wellbeing • Anti-Bullying • Awareness, Empathy &amp; Action.</p>
@@ -868,14 +878,19 @@ function initPillNav(){
   const ind=document.getElementById('navIndicator');
   const links=Array.from(wrap.querySelectorAll('.navlink'));
   let active=null;
+  function hexToRgb(h){ h=h.replace('#',''); return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]; }
   function place(el){
-    if(!el || el.offsetParent===null){ ind.style.opacity='0'; links.forEach(l=>l.classList.remove('on')); return; }
+    if(!el || el.offsetParent===null){ ind.style.opacity='0'; links.forEach(l=>{l.classList.remove('on'); l.style.color='';}); return; }
+    const accent=el.dataset.accent||'#78A2D2', on=el.dataset.on||'#fff';
+    const [r,g,b]=hexToRgb(accent);
     ind.style.opacity='1';
     ind.style.top=el.offsetTop+'px';
     ind.style.height=el.offsetHeight+'px';
     ind.style.width=el.offsetWidth+'px';
     ind.style.transform='translateX('+el.offsetLeft+'px)';
-    links.forEach(l=>l.classList.toggle('on', l===el));
+    ind.style.background=accent;                                  // each section its own accent
+    ind.style.boxShadow='0 10px 24px -8px rgba('+r+','+g+','+b+',.55)';
+    links.forEach(l=>{ const isOn=l===el; l.classList.toggle('on',isOn); l.style.color=isOn?on:''; });
   }
   links.forEach(l=>{
     l.addEventListener('mouseenter',()=>place(l));
@@ -1536,10 +1551,78 @@ function drawBars(id,vals,labels,color){
       ctx.fillStyle=dark?'rgba(255,255,255,.12)':'rgba(0,0,0,.08)';
       ctx.fillRect(x,h-pad-2,bwid,2);
     }
-    ctx.fillStyle=dark?'rgba(255,255,255,.55)':'rgba(0,0,0,.5)'; ctx.font='10px Figtree,sans-serif'; ctx.textAlign='center';
+    ctx.fillStyle=dark?'rgba(255,255,255,.55)':'rgba(0,0,0,.5)'; ctx.font='10px Inter,sans-serif'; ctx.textAlign='center';
     ctx.fillText(labels[i],x+bwid/2,h-pad+14);
   });
 }
+
+/* ===================== FAIRY-DUST CURSOR TRAIL ===================== */
+(function(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const touch = matchMedia('(pointer: coarse)').matches || ('ontouchstart' in window);
+  if(reduce || touch) return;   // graceful fallback: no effect
+
+  const cv=document.createElement('canvas');
+  cv.style.cssText='position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:90';
+  cv.setAttribute('aria-hidden','true');
+  const glow=document.createElement('div');
+  glow.style.cssText='position:fixed;left:0;top:0;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;pointer-events:none;z-index:89;filter:blur(34px);opacity:.5;background:radial-gradient(circle,rgba(247,231,169,.7),rgba(120,162,210,.25) 55%,transparent 70%);transform:translate(-200px,-200px)';
+  function attach(){ document.body.appendChild(cv); document.body.appendChild(glow); }
+  if(document.body) attach(); else document.addEventListener('DOMContentLoaded',attach);
+
+  const ctx=cv.getContext('2d'); let dpr=Math.min(window.devicePixelRatio||1,2);
+  function resize(){ dpr=Math.min(window.devicePixelRatio||1,2); cv.width=innerWidth*dpr; cv.height=innerHeight*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
+  resize(); addEventListener('resize',resize);
+
+  const COLORS=['#F7E7A9','#FFF4C2','#FFF8DC','#FFFFFF','#78A2D2','#FEFFAF','#D8CCFF'];
+  const MAX=160; let parts=[]; let count=0;
+  let mx=-200,my=-200, gx=-200,gy=-200, lx=-200,ly=-200, moved=false;
+  addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; moved=true; });
+
+  function rand(a,b){ return a+Math.random()*(b-a); }
+  function spawn(x,y,bright){
+    const type = bright ? 'spark' : (Math.random()<0.012?'petal':(Math.random()<0.012?'heart':(Math.random()<0.45?'star':(Math.random()<0.5?'sparkle':'dot'))));
+    parts.push({ x:x+rand(-4,4), y:y+rand(-4,4), vx:rand(-.35,.35), vy:rand(-.5,-.05), size:rand(3,8)*(bright?1.4:1),
+      life:0, ttl:rand(700,1200), rot:rand(0,Math.PI*2), vr:rand(-.04,.04),
+      color:bright?'#FFF8DC':COLORS[(Math.random()*COLORS.length)|0], type, glow:bright });
+  }
+  function drawStar(x,y,r,rot){ ctx.beginPath(); for(let i=0;i<8;i++){ const ang=rot+i*Math.PI/4; const rr=(i%2===0)?r:r*0.38; ctx.lineTo(x+Math.cos(ang)*rr,y+Math.sin(ang)*rr);} ctx.closePath(); ctx.fill(); }
+  function drawHeart(x,y,s){ ctx.beginPath(); ctx.moveTo(x,y+s*0.3); ctx.bezierCurveTo(x,y,x-s,y-s*0.2,x-s,y+s*0.25); ctx.bezierCurveTo(x-s,y+s*0.6,x,y+s*0.85,x,y+s); ctx.bezierCurveTo(x,y+s*0.85,x+s,y+s*0.6,x+s,y+s*0.25); ctx.bezierCurveTo(x+s,y-s*0.2,x,y,x,y+s*0.3); ctx.closePath(); ctx.fill(); }
+
+  function frame(){
+    // glow follows with spring lag
+    gx+=(mx-gx)*0.12; gy+=(my-gy)*0.12;
+    glow.style.transform='translate('+gx+'px,'+gy+'px)';
+
+    // emit along movement
+    if(moved){
+      const dx=mx-lx, dy=my-ly, dist=Math.hypot(dx,dy);
+      if(dist>3){
+        const n=Math.min(5,Math.max(2,Math.round(dist/8)));
+        for(let i=0;i<n && parts.length<MAX;i++){ count++; spawn(mx,my, count%12===0); }
+        lx=mx; ly=my;
+      }
+      moved=false;
+    }
+    ctx.clearRect(0,0,innerWidth,innerHeight);
+    for(let i=parts.length-1;i>=0;i--){
+      const p=parts[i]; p.life+=16;
+      const t=p.life/p.ttl; if(t>=1){ parts.splice(i,1); continue; }
+      p.x+=p.vx; p.y+=p.vy; p.vy+=0.006; p.vx*=0.99; p.rot+=p.vr;
+      const a=(1-t), sc=1-t*0.9, s=p.size*sc;
+      ctx.save(); ctx.globalAlpha=a; ctx.fillStyle=p.color;
+      if(p.glow){ ctx.shadowColor=p.color; ctx.shadowBlur=12; }
+      if(p.type==='star'||p.type==='spark'){ drawStar(p.x,p.y,s,p.rot); }
+      else if(p.type==='heart'){ drawHeart(p.x,p.y,s*0.8); }
+      else if(p.type==='petal'){ ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.beginPath(); ctx.ellipse(0,0,s*0.5,s,0,0,7); ctx.fill(); }
+      else if(p.type==='sparkle'){ ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.fillRect(-s*0.12,-s,s*0.24,s*2); ctx.fillRect(-s,-s*0.12,s*2,s*0.24); }
+      else { ctx.beginPath(); ctx.arc(p.x,p.y,s*0.5,0,7); ctx.fill(); }
+      ctx.restore();
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
 </script>
 </body>
 </html>
