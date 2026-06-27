@@ -159,32 +159,32 @@
 <main id="view-site" class="view active">
 
 <!-- ======================= HERO ======================= -->
-<section id="home" class="relative mesh overflow-hidden">
-  <div class="absolute -top-10 left-[8%] w-44 h-44 rounded-full bg-brand-400/30 blur-2xl animate-floaty"></div>
-  <div class="absolute top-24 right-[10%] w-56 h-56 rounded-full bg-sky-400/20 blur-3xl animate-floaty2"></div>
-  <div class="absolute bottom-0 left-1/3 w-48 h-48 rounded-full bg-teal-400/20 blur-3xl animate-floaty"></div>
+<section id="home" class="relative overflow-hidden" style="background:linear-gradient(165deg,#84ACD6 0%,#78A2D2 55%,#6D97C9 100%)">
+  <div class="absolute -top-10 left-[8%] w-44 h-44 rounded-full bg-white/15 blur-2xl animate-floaty"></div>
+  <div class="absolute top-24 right-[10%] w-56 h-56 rounded-full bg-[#FEFFAF]/20 blur-3xl animate-floaty2"></div>
+  <div class="absolute bottom-0 left-1/3 w-48 h-48 rounded-full bg-white/10 blur-3xl animate-floaty"></div>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-20 lg:pt-24 lg:pb-28 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative">
     <div class="reveal">
-      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass text-xs sm:text-sm font-semibold text-brand-700 dark:text-brand-200 mb-6">
-        <span class="w-2 h-2 rounded-full bg-teal-500 animate-pulse2"></span>
+      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 border border-white/25 backdrop-blur text-xs sm:text-sm font-semibold text-white mb-6">
+        <span class="w-2 h-2 rounded-full bg-[#FEFFAF] animate-pulse2"></span>
         Student-Led Initiative • Prometheus School, Noida
       </span>
-      <h1 class="font-serif text-[2.6rem] sm:text-5xl lg:text-[3.75rem] font-bold leading-[1.08] tracking-tight text-slate-900 dark:text-white">
+      <h1 class="font-serif text-[2.6rem] sm:text-5xl lg:text-[3.75rem] font-bold leading-[1.08] tracking-tight text-[#FEFFAF]">
         Creating Safer Spaces Through Awareness, Empathy &amp; Action.
       </h1>
-      <p class="mt-6 text-lg text-slate-500 dark:text-slate-300 max-w-xl leading-relaxed">
+      <p class="mt-6 text-lg text-white/90 max-w-xl leading-relaxed">
         Intervene empowers students to stand against bullying, support mental wellbeing, and build stronger communities.
       </p>
       <div class="mt-9 flex flex-wrap gap-3">
-        <button onclick="openAuth('signup')" class="group inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-semibold text-white bg-brand-500 hover:bg-brand-600 shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transition-all cursor-pointer">
+        <button onclick="openAuth('signup')" class="group inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-semibold text-[#33495F] bg-[#FEFFAF] hover:bg-[#FBFCA0] shadow-lg shadow-black/10 transition-all cursor-pointer">
           Join Community
           <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </button>
-        <button onclick="openEmergency()" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-semibold bg-white dark:bg-white/5 border border-brand-200 dark:border-white/15 text-brand-700 dark:text-brand-200 hover:bg-cream-100 dark:hover:bg-white/10 transition-colors cursor-pointer">
+        <button onclick="openEmergency()" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-semibold bg-white/10 border border-white/40 text-white hover:bg-white/20 transition-colors cursor-pointer">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           Get Support
         </button>
-        <a href="#team" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-semibold bg-white dark:bg-white/5 border border-brand-200 dark:border-white/15 text-brand-700 dark:text-brand-200 hover:bg-cream-100 dark:hover:bg-white/10 transition-colors cursor-pointer">
+        <a href="#team" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-semibold bg-white/10 border border-white/40 text-white hover:bg-white/20 transition-colors cursor-pointer">
           Meet the Team
         </a>
       </div>
@@ -1401,31 +1401,48 @@ async function reportSetStatus(id,status){
   else toast('Status updated (demo)');
   adminReports();
 }
+let editingResIdx=null;
 function adminResources(){
+  const editing = editingResIdx!=null && resources[editingResIdx];
   const list=resources.map((r,i)=>`
-    <div class="flex items-center gap-3 p-3 rounded-2xl bg-white/60 dark:bg-white/5 border border-slate-100 dark:border-white/10">
+    <div onclick="resEdit(${i})" title="Click to edit" class="group flex items-center gap-3 p-3 rounded-2xl bg-white/60 dark:bg-white/5 border ${i===editingResIdx?'border-brand-400 ring-1 ring-brand-300':'border-slate-100 dark:border-white/10'} cursor-pointer hover:border-brand-300 transition-colors">
       <span class="grid place-items-center w-10 h-10 rounded-xl bg-gradient-to-br ${r.g} text-white text-xs font-bold shrink-0">${(r.type||'A')[0]}</span>
-      <div class="min-w-0 flex-1"><p class="font-semibold truncate">${r.t}</p><p class="text-xs text-slate-400">${r.c} • ${r.type} • ${r.m||''}</p></div>
-      <button onclick="resDelete(${i})" aria-label="Delete" class="grid place-items-center w-9 h-9 rounded-lg text-coral-500 hover:bg-coral-50 dark:hover:bg-white/10 cursor-pointer"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button>
+      <div class="min-w-0 flex-1"><p class="font-semibold truncate">${r.t}</p><p class="text-xs text-slate-400">${r.c} • ${r.type} • ${r.m||''}${r.link?' • linked':''}</p></div>
+      <svg class="w-4 h-4 text-slate-300 group-hover:text-brand-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>
+      <button onclick="event.stopPropagation();resDelete(${i})" aria-label="Delete" class="grid place-items-center w-9 h-9 rounded-lg text-coral-500 hover:bg-coral-50 dark:hover:bg-white/10 cursor-pointer"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button>
     </div>`).join('');
   document.getElementById('adminPanel').innerHTML=`
     <div class="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-6">
-      <div class="glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10"><h3 class="font-bold text-lg mb-4">Resource hub (${resources.length})</h3><div class="space-y-2 max-h-[28rem] overflow-y-auto no-scrollbar">${list}</div></div>
+      <div class="glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10"><h3 class="font-bold text-lg mb-1">Resource hub (${resources.length})</h3><p class="text-xs text-slate-400 mb-4">Click any resource to edit it.</p><div class="space-y-2 max-h-[28rem] overflow-y-auto no-scrollbar">${list}</div></div>
       <form onsubmit="resAdd(event)" class="glass-strong rounded-3xl p-6 border border-white/60 dark:border-white/10 h-max">
-        <h3 class="font-bold text-lg mb-4">Add resource</h3>
+        <div class="flex items-center justify-between mb-4"><h3 class="font-bold text-lg">${editing?'Edit resource':'Add resource'}</h3>${editing?'<button type="button" onclick="resCancelEdit()" class="text-xs font-semibold text-slate-400 hover:text-coral-500 cursor-pointer">Cancel</button>':''}</div>
         ${adminInput('rTitle','Title','text',true)}
         ${adminSelect('rCat','Category',['Mental health','Anxiety','Stress','Bullying prevention','Self-confidence','Peer support'])}
         ${adminSelect('rType','Type',['Article','Video','Guide'])}
         ${adminInput('rMeta','Meta (e.g. 5 min read)','text',false)}
         ${adminInput('rUrl','Link URL — where it opens (https://…)','url',false)}
-        <button class="mt-4 w-full py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-teal-500 to-sky-600 hover:opacity-90 cursor-pointer">Publish resource</button>
+        <button class="mt-4 w-full py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-teal-500 to-sky-600 hover:opacity-90 cursor-pointer">${editing?'Save changes':'Publish resource'}</button>
       </form></div>`;
+  if(editing){ const r=resources[editingResIdx];
+    document.getElementById('rTitle').value=r.t||''; document.getElementById('rCat').value=r.c||'Mental health';
+    document.getElementById('rType').value=r.type||'Article'; document.getElementById('rMeta').value=r.m||'';
+    document.getElementById('rUrl').value=r.link||'';
+  }
 }
+function resEdit(i){ editingResIdx=i; adminResources(); document.getElementById('rTitle')?.focus(); }
+function resCancelEdit(){ editingResIdx=null; adminResources(); }
 async function resAdd(e){
   e.preventDefault();
   const title=val('rTitle'),category=val('rCat'),type=val('rType'),content=val('rMeta'),link=val('rUrl');
-  if(sb && ADMIN_IS){ try{ await sb.from('resources').insert({title,category,type,content,link}); toast('Resource published'); await loadContentFromDB(); }catch(err){ toast('Failed: '+err.message); } }
-  else { resources.push({id:'l'+Date.now(),t:title,c:category,type,m:content,link,g:GRADS[resources.length%GRADS.length]}); renderResources(); toast('Resource added (demo)'); }
+  const editing = editingResIdx!=null && resources[editingResIdx];
+  if(editing){
+    const r=resources[editingResIdx];
+    if(sb && ADMIN_IS && r.id && String(r.id).length>10){ try{ await sb.from('resources').update({title,category,type,content,link}).eq('id',r.id); toast('Resource updated'); editingResIdx=null; await loadContentFromDB(); }catch(err){ toast('Failed: '+err.message); } }
+    else { Object.assign(r,{t:title,c:category,type,m:content,link}); editingResIdx=null; renderResources(); toast('Resource updated (demo)'); }
+  } else {
+    if(sb && ADMIN_IS){ try{ await sb.from('resources').insert({title,category,type,content,link}); toast('Resource published'); await loadContentFromDB(); }catch(err){ toast('Failed: '+err.message); } }
+    else { resources.push({id:'l'+Date.now(),t:title,c:category,type,m:content,link,g:GRADS[resources.length%GRADS.length]}); renderResources(); toast('Resource added (demo)'); }
+  }
   adminResources();
 }
 async function resDelete(i){
@@ -1563,10 +1580,10 @@ function drawBars(id,vals,labels,color){
   if(reduce || touch) return;   // graceful fallback: no effect
 
   const cv=document.createElement('canvas');
-  cv.style.cssText='position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:90';
+  cv.style.cssText='position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:40';   // below the navbar (z-50) so links stay readable
   cv.setAttribute('aria-hidden','true');
   const glow=document.createElement('div');
-  glow.style.cssText='position:fixed;left:0;top:0;width:170px;height:170px;margin:-85px 0 0 -85px;border-radius:50%;pointer-events:none;z-index:89;filter:blur(36px);opacity:.8;background:radial-gradient(circle,rgba(254,255,175,.85),rgba(120,162,210,.4) 52%,transparent 72%);transform:translate(-200px,-200px)';
+  glow.style.cssText='position:fixed;left:0;top:0;width:170px;height:170px;margin:-85px 0 0 -85px;border-radius:50%;pointer-events:none;z-index:39;filter:blur(36px);opacity:.8;background:radial-gradient(circle,rgba(254,255,175,.85),rgba(120,162,210,.4) 52%,transparent 72%);transform:translate(-200px,-200px)';
   function attach(){ document.body.appendChild(cv); document.body.appendChild(glow); }
   if(document.body) attach(); else document.addEventListener('DOMContentLoaded',attach);
 
@@ -1575,7 +1592,7 @@ function drawBars(id,vals,labels,color){
   resize(); addEventListener('resize',resize);
 
   const COLORS=['#FEFFAF','#FEFFAF','#78A2D2','#5C83B6','#F2D06B','#FFF4C2','#FFFFFF'];
-  const MAX=260; let parts=[]; let count=0;
+  const MAX=150; let parts=[]; let count=0;
   let mx=-200,my=-200, gx=-200,gy=-200, lx=-200,ly=-200, moved=false;
   addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; moved=true; });
 
@@ -1583,7 +1600,7 @@ function drawBars(id,vals,labels,color){
   function spawn(x,y,bright){
     const type = bright ? 'spark' : (Math.random()<0.012?'petal':(Math.random()<0.012?'heart':(Math.random()<0.55?'star':(Math.random()<0.55?'sparkle':'dot'))));
     parts.push({ x:x+rand(-5,5), y:y+rand(-5,5), vx:rand(-.45,.45), vy:rand(-.6,-.05), size:rand(5,12)*(bright?1.7:1),
-      life:0, ttl:rand(900,1500), rot:rand(0,Math.PI*2), vr:rand(-.05,.05),
+      life:0, ttl:rand(600,1000), rot:rand(0,Math.PI*2), vr:rand(-.05,.05),
       color:bright?'#FFFDE7':COLORS[(Math.random()*COLORS.length)|0], type, glow:bright });
   }
   function drawStar(x,y,r,rot){ ctx.beginPath(); for(let i=0;i<8;i++){ const ang=rot+i*Math.PI/4; const rr=(i%2===0)?r:r*0.38; ctx.lineTo(x+Math.cos(ang)*rr,y+Math.sin(ang)*rr);} ctx.closePath(); ctx.fill(); }
@@ -1597,9 +1614,9 @@ function drawBars(id,vals,labels,color){
     // emit along movement
     if(moved){
       const dx=mx-lx, dy=my-ly, dist=Math.hypot(dx,dy);
-      if(dist>2){
-        const n=Math.min(7,Math.max(3,Math.round(dist/6)));
-        for(let i=0;i<n && parts.length<MAX;i++){ count++; spawn(mx,my, count%7===0); }
+      if(dist>3){
+        const n=Math.min(4,Math.max(2,Math.round(dist/9)));
+        for(let i=0;i<n && parts.length<MAX;i++){ count++; spawn(mx,my, count%8===0); }
         lx=mx; ly=my;
       }
       moved=false;
